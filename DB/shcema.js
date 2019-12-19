@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const chickienuggs = require('./seeds/Example');
+const profiles = require('./seeds/userprofiles');
 
 const db = mongoose.connection;
 
@@ -11,10 +11,12 @@ db.once('open', () => {
 });
 
 
-chickienuggs.save( (err, chickienuggs) => {
+profiles.save( (err, profiles) => {
     if(err) console.log(err);
-    console.log(chickienuggs);
-})
+    console.log(profiles);
+});
+
+
 
 
 
