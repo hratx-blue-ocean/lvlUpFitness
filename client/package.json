@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack -p",
     "test": "jest",
-    "server": "webpack-dev-server --mode development --open --hot"
+    "server": "webpack-dev-server --mode development --open --hot",
+    "apple": "webpack --mode=development --watch --display-error-details=true"
   },
   "author": "",
   "license": "ISC",
