@@ -12,20 +12,30 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/selder18/blue-ocean-rewrite.git"
+    "url": "git+https://github.com/hratx-blue-ocean/lvlUpFitness.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/selder18/blue-ocean-rewrite/issues"
   },
-  "homepage": "https://github.com/selder18/blue-ocean-rewrite#readme",
+  "homepage": "https://github.com/selder18/hratx-blue-ocean/lvlUpFitness#readme",
   "dependencies": {
+    "axios": "^0.19.0",
     "dotenv": "^8.0.0",
     "firebase": "^7.6.0",
     "material-ui-react": "0.0.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel": "^6.23.0",
+    "babel-loader": "^8.0.6",
+    "react": "^16.8.6",
+    "webpack": "^4.38.0",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.8.2",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
     "eslint-config-react-app": "^4.0.0",
