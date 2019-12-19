@@ -1,0 +1,17 @@
+{
+  "name": "DB",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongo-seeding": "^3.4.0-alpha.1",
+    "mongodb": "^3.4.1",
+    "mongoose": "^5.8.1"
+  }
+}
