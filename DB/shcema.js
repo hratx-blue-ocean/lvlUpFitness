@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const chickienuggs = require('./seeds/Example')
+const chickienuggs = require('./seeds/Example');
 
 const db = mongoose.connection;
 
