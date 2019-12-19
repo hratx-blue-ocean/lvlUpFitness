@@ -16,8 +16,8 @@ app.get('/mf', (req,res)=>{
 */
 
 //serve static file for now
-express.static(path.resolve(__dirname,'../client/public/bundle.js'))
-
+//express.static(path.resolve(__dirname,'../client/public'))
+app.use(express.static(path.resolve(__dirname,'../client/public')))
 
 // open up CORS
 // app.use(cors());
@@ -34,6 +34,7 @@ app.use(logger("dev"));
 // You can place your routes here, feel free to refactor:
 const { example } = require("./routes/");
 app.use("/api/example", example);
+app.use('/', example);
 
 
 // catch 404 and forward to error handler
