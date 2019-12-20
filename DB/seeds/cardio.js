@@ -383,14 +383,15 @@ const cardioCycling = new exercise({
                 'Week 4: Mon: Rest, Tue: 90 min ride on the border of Z2-Z3, 90-95 rpm, Wed: 60 min easy spin Thu: Rest, Fri: 90 min ride, start w/ 5 min of Z1-Z2 then 5 min top of Z2, 5 min build up to Z4',
                 'and 5 min of Z2 at 90-95 rpm, next do 10x 1 min at the top of Z4 around 100 rpm,',
                 'Sat: Rest Sun: 2 hr ride on the border of Z2-Z3 at 90-95rpm',
-                'Repeat Weeks 1-4 through 12 weeks.'],
+                'Repeat Weeks 1-4 through 12 weeks.'
+            ],
             intensity: 'Advanced',
             favorite: false
 
         }]
 });
 
-const cardioSwimming = newExercise({
+const cardioSwimming = new exercise({
     muscleGroup: 'Cardiovascular',
     type: [{
         name: 'Beginner Swimming',
@@ -458,9 +459,4 @@ const cardioSwimming = newExercise({
     }]
 
 });
-
-
-
-
-
 module.exports = { cardioJumpRope, cardioStrengthCircuit, cardioDistanceRunning, cardioSprints, cardioWalking, cardioCycling, cardioSwimming};
