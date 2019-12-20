@@ -87,10 +87,10 @@ const proteinPlans = new Meal({
 
     }, 
     {
-        name: '', 
-        body: '', 
-        calories: Number,
-        ingredients: [''],
+        name: 'Salmon Piccata', 
+        body: 'quick and easy seared salmon piccata with an authentic piccata sauce of lemon, garlic and capers, and the optional white wine.', 
+        calories: 387,
+        ingredients: ['24 ounces skinless salmon fillets','sea salt and lemon pepper (or black pepper)','1/4 cup flour','2 tablespoons unsalted butter','1 tablespoon olive oil','4 cloves garlic minced','1/3 cup dry white wine','1 cup low-sodium chicken stock/broth' ,'1 teaspoon cornstarch (or corn flour)','3 tablespoons fresh lemon juice','4 tablespoons rinsed and drained capers','2-4 tablespoons coarsely chopped parsley to serve','Lemon slices to serve'],
         favorite: false
 
     }
