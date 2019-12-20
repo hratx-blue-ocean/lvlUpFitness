@@ -63,9 +63,9 @@ const proteinPlans = new Meal({
         favorite: false
     },
     { 
-            name: 'Veggie Pasta with Sausage', 
-            body: 'This pasta takes spagetti to the next level by letting the Italian turkey sausage be an addition to the flavor while adding vegetables.', 
-            calories: 391,
+        name: 'Veggie Pasta with Sausage', 
+        body: 'This pasta takes spagetti to the next level by letting the Italian turkey sausage be an addition to the flavor while adding vegetables.', 
+        calories: 391,
         ingredients: ['8 ounces uncooked whole-wheat spaghetti', '1 tablespoon olive oil', '6 ounces hot turkey Italian sausage, casings removed', '2 cups chopped yellow onion', '6 garlic cloves, minced', '1 1/2 cups chopped cremini mushrooms (about 4 oz.)', '2 small yellow squash, halved lengthwise and cut into 1/4-in. slices (about 7 oz. each)', '1 tablespoon unsalted tomato paste', '1 tablespoon chopped fresh oregano', '2 cups small broccoli florets', '1/2 teaspoon kosher salt', '1/4 teaspoon crushed red pepper', '1 (14-oz.) can unsalted whole peeled tomatoes, undrained', '1/4 cup torn fresh basil leaves'],
         favorite: false
 
@@ -93,8 +93,52 @@ const proteinPlans = new Meal({
         ingredients: ['24 ounces skinless salmon fillets','sea salt and lemon pepper (or black pepper)','1/4 cup flour','2 tablespoons unsalted butter','1 tablespoon olive oil','4 cloves garlic minced','1/3 cup dry white wine','1 cup low-sodium chicken stock/broth' ,'1 teaspoon cornstarch (or corn flour)','3 tablespoons fresh lemon juice','4 tablespoons rinsed and drained capers','2-4 tablespoons coarsely chopped parsley to serve','Lemon slices to serve'],
         favorite: false
 
-    }
-],
+    }],
 });
+
+const dietPlans = new Meal({
+    catergory: String,
+    recipes: [{ 
+        name: String, 
+        body: String, 
+        calories: Number,
+        ingredients: [String],
+        favorite: Boolean
+    },
+    {
+        name: String, 
+        body: String, 
+        calories: Number,
+        ingredients: [String],
+        favorite: Boolean
+
+    },
+    {
+        name: String, 
+        body: String, 
+        calories: Number,
+        ingredients: [String],
+        favorite: Boolean
+       
+    },
+    {
+        name: String, 
+        body: String, 
+        calories: Number,
+        ingredients: [String],
+        favorite: Boolean
+
+    },
+    {
+
+        name: String, 
+        body: String, 
+        calories: Number,
+        ingredients: [String],
+        favorite: Boolean
+
+    }],
+})
+
 
 module.exports = Meal
