@@ -244,7 +244,7 @@ const bwLegs = new BodyWeight({
     }]
 });
 
-const chest = new BodyWeight({
+const bwChest = new BodyWeight({
     muscleGroup: 'Chest',
     type: [{
         name: 'Standard push-up',
