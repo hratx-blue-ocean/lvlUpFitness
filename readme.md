@@ -40,4 +40,4 @@ Lvl Up Fitness is a user based application for planning tracking and setting a w
 ### Additional Technologies
 * Mongo Atlas
 * Travis CI
-
+* Mocha
