@@ -114,28 +114,28 @@ const dietPlans = new Meal({
 
     },
     {
-        name: String, 
-        body: String, 
-        calories: Number,
-        ingredients: [String],
-        favorite: Boolean
+        name: 'Cabbage Fat-Burning Soup', 
+        body: 'Tomato and cabbage soup is sure to burn that fat away.  Enjoy the wombo combo of tomato and cabbage that is not only tasty but extremely healthy.', 
+        calories: 90,
+        ingredients: ['5 carrots, chopped','3 onions, chopped','2 (16 ounce) cans whole peeled tomatoes, with liquid','1 large head cabbage, chopped','1 (1 ounce) envelope dry onion soup mix','1 (15 ounce) can cut green beans, drained','Green Beans With Sea Salt 8 Oz', '2 quarts tomato juice','2 green bell peppers, diced','10 stalks celery, chopped','1 (14 ounce) can beef broth'],
+        favorite: false
        
     },
     {
-        name: String, 
-        body: String, 
-        calories: Number,
-        ingredients: [String],
-        favorite: Boolean
+        name: 'Chicken and Corn Chili', 
+        body: 'Serve this with grated cheese, sour cream, chopped cilantro and green onions, and flour tortillas on the side for an extra POP to your dish.', 
+        calories: 188,
+        ingredients: ['4 skinless, boneless chicken breast halves','1 (16 ounce) jar salsa', '2 teaspoons garlic powder','1 teaspoon ground cumin','1 teaspoon chili powder','salt to taste','ground black pepper to taste','1 (11 ounce) can Mexican-style corn','1 (15 ounce) can pinto beans'],
+        favorite: false
 
     },
     {
 
-        name: String, 
-        body: String, 
-        calories: Number,
-        ingredients: [String],
-        favorite: Boolean
+        name: 'The Perfect Post-Workout Fruit Salad', 
+        body: 'Nothings wrong with a simple fruit salad for you pre or post work-out needs.  This salad is tastier the longer you can let it soak in its juices.', 
+        calories: 155,
+        ingredients: ['2/3 cup fresh orange juice', '1/3 cup fresh lemon juice', '1/3 cup packed brown sugar', '1/2 teaspoon grated orange zest', '1/2 teaspoon grated lemon zest', '1 teaspoon vanilla extract', '2 cups cubed fresh pineapple', '2 cups strawberries, hulled and sliced', '3 kiwi fruit, peeled and sliced ', '3 bananas, sliced', '2 oranges, peeled and sectioned', '1 cup seedless grapes', '2 cups blueberries'],
+        favorite: false
 
     }],
 })
