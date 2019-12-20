@@ -28,9 +28,12 @@ const mealPlans = new Meal({
         favorite: false
     },
     {
-        name: 'beesburger',
-        body: 'local bee man',
-        calories: 1 
+         catergory: '',
+        recipes: [{ name: '', 
+        body: '', 
+        calories: Number }],
+        ingredients: [''],
+        favorite: false
     }],
     favorite: false
 });
