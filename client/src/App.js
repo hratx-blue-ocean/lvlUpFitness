@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 // import fetch from 'node-fetch';
 // import Axios from 'axios';
-import SignIn from "./components/loginScreen/SignIn.jsx";
-import Home from './components/loginScreen/Home.jsx'
-import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
+// import SignIn from "./components/loginScreen/SignIn.jsx";
+// import Home from './components/loginScreen/Home.jsx'
+// import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 
 import "./App.css";
 
@@ -44,7 +44,7 @@ export default class App extends Component {
   }
 
   // fetchData(){
-  //   Axios.get(`http://localhost:8000/api/example`)
+  //   Axios.get(`http://lcd clocalhost:8000/api/example`)
   //   .then((data)=>{
   //     this.setState({test: data})
   //   })
@@ -52,18 +52,22 @@ export default class App extends Component {
   // }
 
   render() {
-    // console.log(this.state)
-    return (
-      <DebugRouter>
-        <div>
-          <Link to="/SignIn">Login</Link>
-
-          <Switch>
-            <Route path="/SignIn" component={SignIn}></Route>
-            <Route path ='/Home' component = {Home}></Route>
-          </Switch>
-        </div>
-      </DebugRouter>
-    );
+    
+    
   }
 }
+
+/*add Later after grommet setup
+return (
+  <DebugRouter>
+    <div>
+      <Link to="/SignIn">Login</Link>
+
+      <Switch>
+        <Route path="/SignIn" component={SignIn}></Route>
+        <Route path ='/Home' component = {Home}></Route>
+      </Switch>
+    </div>
+  </DebugRouter>
+);
+*/
