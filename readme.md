@@ -1,12 +1,12 @@
 # LvL Up Fitness
 
 
-# Table of Contents
-- [Lvl Up Fitness] (#lvl-up-fitness)
-  - [Table of Contents] (#table-of-contents)
-  - [Contributors] (#contributors)
-  - [About] (#about)
-  - [Technologies] (#technologies)
+## Table of Contents
+- [Lvl Up Fitness](#lvl-up-fitness)
+  - [Table of Contents](#table-of-contents)
+  - [Contributors](#contributors)
+  - [About](#about)
+  - [Technologies](#technologies)
   
 # Contributors
 * [Shaun](https://github.com/shauncarr22)
