@@ -1,11 +1,24 @@
 import React, { Component } from "react";
 // import fetch from 'node-fetch';
 // import Axios from 'axios';
-// import Login from "./components/loginScreen/Login.jsx";
-import { BrowserRouter as Router } from "react-router-dom";
-import { Button,AppBar, Toolbar,IconButton,Typography } from '@material-ui/core';
-// import { MenuIcon } from 'material-ui-icons'
+import SignIn from "./components/loginScreen/SignIn.jsx";
+import Home from './components/loginScreen/Home.jsx'
+import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
+
 import "./App.css";
+
+class DebugRouter extends Router {
+  constructor(props){
+    super(props);
+    console.log('initial history is: ', JSON.stringify(this.history, null,2))
+    this.history.listen((location, action)=>{
+      console.log(
+        `The current URL is ${location.pathname}${location.search}${location.hash}`
+      )
+      console.log(`The last navigation action was ${action}`, JSON.stringify(this.history, null,2));
+    });
+  }
+}
 
 export default class App extends Component {
   constructor(props) {
@@ -15,6 +28,10 @@ export default class App extends Component {
       test: ""
     };
     this.api = `http://localhost:8000/api/example`;
+
+    
+
+
   }
   componentDidMount() {
     // this.fetchData();
@@ -37,24 +54,16 @@ export default class App extends Component {
   render() {
     // console.log(this.state)
     return (
-      <Router>
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton
-              edge="start"
-              
-              color="inherit"
-              aria-label="menu"
-            >
-            
-            </IconButton>
-            <Typography variant="h6" >
-            <Button color="inherit">Login</Button>
-            </Typography>
-           
-          </Toolbar>
-        </AppBar>
-      </Router>
+      <DebugRouter>
+        <div>
+          <Link to="/SignIn">Login</Link>
+
+          <Switch>
+            <Route path="/SignIn" component={SignIn}></Route>
+            <Route path ='/Home' component = {Home}></Route>
+          </Switch>
+        </div>
+      </DebugRouter>
     );
   }
 }
