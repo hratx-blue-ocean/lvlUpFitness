@@ -406,7 +406,9 @@ const bwCore = new BodyWeight({
     type: [{
         name: 'L seat',
         amount: '5 seconds, 6-8 reps, 3 sets',
-        description: ['Take a load off (well, not exactly). Sit with legs extended and feet flexed. Place your hands on the floor and slightly round your torso. Lift your hips off the floor, hold for 5 seconds, and release. Repeat!'],
+        description: ['Take a load off (well, not exactly). Sit with legs extended and feet flexed. Place your ',
+        'hands on the floor and slightly round your torso. Lift your hips off the floor, hold for 5 seconds, and ',
+        'release. Repeat!'],
         intensity: 'Beginner',
         favorite: false
     }, 
@@ -423,14 +425,18 @@ const bwCore = new BodyWeight({
     {
         name: 'Flutter Kick',
         amount: '1 minute, 2 sets',
-        description: ['Lie faceup with arms at your sides and palms facing down. With legs extended, lift your heels about 6 inches off the floor. Make quick, small up-and-down pulses with your legs while keeping your core engaged. Keep kickin’ it for a minute straight!'],
+        description: ['Lie faceup with arms at your sides and palms facing down. With legs extended, lift ',
+        'your heels about 6 inches off the floor. Make quick, small up-and-down pulses with your legs while ',
+        'keeping your core engaged. Keep kickin’ it for a minute straight!'],
         intensity: 'Beginner',
         favorite: false
     }, 
     {
         name: 'Dynamic prone plank',
         amount: '1 minute, 2 sets',
-        description: ['Starting in a standard plank position, raise your hips as high as they can go, then lower them back down. Continue this movement for as long as possible. Make sure your back stays straight and your hips don’t droop.'],
+        description: ['Starting in a standard plank position, raise your hips as high as they can go, then ',
+        'lower them back down. Continue this movement for as long as possible. Make sure your back stays ',
+        'straight and your hips don’t droop.'],
         intensity: 'Beginner',
         favorite: false
     }, 
@@ -447,7 +453,7 @@ const bwCore = new BodyWeight({
         amount: '30-60 seconds, 2 sets',
         description: ['Sit on the floor with knees bent and feet together, lifted a few inches off the floor.',
         ' With your back at a 45-degree angle to the floor, move your arms from side to side in a twisting ',
-        motion. Here, slow and steady wins the race: The slower the twist, the deeper the burn. Feel like ',
+        'motion. Here, slow and steady wins the race: The slower the twist, the deeper the burn. Feel like ',
         'a fitness czar yet?'],
         intensity: 'Intermediate',
         favorite: false
@@ -455,7 +461,9 @@ const bwCore = new BodyWeight({
     {
         name: 'Bicycle',
         amount: '25 each side, 2-3 sets',
-        description: ['Lie faceup with knees bent and hands behind your head. Bring knees in toward chest. Bring right elbow toward left knee as right leg straightens. Continue alternating sides like you’re pedaling a bike. Just keep the helmet in the closet.'],
+        description: ['Lie faceup with knees bent and hands behind your head. Bring knees in toward chest. ',
+        'Bring right elbow toward left knee as right leg straightens. Continue alternating sides like you’re ',
+        'pedaling a bike. Just keep the helmet in the closet.'],
         intensity: 'Beginner',
         favorite: false
     }, 
