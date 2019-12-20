@@ -5,7 +5,7 @@ const bodyWeightSchema = new mongoose.Schema ({
     type: [
         { name: String, 
             amount: String,
-            description : String,
+            description : [String],
             intensity: String,
             favorite: Boolean 
         }
