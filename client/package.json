@@ -6,20 +6,31 @@
   "scripts": {
     "build": "webpack -p",
     "test": "jest",
-    "server": "webpack-dev-server --mode development --open --hot"
+    "server": "webpack-dev-server --mode development --open --hot",
+    "apple": "webpack --mode=development --watch --display-error-details=true"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.7.7",
+    "@material-ui/core": "^4.8.0",
+    "@material-ui/icons": "^4.5.1",
     "axios": "^0.18.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "firebase": "^7.6.1",
+    "grommet": "^2.9.0",
+    "lodash.merge": ">=4.6.2",
     "node-fetch": "^2.6.0",
     "path": "^0.12.7",
+    "polished": "^3.4.2",
+    "re-base": "^4.0.0",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "react-firebaseui": "^4.0.0",
+    "react-router-dom": "^5.1.2",
+    "styled-components": "^4.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",

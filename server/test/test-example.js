@@ -22,3 +22,19 @@ describe('GET example', () => {
       .catch(err => err);
   });
 });
+
+describe('GET user', () => {
+  it('it should GET sample user data', () => {
+    chai
+      .request(`http://localhost:8000`)
+      .get('/api/profile')
+      .then((err,res) => {
+        should.not.exist(err);
+        should.exist(res);
+        res.should.have.status(200);
+        res.body.should.be.a('array');
+        done()
+      })
+      .catch(err => err)
+  });
+});
