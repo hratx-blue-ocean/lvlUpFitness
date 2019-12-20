@@ -97,20 +97,20 @@ const proteinPlans = new Meal({
 });
 
 const dietPlans = new Meal({
-    catergory: String,
+    catergory: Diet,
     recipes: [{ 
-        name: String, 
-        body: String, 
-        calories: Number,
-        ingredients: [String],
-        favorite: Boolean
+        name: 'Broccoli Kale Pizza', 
+        body: 'Low carb pizza crust that is not loaded with starch and outs actually gets crispy. This pizza crust recipe is perfect for the keto diet.', 
+        calories: 86,
+        ingredients: ['24 ounces frozen broccoli florets','6 ounces fresh kale','1/4 cup fine almond flour','1/4 cup flax seed meal','1 egg','1 teaspoon dried oregano','1 teaspoon dried basil','1/2 teaspoon garlic powder','1/2 teaspoon onion powder','1/2 teaspoon kosher salt'],
+        favorite: false
     },
     {
-        name: String, 
-        body: String, 
-        calories: Number,
-        ingredients: [String],
-        favorite: Boolean
+        name: 'Spinach Quinoa Soup', 
+        body: 'The egg lemon sauce is very traditional in Bulgaria and is typically added to spinach, chicken, or meatball soups. Typically it’s made with eggs, yogurt and lemon, but for this recipe we are keeping it vegan and just doing eggs and lemon.', 
+        calories: 49,
+        ingredients: ['Two six ounces bags of baby spinach','1/2 cup raw quinoa','2 eggs','Juice of one lemon','2 quarts water','Kosher salt', 'Freshly cracked black pepper','Olive oil'],
+        favorite: false
 
     },
     {
