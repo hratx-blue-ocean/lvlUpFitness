@@ -11,7 +11,7 @@ const cardioSchema = new mongoose.Schema({
     }]
 });
 
-const exercises  = mongoose.model('exercise', cardioSchema);
+const exercise  = mongoose.model('exercise', cardioSchema);
 
 const cardioJumpRope = new exercise({
     muscleGroup: 'Cardiovascular',
