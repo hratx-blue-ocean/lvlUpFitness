@@ -53,8 +53,8 @@ const carbMeals = new mealPlans({
     
 });
 
-const proteinPlans = new Meal({
-    catergory: Protein,
+const proteinPlans = new mealPlans({
+    catergory: 'Protein',
     recipes: [{ 
         name: 'Carne Asada Bowl', 
         body: 'This taco salad uses steak, lettuce, and queso fresco to create a great mix of protein and flavor for this wonderful dish.',
@@ -96,8 +96,8 @@ const proteinPlans = new Meal({
     }],
 });
 
-const dietPlans = new Meal({
-    catergory: Diet,
+const dietPlans = new mealPlans({
+    catergory: 'Diet',
     recipes: [{ 
         name: 'Broccoli Kale Pizza', 
         body: 'Low carb pizza crust that is not loaded with starch and outs actually gets crispy. This pizza crust recipe is perfect for the keto diet.', 
@@ -141,4 +141,4 @@ const dietPlans = new Meal({
 })
 
 
-module.exports = Meal
+module.exports = {carbMeals,proteinPlans,dietPlans }
