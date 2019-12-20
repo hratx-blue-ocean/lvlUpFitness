@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const bodyWeightSchema = new mongoose.Schema ({
     muscleGroup: String,
     type: [
@@ -526,4 +528,4 @@ const bwCore = new BodyWeight({
     }]
 });
 
-module.exports = bodyWeight;
+module.exports = {bwFullBody,bwLegs,bwChest,bwBack,bwArms,bwShoulders,bwCore}
