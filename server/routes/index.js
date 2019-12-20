@@ -1,3 +1,5 @@
 const example = require('./example');
 
-module.exports = { example }
+const profile = require('./profile')
+
+module.exports = { example, profile }

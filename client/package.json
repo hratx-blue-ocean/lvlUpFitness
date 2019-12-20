@@ -8,7 +8,6 @@
     "test": "jest",
     "server": "webpack-dev-server --mode development --open --hot",
     "apple": "webpack --mode=development --watch --display-error-details=true"
-
   },
   "author": "",
   "license": "ISC",
