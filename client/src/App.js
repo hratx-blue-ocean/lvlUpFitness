@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 // import fetch from 'node-fetch';
 // import Axios from 'axios';
-import Login from "./components/loginScreen/Login.jsx";
-// import Home from './components/loginScreen/Home.jsx'
-import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
+import Home from "./components/loginScreen/Home.jsx";
+import SignUp from "./components/loginScreen/SignUp.jsx";
+import ForOfor from "./components/forOfor/forOfor.jsx";
 
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.css";
 
@@ -51,28 +52,16 @@ export default class App extends Component {
 
   // }
 
-  handleSubmit() {
-    console.log("sadsdad");
-  }
   render() {
-    
-
     return (
       <DebugRouter>
-      <Login/>
-        <div>
-         
-    
-          <Switch>
-            <Route path="/SignIn" component={Login}></Route>
-            
-          </Switch>
-        </div>
+        
+        <Switch>
+        <Route exact path="/" component={Home}></Route>
+          <Route exact path="/SignUp" component={SignUp}></Route>
+          <Route component={ForOfor}></Route>
+        </Switch>
       </DebugRouter>
     );
   }
 }
-
-/*add Later after grommet setup
-
-*/
