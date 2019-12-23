@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function SignUp() {
+export default function ForOfor() {
 	return (
 		<div>
-		test
+		404 Error not found
 			
 		</div>
 	)
