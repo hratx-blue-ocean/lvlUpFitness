@@ -9,11 +9,11 @@ module.exports = {
   },
   module : {
     rules : [
-      {
-        test: /\.(js|mjs|jsx)$/,
-        enforce: 'pre',
-        loader: 'eslint-loader'
-      },
+      // {
+      //   test: /\.(js|mjs|jsx)$/,
+      //   enforce: 'pre',
+      //   loader: 'eslint-loader'
+      // },
       {
         test : /\.js?/,
         include : SRC_DIR,
@@ -22,7 +22,7 @@ module.exports = {
       {
         test: /\.css$/,
         include: SRC_DIR,
-        loader: 'css-loader'
+        loader:  ['style-loader', 'css-loader'],
       },
     ]
   },

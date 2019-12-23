@@ -60,13 +60,6 @@ class SignIn extends React.Component {
 }
 
 
- // <div>
-      //   <h1>Level ☝️ Fitness</h1>
-      //   <p>
-      //     Welcome {firebase.auth().currentUser.displayName}! You are now
-      //     signed-in!
-      //   </p>
-      //   <a onClick={() => firebase.auth().signOut()}>Sign-out</a>
-      // </div>
+
 
 export default SignIn;
