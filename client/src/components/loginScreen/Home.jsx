@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import { Hide, View, Login, Logout } from "grommet-icons";
-import { Box, TextInput, Button, Grommet } from "grommet";
+
 import {
   faEye,
   faEyeSlash,
@@ -16,13 +15,18 @@ const Home = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [reveal, setReveal] = useState(false);
-  
+
   if (newUser === true) {
     return <Redirect push to="/SignUp" />;
   } else if (signIn === true) {
-    return <Redirect  to={{pathname: "/SignIn", 
-    state:{email: email, password: password}
-  }}/>;
+    return (
+      <Redirect
+        to={{
+          pathname: "/SignIn",
+          state: { email: email, password: password }
+        }}
+      />
+    );
   } else {
     return (
       <div className="login-form">
@@ -33,10 +37,11 @@ const Home = () => {
             type="email"
             name="email"
             placeholder="email@domain.com"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required
             value={email}
             onChange={event => setEmail(event.target.value)}
           ></input>
-          <div className="email-clear" onClick={() => setEmail('')}>
+          <div className="email-clear" onClick={() => setEmail("")}>
             <FontAwesomeIcon icon={faBackspace} size="2x" />
           </div>
         </div>
@@ -71,11 +76,12 @@ const Home = () => {
         </div>
 
         <div className="forgot-password">Forgot-Password</div>
-        <div className="sign-up">Sign-Up</div>
+        <div className="sign-up" onClick={() => setNewUserStatus(true)}>
+          Sign-Up
+        </div>
       </div>
     );
   }
-  
 };
 
 export default Home;
