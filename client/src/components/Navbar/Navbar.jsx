@@ -63,7 +63,7 @@ export default class App extends Component {
           {this.state.seaCreatures.map((creature, index) => (
             <li key={index}>{creature}</li>
           ))}    a
-        </ul> */}
+        </ul> }
 
         </div>
         );
