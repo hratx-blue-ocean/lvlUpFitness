@@ -37,7 +37,9 @@ const Home = () => {
             type="email"
             name="email"
             placeholder="email@domain.com"
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+            required
             value={email}
             onChange={event => setEmail(event.target.value)}
           ></input>
@@ -79,6 +81,9 @@ const Home = () => {
         <div className="sign-up" onClick={() => setNewUserStatus(true)}>
           Sign-Up
         </div>
+       
+          
+       
       </div>
     );
   }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   faEye,
   faEyeSlash,
@@ -12,12 +12,11 @@ export default function SignUp() {
   const [firstName, setFirst] = useState("");
   const [lastName, setLast] = useState("");
   const [email, setEmail] = useState("");
+  /* passsword validation hooks*/
   const [password, setPassword] = useState("");
-  const [rePassword, setRePassword] = useState("");
-  const [isStrong, setRePasswordStatus] = useState(false);
-  const [signUpComplete, setSignUpComplete] = useState(false);
   const [reveal, setReveal] = useState(false);
-  const [validationRequirement, setValidationRequirement] = useState(false);
+  const [rePassword, setRePassword] = useState("");
+  const [isStrong, setStrongPW] = useState(false);
   const [validationClass, setValidationClass] = useState(
     "password-requirement-inactive"
   );
@@ -27,34 +26,58 @@ export default function SignUp() {
     number: "invalid",
     len: "invalid"
   });
+  const [isSame, setSame] = useState(false)
 
-  useEffect(() => {
-	  console.log('from effect')
-	  validatePassword(password, validCheck)
-	 
-  }, [password])
-
-  const validatePassword = (password, validCheck) => {
+  const [signUpComplete, setSignUpComplete] = useState(true);
+  const validatePassword = () => {
     if (password.match(/[a-z]/g)) {
       validCheck.lower = "valid";
+      setValidCheck(validCheck);
+    } else {
+      validCheck.lower = "invalid";
       setValidCheck(validCheck);
     }
     if (password.match(/[A-Z]/g)) {
       validCheck.upper = "valid";
       setValidCheck(validCheck);
+    } else {
+      validCheck.upper = "invalid";
+      setValidCheck(validCheck);
     }
     if (password.match(/[0-9]/g)) {
       validCheck.number = "valid";
+      setValidCheck(validCheck);
+    } else {
+      validCheck.number = "invalid";
       setValidCheck(validCheck);
     }
     if (password.length >= 8) {
       validCheck.len = "valid";
       setValidCheck(validCheck);
+    } else {
+      validCheck.len = "invalid";
+      setValidCheck(validCheck);
+    }
+    if (Object.values(validCheck).includes("invalid")) {
+      setStrongPW(false);
+    } else {
+      setStrongPW(true);
     }
   };
-  console.log("Check for update", validCheck);
+  const checkSame = (a, b)=>{
+	  a===b? setSame(true):setSame(false)
+  }
+  const formComplete = ()=>{
+	  console.log()
+	  if (isStrong && isSame){
+		  setSignUpComplete(false)
+	  }
+	  else setSignUpComplete(true)
+  }
+  
+
   return (
-    <div className="signup-form">
+    <div className="signup-form" onChange = {()=> formComplete()}>
       <div className="title">Create your Account</div>
 
       <div className="username-field">
@@ -76,7 +99,7 @@ export default function SignUp() {
           className="first-name"
           type="text"
           name="first-name"
-          placeholder="Sujan"
+          placeholder="John"
           value={firstName}
           onChange={event => setFirst(event.target.value)}
         />
@@ -90,7 +113,7 @@ export default function SignUp() {
           className="last-name"
           type="text"
           name="last-name"
-          placeholder="Dahal"
+          placeholder="Doe"
           value={lastName}
           onChange={event => setLast(event.target.value)}
         />
@@ -120,15 +143,11 @@ export default function SignUp() {
           name="password"
           placeholder="********"
           value={password}
-          onFocus={event => {
-            setValidationRequirement(true),
-              setValidationClass("password-requirement-active");
-          }}
+          onFocus={() => setValidationClass("password-requirement-active")}
           onChange={event => {
             setPassword(event.target.value);
-            
 		  }}
-		  onKeyDown = {()=>validatePassword(password, validCheck)}
+		  onKeyUp={()=> validatePassword()}
         />
         <div className="show-password" onClick={() => setReveal(!reveal)}>
           {reveal ? (
@@ -146,7 +165,12 @@ export default function SignUp() {
           name="repassword"
           placeholder="********"
           value={rePassword}
-          onChange={event => setRePassword(event.target.value)}
+          disabled={!isStrong}
+          onChange={event => {
+            setRePassword(event.target.value)
+            
+		  }}
+		  onKeyDown={()=>checkSame(password, rePassword)}
         />
         <div className="show-password-again" onClick={() => setReveal(!reveal)}>
           {reveal ? (
@@ -157,34 +181,32 @@ export default function SignUp() {
         </div>
       </div>
 
-      <div className="create-account">
-        <input
+      <button className="create-account" disabled = {signUpComplete}>
+        <div
           className="create-account-text"
           type="readonly"
-          placeholder="Create Account"
-          onClick={() => {
-            setSignUpComplete(true);
-          }}
-        />
-      </div>
-      <div className={validationClass}>
+         
+        >  Create Account</div>
+      </button>
+
+      <ul className={validationClass}>
         <h3>Password Requirement:</h3>
-        <p id="letter" className={validCheck.lower}>
-          A <b>lowercase</b> letter <p>{validCheck.lower}</p>
-        </p>
-        <p id="capital" className={validCheck.upper}>
-          A <b>capital (uppercase)</b> letter<p>{validCheck.upper}</p>
-        </p>
-        <p id="number" className={validCheck.number}>
-          A <b>number</b><p>{validCheck.number}</p>
-        </p>
-        <p id="length" className={validCheck.len}>
-          Minimum <b>8 characters</b><p>{validCheck.length}</p>
-        </p>
-        <p id="same" className={validCheck.same}>
+        <li className={validCheck.lower}>
+          A <b>lowercase</b> letter
+        </li>
+        <li className={validCheck.upper}>
+          A <b>capital (uppercase)</b> letter
+        </li>
+        <li className={validCheck.number}>
+          A <b>number</b>
+        </li>
+        <li className={validCheck.len}>
+          Minimum <b>8 characters</b>
+        </li>
+        <li className={validCheck.same}>
           <b>Must </b> match
-        </p>
-      </div>
+        </li>
+      </ul>
     </div>
   );
 }
