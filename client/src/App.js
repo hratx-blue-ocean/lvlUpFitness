@@ -62,6 +62,7 @@ export default class App extends Component {
           <Route exact path="/SignUp" component={SignUp}></Route>
           <Route exact path="/SignIn" component={SignIn}></Route>
           <Route exact path="/Home" component={Navbar}></Route>
+          <Route exact path="/Navbar" component={Navbar}></Route>
           <Route component={ForOfor}></Route>
         </Switch>
       </DebugRouter>
