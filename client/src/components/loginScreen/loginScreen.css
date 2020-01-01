@@ -27,6 +27,30 @@ body{
 	display: flex;
 }
 
+.create-account[disabled]
+{
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.label{
+	font-size: 24px;
+	color: #FFFFFF;
+	text-align: left;
+}
+
+.email-field-error, .password-field-error, select, textarea{
+	display: flex;
+	background-color: red;
+	color: red;
+}
+
+.input-label{
+	font-size: 24px;
+	color: #FFFFFF;
+	text-align: left;
+}
+
 .username,
 .email,
 .password,
@@ -37,6 +61,14 @@ body{
 	border: 1px solid #979797;
 	font-size: 36px;
 	border-radius: 10px;
+}
+
+.email-error, .password-error{
+	background-color: #D8D8D8;
+	border: 1px solid #979797;
+	font-size: 36px;
+	border-radius: 10px;
+	color: red
 }
 .username-clear,
 .email-clear,
@@ -52,12 +84,9 @@ margin-right: 50px;
 
 }
 .password-requirement-active{
-	
 	color:white;
 	position: relative;
-	right: -50px;
-
-	
+	right: -50px;	
 }
 .invalid{
 	color: red;
@@ -69,16 +98,18 @@ margin-right: 50px;
 }
 
 .sign-in-text, .create-account-text{
+	width: 398px;
 	background-color: #88C4F8;
 	border: 1px solid #979797;
+	color: #FFFFFF;
 	border-radius: 10px;
 	font-size: 36px;
 	text-align: center;
 	cursor: pointer;
 }
-.sign-in-text::placeholder, .create-account-text::placeholder{
+/* .sign-in-text::placeholder, .create-account-text::placeholder{
 	color: white;
-}
+} */
 .forgot-password{
 	font-size: 12px;
 	color: rgb(144, 144, 233);
