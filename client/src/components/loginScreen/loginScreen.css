@@ -79,10 +79,10 @@ body{
 	margin-left: -45px;
 }
 .password-requirement-inactive{
-display: none;
-margin-right: 50px;
-
+	display: none;
+	margin-right: 50px;
 }
+
 .password-requirement-active{
 	color:white;
 	position: relative;

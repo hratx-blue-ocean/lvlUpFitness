@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { withRouter} from "react-router-dom";
 import {
   faEye,
   faEyeSlash,
@@ -8,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./loginScreen.css";
 import firebase from "../../firebase.js";
 
-export default function SignUp() {
+export default function SignUp(props) {
   const [userName, setUserName] = useState("");
   const [firstName, setFirst] = useState("");
   const [lastName, setLast] = useState("");
@@ -31,16 +32,15 @@ export default function SignUp() {
 
   //useEffect to validate password requirement
   useEffect(() => {
+    checkEmail()
     validatePassword();
     checkSame();
     formComplete();
-    checkEmail()
   }, [email, password, rePassword, isSame, isStrong]);
 
   const checkEmail=()=>{
     email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g)? setValidEmail('valid'): setValidEmail('invalid')
   }
-  console.log(validEmail)
 
   const validatePassword = () => {
     password.match(/[a-z]/g) ? setLower("valid") : setLower("invalid");
@@ -65,6 +65,15 @@ export default function SignUp() {
       ? setSignUpComplete(true)
       : setSignUpComplete(false);
   };
+  const handleCreateUser = (userNameToSend, emailToSend,passswordToSend)=>{
+    const regStatus =  new Promise((resolve, reject)=>{
+      resolve(firebase.register(userNameToSend, emailToSend,passswordToSend))
+    })
+    .then(()=>{
+      setTimeout(()=>
+      props.history.replace('/Navbar'), 2000)
+    })
+  }
 
   return (
     <div className="signup-form">
@@ -179,7 +188,7 @@ export default function SignUp() {
           <div
             className="create-account-text"
             type="readonly"
-            onClick = {()=>console.log("Email:",email,"Password:", password)}
+            onClick = {()=>handleCreateUser(userName, email,password)}
           >
             Create Account
           </div>
