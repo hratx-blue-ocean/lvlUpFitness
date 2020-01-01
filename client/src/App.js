@@ -3,7 +3,7 @@ import React, { Component } from "react";
 // import Axios from 'axios';
 import Home from "./components/loginScreen/Home.jsx";
 import SignUp from "./components/loginScreen/SignUp.jsx";
-import SignIn from "./components/loginScreen/SignIn.jsx";
+
 import ForOfor from "./components/forOfor/forOfor.jsx";
 import Navbar from "./components/Navbar/Navbar.jsx"
 
@@ -60,8 +60,9 @@ export default class App extends Component {
         <Switch>
           <Route exact path="/" component={Home}></Route>
           <Route exact path="/SignUp" component={SignUp}></Route>
-          <Route exact path="/SignIn" component={SignIn}></Route>
+         
           <Route exact path="/Home" component={Navbar}></Route>
+          <Route exact path="/Navbar" component={Navbar}></Route>
           <Route component={ForOfor}></Route>
         </Switch>
       </DebugRouter>

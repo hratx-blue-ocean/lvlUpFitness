@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { withRouter} from "react-router-dom";
 import {
   faEye,
   faEyeSlash,
@@ -6,12 +7,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./loginScreen.css";
+import firebase from "../../firebase.js";
 
-export default function SignUp() {
+export default function SignUp(props) {
   const [userName, setUserName] = useState("");
   const [firstName, setFirst] = useState("");
   const [lastName, setLast] = useState("");
   const [email, setEmail] = useState("");
+  const [validEmail, setValidEmail] = useState('')
   /* passsword validation hooks*/
   const [password, setPassword] = useState("");
   const [reveal, setReveal] = useState(false);
@@ -20,67 +23,65 @@ export default function SignUp() {
   const [validationClass, setValidationClass] = useState(
     "password-requirement-inactive"
   );
-  const [validCheck, setValidCheck] = useState({
-    lower: "invalid",
-    upper: "invalid",
-    number: "invalid",
-    len: "invalid"
-  });
-  const [isSame, setSame] = useState(false)
+  const [lower, setLower] = useState("invalid");
+  const [upper, setUpper] = useState("invalid");
+  const [number, setNumber] = useState("invalid");
+  const [len, setLen] = useState("invalid");
+  const [isSame, setSame] = useState("invalid");
+  const [signUpComplete, setSignUpComplete] = useState(false);
 
-  const [signUpComplete, setSignUpComplete] = useState(true);
+  //useEffect to validate password requirement
+  useEffect(() => {
+    checkEmail()
+    validatePassword();
+    checkSame();
+    formComplete();
+  }, [email, password, rePassword, isSame, isStrong]);
+
+  const checkEmail=()=>{
+    email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g)? setValidEmail('valid'): setValidEmail('invalid')
+  }
+
   const validatePassword = () => {
-    if (password.match(/[a-z]/g)) {
-      validCheck.lower = "valid";
-      setValidCheck(validCheck);
-    } else {
-      validCheck.lower = "invalid";
-      setValidCheck(validCheck);
-    }
-    if (password.match(/[A-Z]/g)) {
-      validCheck.upper = "valid";
-      setValidCheck(validCheck);
-    } else {
-      validCheck.upper = "invalid";
-      setValidCheck(validCheck);
-    }
-    if (password.match(/[0-9]/g)) {
-      validCheck.number = "valid";
-      setValidCheck(validCheck);
-    } else {
-      validCheck.number = "invalid";
-      setValidCheck(validCheck);
-    }
-    if (password.length >= 8) {
-      validCheck.len = "valid";
-      setValidCheck(validCheck);
-    } else {
-      validCheck.len = "invalid";
-      setValidCheck(validCheck);
-    }
-    if (Object.values(validCheck).includes("invalid")) {
-      setStrongPW(false);
-    } else {
-      setStrongPW(true);
-    }
+    password.match(/[a-z]/g) ? setLower("valid") : setLower("invalid");
+    password.match(/[A-Z]/g) ? setUpper("valid") : setUpper("invalid");
+    password.match(/[0-9]/g) ? setNumber("valid") : setNumber("invalid");
+    password.length >= 8 ? setLen("valid") : setLen("invalid");
+    lower === "invalid" &&
+    upper === "invalid" &&
+    number === "invalid" &&
+    len === "invalid"
+      ? setStrongPW(false)
+      : setStrongPW(true);
   };
-  const checkSame = (a, b)=>{
-	  a===b? setSame(true):setSame(false)
+
+  const checkSame = () => {
+    password === rePassword && (password !== "" || rePassword !== "")
+      ? setSame("valid")
+      : setSame("invalid");
+  };
+  const formComplete = () => {
+    validEmail === 'valid' && isStrong === true && isSame === "valid" 
+      ? setSignUpComplete(true)
+      : setSignUpComplete(false);
+  };
+  const handleCreateUser = (userNameToSend, emailToSend,passswordToSend)=>{
+    const regStatus =  new Promise((resolve, reject)=>{
+      resolve(firebase.register(userNameToSend, emailToSend,passswordToSend))
+    })
+    .then(()=>{
+      setTimeout(()=>
+      props.history.replace('/Navbar'), 2000)
+    })
   }
-  const formComplete = ()=>{
-	  console.log()
-	  if (isStrong && isSame){
-		  setSignUpComplete(false)
-	  }
-	  else setSignUpComplete(true)
-  }
-  
 
   return (
-    <div className="signup-form" onChange = {()=> formComplete()}>
-      <div className="title">Create your Account</div>
+    <div className="signup-form">
 
+      <div className="title">Create your Account</div>
+      <div className = "input-label">Username: </div>
       <div className="username-field">
+      
         <input
           className="username"
           type="text"
@@ -94,6 +95,7 @@ export default function SignUp() {
         </div>
       </div>
 
+      <div className = "input-label">First Name: </div>
       <div className="first-name-field">
         <input
           className="first-name"
@@ -108,6 +110,7 @@ export default function SignUp() {
         </div>
       </div>
 
+      <div className = "input-label">Last Name: </div>
       <div className="last-name-field">
         <input
           className="last-name"
@@ -122,6 +125,7 @@ export default function SignUp() {
         </div>
       </div>
 
+      <div className = "input-label">Email Adress: </div>
       <div className="email-field">
         <input
           className="email"
@@ -136,6 +140,7 @@ export default function SignUp() {
         </div>
       </div>
 
+      <div className = "input-label">Password: </div>
       <div className="password-field">
         <input
           className="password"
@@ -144,12 +149,13 @@ export default function SignUp() {
           placeholder="********"
           value={password}
           onFocus={() => setValidationClass("password-requirement-active")}
-          onChange={event => {
-            setPassword(event.target.value);
-		  }}
-		  onKeyUp={()=> validatePassword()}
+          onChange={event => setPassword(event.target.value)}
         />
-        <div className="show-password" onClick={() => setReveal(!reveal)}>
+        <div
+          className="show-password"
+          onMouseDown={() => setReveal(!reveal)}
+          onMouseUp={() => setReveal(!reveal)}
+        >
           {reveal ? (
             <FontAwesomeIcon icon={faEye} size="2x" />
           ) : (
@@ -158,6 +164,7 @@ export default function SignUp() {
         </div>
       </div>
 
+      <div className = "input-label">Re Type Password: </div>
       <div className="re-password-field">
         <input
           className="re-password"
@@ -166,11 +173,7 @@ export default function SignUp() {
           placeholder="********"
           value={rePassword}
           disabled={!isStrong}
-          onChange={event => {
-            setRePassword(event.target.value)
-            
-		  }}
-		  onKeyDown={()=>checkSame(password, rePassword)}
+          onChange={event => setRePassword(event.target.value)}
         />
         <div className="show-password-again" onClick={() => setReveal(!reveal)}>
           {reveal ? (
@@ -181,32 +184,35 @@ export default function SignUp() {
         </div>
       </div>
 
-      <button className="create-account" disabled = {signUpComplete}>
-        <div
-          className="create-account-text"
-          type="readonly"
-         
-        >  Create Account</div>
-      </button>
+      <div className="create-account" disabled={!signUpComplete}>
+          <div
+            className="create-account-text"
+            type="readonly"
+            onClick = {()=>handleCreateUser(userName, email,password)}
+          >
+            Create Account
+          </div>
+        </div>
 
       <ul className={validationClass}>
         <h3>Password Requirement:</h3>
-        <li className={validCheck.lower}>
+        <li className={lower}>
           A <b>lowercase</b> letter
         </li>
-        <li className={validCheck.upper}>
+        <li className={upper}>
           A <b>capital (uppercase)</b> letter
         </li>
-        <li className={validCheck.number}>
+        <li className={number}>
           A <b>number</b>
         </li>
-        <li className={validCheck.len}>
+        <li className={len}>
           Minimum <b>8 characters</b>
         </li>
-        <li className={validCheck.same}>
+        <li className={isSame}>
           <b>Must </b> match
         </li>
       </ul>
+    
     </div>
   );
 }

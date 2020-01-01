@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
+import firebase from "../../firebase.js";
 
 import {
   faEye,
@@ -9,36 +10,69 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./loginScreen.css";
 
-const Home = () => {
+const Home = ({ location }) => {
+  const [isAuthenticated, setAuthentication] = useState(false);
+  const [userInfo, setUserInfo] = useState("");
   const [newUser, setNewUserStatus] = useState(false);
-  const [signIn, setLogin] = useState(false);
+  const [signIn, setSignIn] = useState(false);
   const [email, setEmail] = useState("");
+  const [emailClass, setEmailClass] = useState("email");
   const [password, setPassword] = useState("");
+  const [pwClass, setPWClass] = useState("password");
   const [reveal, setReveal] = useState(false);
 
-  if (newUser === true) {
-    return <Redirect push to="/SignUp" />;
-  } else if (signIn === true) {
+  useEffect(() => {
+    authenticateUser(email, password);
+  }, [signIn]);
+
+  const authenticateUser = (email, password) => {
+    let a = new Promise((resolve, reject) => {
+      resolve(firebase.login(email, password));
+    })
+      .then(() => {
+        setAuthentication(true);
+        setUserInfo(a);
+      })
+      .catch(error => {
+        // Handle Errors here.
+        console.log([error.code, error.message]);
+        if (error.code === "auth/user-not-found"){
+          setEmailClass('email-error')
+        }
+        if (error.code === "auth/wrong-password"){
+          setPWClass('password-error')
+        }
+
+      });
+
+    setSignIn(false);
+  };
+  if (isAuthenticated === true) {
     return (
       <Redirect
         to={{
-          pathname: "/SignIn",
-          state: { email: email, password: password }
+          pathname: "/Navbar",
+          state: { a: userInfo }
         }}
       />
     );
+  } else {
+    <React.Fragment>wrongEmail or wrongPassword redirecting</React.Fragment>;
+  }
+
+  if (newUser === true) {
+    return <Redirect push to="/SignUp" />;
   } else {
     return (
       <div className="login-form">
         <div className="title">Log In</div>
         <div className="email-field">
           <input
-            className="email"
+            className={emailClass}
             type="email"
             name="email"
             placeholder="email@domain.com"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
             required
             value={email}
             onChange={event => setEmail(event.target.value)}
@@ -50,14 +84,18 @@ const Home = () => {
 
         <div className="password-field">
           <input
-            className="password"
+            className={pwClass}
             type={reveal ? "text" : "password"}
             name="password"
             placeholder="********"
             value={password}
             onChange={event => setPassword(event.target.value)}
           ></input>
-          <div className="show-password" onClick={() => setReveal(!reveal)}>
+          <div
+            className="show-password"
+            onMouseDown={() => setReveal(!reveal)}
+            onMouseUp={() => setReveal(!reveal)}
+          >
             {reveal ? (
               <FontAwesomeIcon icon={faEye} size="2x" />
             ) : (
@@ -65,25 +103,22 @@ const Home = () => {
             )}
           </div>
         </div>
-
-        <div className="sign-in">
-          <input
+        <div className="sign-in" disabled={signIn}>
+          <div
             className="sign-in-text"
             type="readonly"
-            placeholder="Login"
             onClick={() => {
-              setLogin(true);
+              setSignIn(true);
             }}
-          ></input>
+          >
+            Sign In
+          </div>
         </div>
 
         <div className="forgot-password">Forgot-Password</div>
         <div className="sign-up" onClick={() => setNewUserStatus(true)}>
           Sign-Up
         </div>
-       
-          
-       
       </div>
     );
   }
