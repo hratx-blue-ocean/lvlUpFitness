@@ -26,26 +26,27 @@ const Home = ({ location }) => {
   }, [signIn]);
 
   const authenticateUser = (email, password) => {
-    let a = new Promise((resolve, reject) => {
-      resolve(firebase.login(email, password));
-    })
-      .then(() => {
-        setAuthentication(true);
-        setUserInfo(a);
+    if (email.length > 0 && password.length > 0) {
+      let a = new Promise((resolve, reject) => {
+        resolve(firebase.login(email, password));
       })
-      .catch(error => {
-        // Handle Errors here.
-        console.log([error.code, error.message]);
-        if (error.code === "auth/user-not-found"){
-          setEmailClass('email-error')
-        }
-        if (error.code === "auth/wrong-password"){
-          setPWClass('password-error')
-        }
+        .then(() => {
+          setAuthentication(true);
+          setUserInfo(a);
+        })
+        .catch(error => {
+          // Handle Errors here.
+          console.log([error.code, error.message]);
+          if (error.code === "auth/user-not-found") {
+            setEmailClass("email-error");
+          }
+          if (error.code === "auth/wrong-password") {
+            setPWClass("password-error");
+          }
+        });
 
-      });
-
-    setSignIn(false);
+      setSignIn(false);
+    }
   };
   if (isAuthenticated === true) {
     return (
@@ -57,9 +58,9 @@ const Home = ({ location }) => {
       />
     );
   } else {
-    <React.Fragment>wrongEmail or wrongPassword redirecting</React.Fragment>;
+    <React.Fragment>wrongEmail or wrongPassword redirecting
+    </React.Fragment>;
   }
-
   if (newUser === true) {
     return <Redirect push to="/SignUp" />;
   } else {

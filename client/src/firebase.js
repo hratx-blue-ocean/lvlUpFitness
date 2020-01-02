@@ -2,7 +2,7 @@ const app = require("firebase");
 const config = require("../src/components/loginScreen/config.js");
 
 class Firebase {
-  constructor() {
+	constructor() {
     app.initializeApp(config.default);
     this.auth = app.auth();
     // this.db = app.firestore();
