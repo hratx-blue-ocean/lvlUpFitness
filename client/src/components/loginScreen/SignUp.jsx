@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { withRouter} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { } from "react-router-dom";
 import {
   faEye,
   faEyeSlash,
@@ -14,7 +14,7 @@ export default function SignUp(props) {
   const [firstName, setFirst] = useState("");
   const [lastName, setLast] = useState("");
   const [email, setEmail] = useState("");
-  const [validEmail, setValidEmail] = useState('')
+  const [validEmail, setValidEmail] = useState("");
   /* passsword validation hooks*/
   const [password, setPassword] = useState("");
   const [reveal, setReveal] = useState(false);
@@ -32,17 +32,19 @@ export default function SignUp(props) {
 
   //useEffect to validate password requirement
   useEffect(() => {
-    checkEmail()
-    validatePassword();
-    checkSame();
-    formComplete();
+    checkEmail(email);
+    validatePassword(password, lower, upper, number, len);
+    checkSame(password, rePassword);
+    formComplete(validEmail,isStrong,isSame);
   }, [email, password, rePassword, isSame, isStrong]);
 
-  const checkEmail=()=>{
-    email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g)? setValidEmail('valid'): setValidEmail('invalid')
-  }
+  const checkEmail = (email) => {
+    email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/g)
+      ? setValidEmail("valid")
+      : setValidEmail("invalid");
+  };
 
-  const validatePassword = () => {
+  const validatePassword = (password, lower, upper, number, len) => {
     password.match(/[a-z]/g) ? setLower("valid") : setLower("invalid");
     password.match(/[A-Z]/g) ? setUpper("valid") : setUpper("invalid");
     password.match(/[0-9]/g) ? setNumber("valid") : setNumber("invalid");
@@ -55,33 +57,29 @@ export default function SignUp(props) {
       : setStrongPW(true);
   };
 
-  const checkSame = () => {
+  const checkSame = (password, rePassword) => {
     password === rePassword && (password !== "" || rePassword !== "")
       ? setSame("valid")
       : setSame("invalid");
   };
-  const formComplete = () => {
-    validEmail === 'valid' && isStrong === true && isSame === "valid" 
+  const formComplete = (validEmail,isStrong,isSame) => {
+    validEmail === "valid" && isStrong === true && isSame === "valid"
       ? setSignUpComplete(true)
       : setSignUpComplete(false);
   };
-  const handleCreateUser = (userNameToSend, emailToSend,passswordToSend)=>{
-    const regStatus =  new Promise((resolve, reject)=>{
-      resolve(firebase.register(userNameToSend, emailToSend,passswordToSend))
-    })
-    .then(()=>{
-      setTimeout(()=>
-      props.history.replace('/Navbar'), 2000)
-    })
-  }
+  const handleCreateUser = (userNameToSend, emailToSend, passswordToSend) => {
+    const regStatus = new Promise((resolve, reject) => {
+      resolve(firebase.register(userNameToSend, emailToSend, passswordToSend));
+    }).then(() => {
+      setTimeout(() => props.history.replace("/Navbar"), 2000);
+    });
+  };
 
   return (
     <div className="signup-form">
-
       <div className="title">Create your Account</div>
-      <div className = "input-label">Username: </div>
+      <div className="input-label">Username: </div>
       <div className="username-field">
-      
         <input
           className="username"
           type="text"
@@ -95,7 +93,7 @@ export default function SignUp(props) {
         </div>
       </div>
 
-      <div className = "input-label">First Name: </div>
+      <div className="input-label">First Name: </div>
       <div className="first-name-field">
         <input
           className="first-name"
@@ -110,7 +108,7 @@ export default function SignUp(props) {
         </div>
       </div>
 
-      <div className = "input-label">Last Name: </div>
+      <div className="input-label">Last Name: </div>
       <div className="last-name-field">
         <input
           className="last-name"
@@ -125,7 +123,7 @@ export default function SignUp(props) {
         </div>
       </div>
 
-      <div className = "input-label">Email Adress: </div>
+      <div className="input-label">Email Adress: </div>
       <div className="email-field">
         <input
           className="email"
@@ -140,7 +138,7 @@ export default function SignUp(props) {
         </div>
       </div>
 
-      <div className = "input-label">Password: </div>
+      <div className="input-label">Password: </div>
       <div className="password-field">
         <input
           className="password"
@@ -164,7 +162,7 @@ export default function SignUp(props) {
         </div>
       </div>
 
-      <div className = "input-label">Re Type Password: </div>
+      <div className="input-label">Re Type Password: </div>
       <div className="re-password-field">
         <input
           className="re-password"
@@ -185,14 +183,14 @@ export default function SignUp(props) {
       </div>
 
       <div className="create-account" disabled={!signUpComplete}>
-          <div
-            className="create-account-text"
-            type="readonly"
-            onClick = {()=>handleCreateUser(userName, email,password)}
-          >
-            Create Account
-          </div>
+        <div
+          className="create-account-text"
+          type="readonly"
+          onClick={() => handleCreateUser(userName, email, password)}
+        >
+          Create Account
         </div>
+      </div>
 
       <ul className={validationClass}>
         <h3>Password Requirement:</h3>
@@ -212,7 +210,6 @@ export default function SignUp(props) {
           <b>Must </b> match
         </li>
       </ul>
-    
     </div>
   );
 }
