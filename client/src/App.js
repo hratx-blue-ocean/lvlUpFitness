@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 // import fetch from 'node-fetch';
 // import Axios from 'axios';
+import "./App.css";
+import AuthContextProvider from "./AuthContext.js";
+import { AuthContext } from './AuthContext'
 import Home from "./components/loginScreen/Home.jsx";
 import SignUp from "./components/loginScreen/SignUp.jsx";
-
 import ForOfor from "./components/forOfor/forOfor.jsx";
-import Navbar from "./components/Navbar/Navbar.jsx"
-
+import Navbar from "./components/Navbar/Navbar.jsx";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
-import "./App.css";
 
 class DebugRouter extends Router {
   constructor(props) {
@@ -28,15 +27,19 @@ class DebugRouter extends Router {
 }
 
 export default class App extends Component {
+  // static contextType = AuthContext;
+  
   constructor(props) {
     super(props);
     this.state = {
-      seaCreatures: [],
-      test: ""
+      
     };
-    this.api = `http://localhost:8000/api/example`;
+    this.api = "http://localhost:8000/api/example";
   }
-  componentDidMount() {
+
+  
+
+  //componentDidMount() {
     // this.fetchData();
     //SUjan commented this to test the initial setup
     // fetch(this.api)
@@ -44,10 +47,10 @@ export default class App extends Component {
     //   .then(seaCreatures => {
     //     this.setState({ seaCreatures: seaCreatures.data });
     //   });
-  }
+  //}
 
   // fetchData(){
-  //   Axios.get(`http://lcd clocalhost:8000/api/example`)
+  //   Axios.get(`http://loclocalhost:8000/api/example`)
   //   .then((data)=>{
   //     this.setState({test: data})
   //   })
@@ -55,17 +58,26 @@ export default class App extends Component {
   // }
 
   render() {
+    console.log(this.context)
     return (
-      <DebugRouter>
-        <Switch>
-          <Route exact path="/" component={Home}></Route>
-          <Route exact path="/SignUp" component={SignUp}></Route>
-         
-          <Route exact path="/Home" component={Navbar}></Route>
-          <Route exact path="/Navbar" component={Navbar}></Route>
-          <Route component={ForOfor}></Route>
-        </Switch>
-      </DebugRouter>
+      <AuthContextProvider>
+        <DebugRouter>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/SignUp">
+              <SignUp />
+            </Route>
+            <Route exact path="/Navbar">
+              <Navbar />
+            </Route>
+            <Route>
+              <ForOfor />
+            </Route>
+          </Switch>
+        </DebugRouter>
+      </AuthContextProvider>
     );
   }
 }
