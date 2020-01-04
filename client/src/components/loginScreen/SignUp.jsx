@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
-import Home from "./Home.jsx";
-import AuthContextProvider from "../../AuthContext";
+import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../AuthContext";
-import { Redirect, withRouter, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
   faEye,
   faEyeSlash,
@@ -14,6 +12,11 @@ import firebase from "../../firebase.js";
 
 const SignUp = () => {
   let reRoute = useHistory();
+
+  const context = useContext(AuthContext);
+  const { isAuth, loggedIn } = context;
+  isAuth === true ? reRoute.push("/Navbar") : null;
+
   const [userName, setUserName] = useState("");
   const [firstName, setFirst] = useState("");
   const [lastName, setLast] = useState("");
@@ -76,12 +79,15 @@ const SignUp = () => {
     const regStatus = new Promise((resolve, reject) => {
       resolve(firebase.register(userNameToSend, emailToSend, passswordToSend));
     }).then(() => {
-      setTimeout(() => reRoute.push("/Navbar"), 2000);
+      setTimeout(() => {
+        loggedIn();
+      }, 2000);
     });
   };
 
   return (
     <div className="signup-form">
+      <h1>{context.isAuth.toString()}</h1>
       <div className="title">Create your Account</div>
       <div className="input-label">Username: </div>
       <div className="username-field">

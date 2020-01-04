@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Redirect, withRouter } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { Redirect, useHistory } from "react-router-dom";
 import firebase from "../../firebase.js";
 import {
   faEye,
@@ -8,9 +8,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./loginScreen.css";
+import { AuthContext } from "../../AuthContext.js";
 
 const Home = () => {
-  const [isAuthenticated, setAuthentication] = useState(false);
+  let reRoute = useHistory();
+  const context = useContext(AuthContext);
+  const { isAuth, loggedIn } = context;
+
+  isAuth === true ? reRoute.push("/Navbar") : null;
+
   const [userInfo, setUserInfo] = useState("");
   const [newUser, setNewUserStatus] = useState(false);
   const [signIn, setSignIn] = useState(false);
@@ -30,31 +36,23 @@ const Home = () => {
         resolve(firebase.login(email, password));
       })
         .then(() => {
-          setAuthentication(true);
+          loggedIn();
           setUserInfo(a);
         })
         .catch(error => {
           // Handle Errors here.
           console.log([error.code, error.message]);
-          (error.code === "auth/user-not-found")? 
-            setEmailClass("email-error"):setEmailClass("email");
-          (error.code === "auth/wrong-password") ?
-            setPWClass("password-error"):setPWClass("password");
-          
+          error.code === "auth/user-not-found"
+            ? setEmailClass("email-error")
+            : setEmailClass("email");
+          error.code === "auth/wrong-password"
+            ? setPWClass("password-error")
+            : setPWClass("password");
         });
       setSignIn(false);
     }
   };
-  if (isAuthenticated === true) {
-    return (
-      <Redirect
-        to={{
-          pathname: "/Navbar",
-          state: { a: userInfo }
-        }}
-      />
-    );
-  }
+
   if (newUser === true) {
     return <Redirect push to="/SignUp" />;
   } else {

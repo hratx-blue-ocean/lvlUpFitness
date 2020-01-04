@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import {AuthContext} from "../../AuthContext";
 
 export default class Navbar extends Component {
+  static contextType = AuthContext;
   
-
   render() {
     return (
       <div>
