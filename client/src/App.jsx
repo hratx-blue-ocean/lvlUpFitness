@@ -53,11 +53,9 @@ export default class App extends Component {
   // }
 
   render() {
-    console.log(this.AuthContext);
-
     return (
-      <AuthContextProvider>
-        <DebugRouter>
+      <DebugRouter>
+        <AuthContextProvider>
           <Switch>
             <Route exact path="/">
               <Home />
@@ -72,8 +70,8 @@ export default class App extends Component {
               <ForOfor />
             </Route>
           </Switch>
-        </DebugRouter>
-      </AuthContextProvider>
+        </AuthContextProvider>
+      </DebugRouter>
     );
   }
 }
