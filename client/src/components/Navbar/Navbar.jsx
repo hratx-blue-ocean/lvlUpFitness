@@ -5,6 +5,7 @@ export default class Navbar extends Component {
   static contextType = AuthContext;
   
   render() {
+    console.log(this.context)
     return (
       <div>
         <h2>Navbar</h2>

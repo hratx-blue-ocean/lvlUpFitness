@@ -1,11 +1,17 @@
 import React, {createContext, Component } from "react";
+import { getSessionCookie } from "./components/Cookies";
 
-export const AuthContext = createContext();
+export const AuthContext = createContext(getSessionCookie());
 
 export default class AuthContextProvider extends Component {
   state = {
     isAuth: false
   };
+
+  componentDidMount(){
+    this.setState(getSessionCookie())
+
+  }
 
   loggedIn =()=>{
     this.setState({isAuth: true});
@@ -16,6 +22,7 @@ export default class AuthContextProvider extends Component {
   }
 
   render() {
+    console.log("I am context from AuthContext", this.context)
     
     return (
       <AuthContext.Provider 

@@ -9,11 +9,14 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./loginScreen.css";
 import { AuthContext } from "../../AuthContext.js";
+import { setSessionCookie } from "../Cookies.js";
+
 
 const Home = () => {
   let reRoute = useHistory();
   const context = useContext(AuthContext);
   const { isAuth, loggedIn } = context;
+
 
   isAuth === true ? reRoute.push("/Navbar") : null;
 
@@ -30,13 +33,17 @@ const Home = () => {
     authenticateUser(email, password);
   }, [signIn]);
 
-  const authenticateUser = (email, password) => {
+  const authenticateUser =  (email, password) => {
     if (email.length > 0 && password.length > 0) {
       let a = new Promise((resolve, reject) => {
         resolve(firebase.login(email, password));
       })
         .then(() => {
           loggedIn();
+        })
+        .then(()=>{
+          console.log(isAuth)
+          setSessionCookie({isAuth: true})
           setUserInfo(a);
         })
         .catch(error => {
@@ -49,6 +56,7 @@ const Home = () => {
             ? setPWClass("password-error")
             : setPWClass("password");
         });
+        
       setSignIn(false);
     }
   };
