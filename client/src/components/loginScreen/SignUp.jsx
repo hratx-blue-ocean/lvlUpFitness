@@ -9,6 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./loginScreen.css";
 import firebase from "../../firebase.js";
+import { setSessionCookie } from "../Cookies.js";
 
 const SignUp = () => {
   let reRoute = useHistory();
@@ -82,7 +83,11 @@ const SignUp = () => {
       setTimeout(() => {
         loggedIn();
       }, 2000);
-    });
+    }).then(()=>{
+      console.log(isAuth)
+      setSessionCookie({isAuth: true})
+      setUserInfo(a);
+    })
   };
 
   return (

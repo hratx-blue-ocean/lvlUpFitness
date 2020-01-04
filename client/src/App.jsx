@@ -57,7 +57,7 @@ export default class App extends Component {
       <DebugRouter>
         <AuthContextProvider>
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/"  >
               <Home />
             </Route>
             <Route exact path="/SignUp">
