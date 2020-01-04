@@ -3,7 +3,7 @@ import React, { Component } from "react";
 // import Axios from 'axios';
 import "./App.css";
 import AuthContextProvider from "./AuthContext.js";
-import { AuthContext } from './AuthContext'
+import { AuthContext } from "./AuthContext.js";
 import Home from "./components/loginScreen/Home.jsx";
 import SignUp from "./components/loginScreen/SignUp.jsx";
 import ForOfor from "./components/forOfor/forOfor.jsx";
@@ -27,26 +27,21 @@ class DebugRouter extends Router {
 }
 
 export default class App extends Component {
-  // static contextType = AuthContext;
-  
   constructor(props) {
     super(props);
-    this.state = {
-      
-    };
+    this.state = {};
     this.api = "http://localhost:8000/api/example";
   }
 
-  
-
+  static contextType = AuthContext;
   //componentDidMount() {
-    // this.fetchData();
-    //SUjan commented this to test the initial setup
-    // fetch(this.api)
-    //   .then(res => res.json())
-    //   .then(seaCreatures => {
-    //     this.setState({ seaCreatures: seaCreatures.data });
-    //   });
+  // this.fetchData();
+  //SUjan commented this to test the initial setup
+  // fetch(this.api)
+  //   .then(res => res.json())
+  //   .then(seaCreatures => {
+  //     this.setState({ seaCreatures: seaCreatures.data });
+  //   });
   //}
 
   // fetchData(){
@@ -58,7 +53,8 @@ export default class App extends Component {
   // }
 
   render() {
-    console.log(this.context)
+    console.log(this.AuthContext);
+
     return (
       <AuthContextProvider>
         <DebugRouter>

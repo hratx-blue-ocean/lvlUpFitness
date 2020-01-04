@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { withRouter} from "react-router-dom";
+import Home from "./Home.jsx";
+import AuthContextProvider from "../../AuthContext";
+import { AuthContext } from "../../AuthContext";
+import { Redirect, withRouter, useHistory } from "react-router-dom";
 import {
   faEye,
   faEyeSlash,
@@ -9,7 +12,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./loginScreen.css";
 import firebase from "../../firebase.js";
 
-export default function SignUp(props) {
+const SignUp = () => {
+  let reRoute = useHistory();
   const [userName, setUserName] = useState("");
   const [firstName, setFirst] = useState("");
   const [lastName, setLast] = useState("");
@@ -30,15 +34,15 @@ export default function SignUp(props) {
   const [isSame, setSame] = useState("invalid");
   const [signUpComplete, setSignUpComplete] = useState(false);
 
-  //useEffect to validate password requirement
+  /*useEffect to validate form complete requirement*/
   useEffect(() => {
     checkEmail(email);
     validatePassword(password, lower, upper, number, len);
     checkSame(password, rePassword);
-    formComplete(validEmail,isStrong,isSame);
+    formComplete(validEmail, isStrong, isSame);
   }, [email, password, rePassword, isSame, isStrong]);
 
-  const checkEmail = (email) => {
+  const checkEmail = email => {
     email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/g)
       ? setValidEmail("valid")
       : setValidEmail("invalid");
@@ -62,16 +66,17 @@ export default function SignUp(props) {
       ? setSame("valid")
       : setSame("invalid");
   };
-  const formComplete = (validEmail,isStrong,isSame) => {
+  const formComplete = (validEmail, isStrong, isSame) => {
     validEmail === "valid" && isStrong === true && isSame === "valid"
       ? setSignUpComplete(true)
       : setSignUpComplete(false);
   };
+
   const handleCreateUser = (userNameToSend, emailToSend, passswordToSend) => {
     const regStatus = new Promise((resolve, reject) => {
       resolve(firebase.register(userNameToSend, emailToSend, passswordToSend));
     }).then(() => {
-      setTimeout(() => props.history.replace("/Navbar"), 2000);
+      setTimeout(() => reRoute.push("/Navbar"), 2000);
     });
   };
 
@@ -212,4 +217,6 @@ export default function SignUp(props) {
       </ul>
     </div>
   );
-}
+};
+
+export default SignUp;
