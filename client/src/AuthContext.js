@@ -1,21 +1,17 @@
-import React, { Component } from "react";
+import React, {createContext, Component } from "react";
 
-
-export const AuthContext = React.createContext();
+export const AuthContext = createContext();
 
 export default class AuthContextProvider extends Component {
-  constructor(){
-    super();
-    this.state = {
-      isAuth: false
-    };
-  }
-  
+  state = {
+    isAuth: false
+  };
+
   render() {
     return (
-	  <AuthContext.Provider value = {{...this.state}}>
-      {this.props.children}
-	  </AuthContext.Provider>
+      <AuthContext.Provider value={{ ...this.state }}>
+        {this.props.children}
+      </AuthContext.Provider>
     );
   }
 }

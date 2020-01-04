@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import firebase from "../../firebase.js";
-
 import {
   faEye,
   faEyeSlash,
@@ -10,7 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./loginScreen.css";
 
-const Home = ({ location }) => {
+const Home = () => {
   const [isAuthenticated, setAuthentication] = useState(false);
   const [userInfo, setUserInfo] = useState("");
   const [newUser, setNewUserStatus] = useState(false);
@@ -37,14 +36,12 @@ const Home = ({ location }) => {
         .catch(error => {
           // Handle Errors here.
           console.log([error.code, error.message]);
-          if (error.code === "auth/user-not-found") {
-            setEmailClass("email-error");
-          }
-          if (error.code === "auth/wrong-password") {
-            setPWClass("password-error");
-          }
+          (error.code === "auth/user-not-found")? 
+            setEmailClass("email-error"):setEmailClass("email");
+          (error.code === "auth/wrong-password") ?
+            setPWClass("password-error"):setPWClass("password");
+          
         });
-
       setSignIn(false);
     }
   };
@@ -57,9 +54,6 @@ const Home = ({ location }) => {
         }}
       />
     );
-  } else {
-    <React.Fragment>wrongEmail or wrongPassword redirecting
-    </React.Fragment>;
   }
   if (newUser === true) {
     return <Redirect push to="/SignUp" />;
