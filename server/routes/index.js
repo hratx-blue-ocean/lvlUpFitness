@@ -1,5 +1,9 @@
 const example = require('./example');
 
-const profile = require('./profile')
+const profile = require('./profile');
 
-module.exports = { example, profile }
+const meals = require('./meals');
+
+const bodyweight = require('./bodyweight');
+
+module.exports = { example, profile, meals, bodyweight }

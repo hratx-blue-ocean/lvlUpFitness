@@ -38,3 +38,18 @@ describe('GET user', () => {
       .catch(err => err)
   });
 });
+
+describe('Get Body weight workouts', () => {
+  it('it should GET workouts under body weight collection', () => {
+    chai 
+      .request(`http:localhost:8000`)
+      .get('/api/bodyweight')
+      .then((err,res) => {
+        should.not.exist(err)
+        should.exist(res)
+        res.should.have.status(200)
+        res.body.should.be.a('array')
+        done()
+      })
+  })
+})
