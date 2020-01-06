@@ -79,11 +79,17 @@ const SignUp = () => {
   const handleCreateUser = (userNameToSend, emailToSend, passswordToSend) => {
     const regStatus = new Promise((resolve, reject) => {
       resolve(firebase.register(userNameToSend, emailToSend, passswordToSend));
-    }).then(() => {
+    }).then(()=>{
+      //post necessary info to db using uid
+    })
+    
+    .then(() => {
       setTimeout(() => {
         loggedIn();
       }, 2000);
-    }).then(()=>{
+    })
+    
+    .then(()=>{
       console.log(isAuth)
       setSessionCookie({isAuth: true})
       setUserInfo(a);
