@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { Redirect, useHistory } from "react-router-dom";
 import firebase from "../../firebase.js";
-
 import {
   faEye,
   faEyeSlash,
@@ -9,9 +8,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./loginScreen.css";
+import { AuthContext } from "../../AuthContext.js";
+import { setSessionCookie } from "../Cookies.js";
 
-const Home = ({ location }) => {
-  const [isAuthenticated, setAuthentication] = useState(false);
+
+const Home = () => {
+  let reRoute = useHistory();
+  const context = useContext(AuthContext);
+  const { isAuth, loggedIn } = context;
+
+
+  isAuth === true ? reRoute.push("/Navbar") : null;
+
   const [userInfo, setUserInfo] = useState("");
   const [newUser, setNewUserStatus] = useState(false);
   const [signIn, setSignIn] = useState(false);
@@ -25,42 +33,34 @@ const Home = ({ location }) => {
     authenticateUser(email, password);
   }, [signIn]);
 
-  const authenticateUser = (email, password) => {
+  const authenticateUser =  (email, password) => {
     if (email.length > 0 && password.length > 0) {
       let a = new Promise((resolve, reject) => {
         resolve(firebase.login(email, password));
       })
         .then(() => {
-          setAuthentication(true);
+          loggedIn();
+        })
+        .then(()=>{
+          console.log(isAuth)
+          setSessionCookie({isAuth: true})
           setUserInfo(a);
         })
         .catch(error => {
           // Handle Errors here.
           console.log([error.code, error.message]);
-          if (error.code === "auth/user-not-found") {
-            setEmailClass("email-error");
-          }
-          if (error.code === "auth/wrong-password") {
-            setPWClass("password-error");
-          }
+          error.code === "auth/user-not-found"
+            ? setEmailClass("email-error")
+            : setEmailClass("email");
+          error.code === "auth/wrong-password"
+            ? setPWClass("password-error")
+            : setPWClass("password");
         });
-
+        
       setSignIn(false);
     }
   };
-  if (isAuthenticated === true) {
-    return (
-      <Redirect
-        to={{
-          pathname: "/Navbar",
-          state: { a: userInfo }
-        }}
-      />
-    );
-  } else {
-    <React.Fragment>wrongEmail or wrongPassword redirecting
-    </React.Fragment>;
-  }
+
   if (newUser === true) {
     return <Redirect push to="/SignUp" />;
   } else {

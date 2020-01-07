@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../AuthContext";
+import { useHistory } from "react-router-dom";
 import {
   faEye,
   faEyeSlash,
@@ -8,8 +9,15 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./loginScreen.css";
 import firebase from "../../firebase.js";
+import { setSessionCookie } from "../Cookies.js";
 
-export default function SignUp(props) {
+const SignUp = () => {
+  let reRoute = useHistory();
+
+  const context = useContext(AuthContext);
+  const { isAuth, loggedIn } = context;
+  isAuth === true ? reRoute.push("/Navbar") : null;
+
   const [userName, setUserName] = useState("");
   const [firstName, setFirst] = useState("");
   const [lastName, setLast] = useState("");
@@ -30,15 +38,15 @@ export default function SignUp(props) {
   const [isSame, setSame] = useState("invalid");
   const [signUpComplete, setSignUpComplete] = useState(false);
 
-  //useEffect to validate password requirement
+  /*useEffect to validate form complete requirement*/
   useEffect(() => {
     checkEmail(email);
     validatePassword(password, lower, upper, number, len);
     checkSame(password, rePassword);
-    formComplete(validEmail,isStrong,isSame);
+    formComplete(validEmail, isStrong, isSame);
   }, [email, password, rePassword, isSame, isStrong]);
 
-  const checkEmail = (email) => {
+  const checkEmail = email => {
     email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/g)
       ? setValidEmail("valid")
       : setValidEmail("invalid");
@@ -62,21 +70,35 @@ export default function SignUp(props) {
       ? setSame("valid")
       : setSame("invalid");
   };
-  const formComplete = (validEmail,isStrong,isSame) => {
+  const formComplete = (validEmail, isStrong, isSame) => {
     validEmail === "valid" && isStrong === true && isSame === "valid"
       ? setSignUpComplete(true)
       : setSignUpComplete(false);
   };
+
   const handleCreateUser = (userNameToSend, emailToSend, passswordToSend) => {
     const regStatus = new Promise((resolve, reject) => {
       resolve(firebase.register(userNameToSend, emailToSend, passswordToSend));
-    }).then(() => {
-      setTimeout(() => props.history.replace("/Navbar"), 2000);
-    });
+    }).then(()=>{
+      //post necessary info to db using uid
+    })
+    
+    .then(() => {
+      setTimeout(() => {
+        loggedIn();
+      }, 2000);
+    })
+    
+    .then(()=>{
+      console.log(isAuth)
+      setSessionCookie({isAuth: true})
+      setUserInfo(a);
+    })
   };
 
   return (
     <div className="signup-form">
+      <h1>{context.isAuth.toString()}</h1>
       <div className="title">Create your Account</div>
       <div className="input-label">Username: </div>
       <div className="username-field">
@@ -212,4 +234,6 @@ export default function SignUp(props) {
       </ul>
     </div>
   );
-}
+};
+
+export default SignUp;

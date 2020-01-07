@@ -1,51 +1,8 @@
-.login{
-  background-color: #332C62;
-border: 1px solid #979797;
+body{
+	background: #332C62;
+	box-sizing: border-box;
+	font-family: NanumGothic;
+	margin: 0 !important;
+    padding: 0 !important;
 }
 
-/*
-background: #D8D8D8;
-border: 1px solid #979797;
-border-radius: 10px;
-
-
-font-family: NanumGothic;
-font-size: 48px;
-color: #FFFDFD;
-text-align: left;
-
-
-background: #D8D8D8;
-border: 1px solid #979797;
-border-radius: 10px;
-
-
-font-family: NanumGothic;
-font-size: 24px;
-color: #ADACAE;
-text-align: left;
-
-
-font-family: NanumGothic;
-font-size: 24px;
-color: #ADACAE;
-text-align: left;
-
-
-background: #88C4F8;
-border: 1px solid #979797;
-border-radius: 10px;
-
-
-font-family: NanumGothic;
-font-size: 24px;
-color: #ADACAE;
-text-align: left;
-
-
-font-family: NanumGothic;
-font-size: 36px;
-color: #FFFFFF;
-text-align: left;
-
-*/
