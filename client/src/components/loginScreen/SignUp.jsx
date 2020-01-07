@@ -15,7 +15,7 @@ const SignUp = () => {
   let reRoute = useHistory();
 
   const context = useContext(AuthContext);
-  const { isAuth, loggedIn } = context;
+  const { isAuth,phone, loggedIn } = context;
   isAuth === true ? reRoute.push("/Navbar") : null;
 
   const [userName, setUserName] = useState("");
@@ -37,6 +37,7 @@ const SignUp = () => {
   const [len, setLen] = useState("invalid");
   const [isSame, setSame] = useState("invalid");
   const [signUpComplete, setSignUpComplete] = useState(false);
+  const [user, setUser] = useState('')
 
   /*useEffect to validate form complete requirement*/
   useEffect(() => {
@@ -78,27 +79,25 @@ const SignUp = () => {
 
   const handleCreateUser = (userNameToSend, emailToSend, passswordToSend) => {
     const regStatus = new Promise((resolve, reject) => {
+      firebase.signOut();
       resolve(firebase.register(userNameToSend, emailToSend, passswordToSend));
-    }).then(()=>{
-      //post necessary info to db using uid
     })
-    
     .then(() => {
       setTimeout(() => {
-        loggedIn();
+        setUser(firebase.auth.currentUser.uid);
+        loggedIn(user);
       }, 2000);
     })
-    
     .then(()=>{
-      console.log(isAuth)
-      setSessionCookie({isAuth: true})
-      setUserInfo(a);
+      setSessionCookie({isAuth: true, uid: user})
+      setSignUpComplete(true)
     })
+  
   };
 
+  console.log("I am user", user)
   return (
     <div className="signup-form">
-      <h1>{context.isAuth.toString()}</h1>
       <div className="title">Create your Account</div>
       <div className="input-label">Username: </div>
       <div className="username-field">
