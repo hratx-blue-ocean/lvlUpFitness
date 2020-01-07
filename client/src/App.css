@@ -2,5 +2,7 @@ body{
 	background: #332C62;
 	box-sizing: border-box;
 	font-family: NanumGothic;
-	padding: 1px;
+	margin: 0 !important;
+    padding: 0 !important;
 }
+
