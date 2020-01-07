@@ -4,8 +4,14 @@ const profile = require('./profile')
 
 const bodyweight = require('./BodyWeight')
 
-const  = require('./profile')
+const cardio  = require('./cardio')
 
-// const profile = require('./profile')
+const flexibility = require('./flexibility')
 
-module.exports = { example, profile, bodyweight }
+const weightLifting = require('./WeightLifting')
+
+const mealPlans = require('./MealPlans')
+
+
+
+module.exports = { example, profile, bodyweight, cardio, flexibility, weightLifting, mealPlans }

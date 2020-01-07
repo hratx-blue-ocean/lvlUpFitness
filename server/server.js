@@ -25,12 +25,15 @@ app.use((_, res, next) => {
 app.use(logger("dev"));
 
 // You can place your routes here, feel free to refactor:
-const { example, profile, bodyweight } = require("./routes/");
+const { example, profile, bodyweight, cardio, flexibility, weightLifting, mealPlans} = require("./routes/");
 app.use("/api/example", example);
 app.use('/api/profile', profile);
 app.use('/api/bodyweight', bodyweight);
-// app.use('/api/profile', profile);
-// app.use('/api/profile', profile);
+app.use('/api/cardio', cardio);
+app.use('/api/flexibility', flexibility);
+app.use('/api/weightLifting', weightLifting);
+app.use('/api/mealPlans', mealPlans);
+
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   next(createError(404));
