@@ -16,15 +16,15 @@ class Firebase {
     return this.auth.signOut();
   }
 
+  
+
   register(name, email, password) {
     const reg = new Promise((resolve, reject) => {
       resolve(this.auth.createUserWithEmailAndPassword(email, password));
+    }).then(()=>{
+      const newId = this.auth.currentUser.uid;
+      return newId;
     })
-      .then(() => { 
-        return this.auth.currentUser.updateProfile({
-          userName: name
-        });
-      })
       .catch(error => {
         console.log("Code: ", error.code, "/n", "Message", error.message);
       });

@@ -5,7 +5,8 @@ export const AuthContext = createContext(getSessionCookie());
 
 export default class AuthContextProvider extends Component {
   state = {
-    isAuth: false
+    isAuth: false,
+    uid:''
   };
 
   componentDidMount(){
@@ -13,8 +14,9 @@ export default class AuthContextProvider extends Component {
 
   }
 
-  loggedIn =()=>{
-    this.setState({isAuth: true});
+  loggedIn =(uid)=>{
+    this.setState({isAuth: false,
+      uid:uid});
   }
 
   loggedOut =() =>{

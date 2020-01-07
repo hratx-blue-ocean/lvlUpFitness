@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./loginScreen.css";
 import { AuthContext } from "../../AuthContext.js";
-import { setSessionCookie } from "../Cookies.js";
+import { setSessionCookie, getSessionCookie } from "../Cookies.js";
 
 
 const Home = () => {
@@ -38,14 +38,14 @@ const Home = () => {
       let a = new Promise((resolve, reject) => {
         resolve(firebase.login(email, password));
       })
-        .then(() => {
-          loggedIn();
+      .then(()=>{
+          setUserInfo(firebase.auth.currentUser.uid);
+          setSessionCookie({isAuth: true, user: userInfo});
+          loggedIn(uid);
+     
         })
-        .then(()=>{
-          console.log(isAuth)
-          setSessionCookie({isAuth: true})
-          setUserInfo(a);
-        })
+       
+        
         .catch(error => {
           // Handle Errors here.
           console.log([error.code, error.message]);
@@ -60,6 +60,7 @@ const Home = () => {
       setSignIn(false);
     }
   };
+
 
   if (newUser === true) {
     return <Redirect push to="/SignUp" />;

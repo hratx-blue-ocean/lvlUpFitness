@@ -1,4 +1,4 @@
-import React, { Component, useContext, useState } from "react";
+import React, { Component, useContext, useState , useEffect} from "react";
 import { AuthContext } from "../../AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import { DebugRouter } from "../../App.jsx";
@@ -14,32 +14,43 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Navbar.css";
+const SearchBar = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+
+// useEffect(() => {
+//   callFn()
+// }, [searchQuery])
+// const callFn = (e)=>{
+//   e.preventDefault();
+//   setSearchQuery(e.target.value)
+// }
+return (
+  <div className="search-bar">
+    <input
+      type="text"
+      name="name"
+      value={searchQuery}
+      placeholder="Search this bro"
+      onChange={e => {setSearchQuery(e.target.value)}}
+    />
+    <div className="search-button" onClick={() => setSearchQuery("")}>
+      <FontAwesomeIcon icon={faSearch} size="2x" />
+    </div>
+  </div>
+);
+};
 
 const Navbar = () => {
   let reRoute = useHistory();
   const context = useContext(AuthContext);
-  const { isAuth } = context;
-  const [searchQuery, setSearchQuery] = useState("");
+  const { isAuth, uid } = context;
+  
 
-  const SearchBar = () => {
-    return (
-      <div className="search-bar">
-        <input
-          type="text"
-          name="name"
-          value={searchQuery}
-          placeholder="Search this bro"
-          onChange={e => setSearchQuery(e.target.value)}
-        />
-        <div className="search-button" onClick={() => setSearchQuery("")}>
-          <FontAwesomeIcon icon={faSearch} size="2x" />
-        </div>
-      </div>
-    );
-  };
+  
 
   return (
     <div className="header-bar">
+    <p>{uid}</p>
       <div className="logo">
         <Link to="/Navbar">
           <FontAwesomeIcon
