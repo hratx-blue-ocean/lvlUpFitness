@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-// const config = require(CONFIG);
+const config = require("../config");
 
 mongoose.connect(
-  `mongodb+srv://shauncarr22:Pokemon21!@lvlupfitdb-lef31.mongodb.net/test?retryWrites=true&w=majority`,
+  `mongodb+srv://shauncarr22:${config}@lvlupfitdb-lef31.mongodb.net/test?retryWrites=true&w=majority`,
   { useNewUrlParser: true }
 );
 
