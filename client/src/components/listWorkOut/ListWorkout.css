@@ -1,0 +1,15 @@
+.list{
+	display: flex;
+}
+.list-item{
+	flex-direction: column;
+}
+
+.details{
+	display: flex;
+	color: white;
+
+}
+.name, .intensity, .duration, .description{
+	flex-direction: column;
+}
