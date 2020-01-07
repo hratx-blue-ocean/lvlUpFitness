@@ -10,6 +10,7 @@ import ForOfor from "./components/forOfor/forOfor.jsx";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import Profile from "./components/profile/Profile.jsx"
 import CustomWorkout from "./components/Workouts/CustomWorkout.jsx"
+import ListWorkOut from './components/listWorkOut/ListWorkOut.jsx';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 class DebugRouter extends Router {
@@ -76,6 +77,9 @@ export default class App extends Component {
             </Route>
             <Route exact path="/Workout">
               <CustomWorkout />
+            </Route>
+            <Route exact path="/ListWorkOut">
+              <ListWorkOut />
             </Route>
             <Route>
               <ForOfor />
