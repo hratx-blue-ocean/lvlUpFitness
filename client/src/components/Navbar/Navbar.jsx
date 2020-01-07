@@ -83,7 +83,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="dumbell-icon">
-        <Link to="/">
+        <Link to="/Workout">
           <FontAwesomeIcon icon={faDumbbell} size="2x" />
           <p>Workout</p>
         </Link>
