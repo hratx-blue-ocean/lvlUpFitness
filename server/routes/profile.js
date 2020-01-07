@@ -5,7 +5,7 @@ const CONFIG = path.join(__dirname, "../../DB/config.js");
 const config = require(CONFIG);
 const Profile = require("../../db/seeds/Userprofiles");
 const mongoose = require("mongoose");
-//create profile
+//create profile from ui
 router.post("/", (req, res) => {
   MongoClient.connect(
     `mongodb+srv://shauncarr22:${config}@lvlupfitdb-lef31.mongodb.net/test?retryWrites=true&w=majority`,
@@ -22,6 +22,7 @@ router.post("/", (req, res) => {
   );
 });
 
+//retrive my profile
 router.get("/", (req, res) => {
   MongoClient.connect(
     `mongodb+srv://shauncarr22:${config}@lvlupfitdb-lef31.mongodb.net/test?retryWrites=true&w=majority`,
@@ -37,5 +38,7 @@ router.get("/", (req, res) => {
     }
   );
 });
+
+//update profile to add
 
 module.exports = router;
