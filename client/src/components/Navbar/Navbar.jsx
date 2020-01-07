@@ -11,6 +11,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Navbar.css";
+import SearchBar from './SearchBar.js';
+import BodyPart from './BodyPart.js';
 
 const Navbar = () => {
   let reRoute = useHistory();
@@ -20,10 +22,11 @@ const Navbar = () => {
 
   return (
     <div className="header-bar">
-      
+    
+     
       <ul className="icons-bar">
         <li className="profile-icon">
-          <Link to="/">
+          <Link to="/Profile">
             <FontAwesomeIcon icon={faHome} size="2x" />
             Profile
           </Link>
