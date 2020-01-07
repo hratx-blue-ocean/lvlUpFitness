@@ -1,1 +1,6 @@
-
+body{
+	background: #332C62;
+	box-sizing: border-box;
+	font-family: NanumGothic;
+	padding: 1px;
+}
