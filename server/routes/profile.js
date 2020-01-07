@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const MongoClient = require('mongodb').MongoClient;
-const config = require('/Users/studentThree/Desktop/lvlUpFitness/DB/config.js')
+const path = require('path')
+const CONFIG = path.join(__dirname, "../../DB/config.js")
+const config = require(CONFIG)
 
 router.get('/', (req,res) => {
     MongoClient.connect(`mongodb+srv://shauncarr22:${config}@lvlupfitdb-lef31.mongodb.net/test?retryWrites=true&w=majority`, (err,client) => {
