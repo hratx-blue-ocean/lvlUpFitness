@@ -18,21 +18,21 @@ import {
   Redirect
 } from "react-router-dom";
 
-// class DebugRouter extends Router {
-//   constructor(props) {
-//     super(props);
-//     console.log("initial history is: ", JSON.stringify(this.history, null, 2));
-//     this.history.listen((location, action) => {
-//       console.log(
-//         `The current URL is ${location.pathname}${location.search}${location.hash}`
-//       );
-//       console.log(
-//         `The last navigation action was ${action}`,
-//         JSON.stringify(this.history, null, 2)
-//       );
-//     });
-//   }
-// }
+class DebugRouter extends Router {
+  constructor(props) {
+    super(props);
+    console.log("initial history is: ", JSON.stringify(this.history, null, 2));
+    this.history.listen((location, action) => {
+      console.log(
+        `The current URL is ${location.pathname}${location.search}${location.hash}`
+      );
+      console.log(
+        `The last navigation action was ${action}`,
+        JSON.stringify(this.history, null, 2)
+      );
+    });
+  }
+}
 
 export default class App extends Component {
   constructor(props) {
@@ -63,35 +63,20 @@ export default class App extends Component {
 
   render() {
     return (
-      <AuthContextProvider>
-
-      <Navbar />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-
-          <Route exact path="/SignUp">
-            <SignUp />
-          </Route>
-
-          <Route exact path="/Navbar">
-            
-          </Route>
-          <Route exact path="/Profile">
-            <Profile />
-          </Route>
-          <Route exact path="/Workout">
-            <CustomWorkout />
-          </Route>
-          <Route exact path="/ListWorkOut">
-            <ListWorkOut />
-          </Route>
-          <Route>
-            <ForOfor />
-          </Route>
-        </Switch>
-      </AuthContextProvider>
+      <DebugRouter>
+        <AuthContextProvider>
+          <Navbar />
+          
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/SignUp" component={SignUp} />
+            <Route exact path="/Navbar"></Route>
+            <Route exact path="/Profile" component={Profile} />
+            <Route exact path="/Workout" component={CustomWorkout} />
+            <Route exact path="/ListWorkOut" component={ListWorkOut} />
+          </Switch>
+        </AuthContextProvider>
+      </DebugRouter>
     );
   }
 }

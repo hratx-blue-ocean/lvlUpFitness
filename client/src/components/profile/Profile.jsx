@@ -1,9 +1,10 @@
 import React from 'react'
+import CustomWorkout from '../Workouts/CustomWorkout.jsx'
 
 export default function Profile() {
 	return (
-		<div>
-			I am profile
+		<div className = "user">
+			<CustomWorkout/>
 		</div>
 	)
 }

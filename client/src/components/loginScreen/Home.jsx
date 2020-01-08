@@ -16,7 +16,7 @@ const Home = () => {
   const context = useContext(AuthContext);
   const { isAuth, loggedIn } = context;
 
-  isAuth ? reRoute.push("/Navbar") : null;
+  isAuth ? reRoute.push("/Profile") : null;
 
   const [email, setemail] = useState("");
   const [emailClass, setemailClass] = useState("email");
@@ -27,19 +27,19 @@ const Home = () => {
   const [newUser, setNewUserStatus] = useState(false);
   const [authStatus, setAuthStatus] = useState(false);
 
-  // useEffect(() => {
-  //  fetchUser()
-  // }, [])
+  useEffect(() => {
+   fetchUser()
+  }, [])
 
-  // const fetchUser = ()=>{
-  //   Axios.get(`http://localhost:8000/api/BodyWeight`)
-  //     .then(({ data }) => {
-  //       console.log(data)
-  //     })
-  //     .catch(() => {
-  //       console.error("Api call from cardiovascular failed");
-  //     });
-  // }
+  const fetchUser = ()=>{
+    Axios.get(`http://localhost:8000/api/profile`)
+      .then(({ data }) => {
+        // console.log(data)
+      })
+      .catch(() => {
+        console.error(error);
+      });
+  }
 
   const authenticateUser = (email, password) => {
     if (email.length > 0 && password.length > 0) {
