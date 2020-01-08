@@ -6,7 +6,9 @@ const SubListWorkout = ({ subList }) => {
   const [sendExercise, setSendExercise] = useState("");
   const context = useContext(AuthContext);
   const { isAuth, loggedIn, uid } = context;
+
   // console.log(uid);
+
   
   const showExercise = param => {
     const holder = subList.filter((el, i) => {

@@ -9,14 +9,19 @@ router.post("/", (req, res) => {
     MongoClient.connect(
       `mongodb+srv://shauncarr22:${config}@lvlupfitdb-lef31.mongodb.net/test?retryWrites=true&w=majority`,(err, client) => {
         if (err) console.error(err);
-        const { username, u_id, email } = req.body;
-        const newUser = new Profile({
-          username,
-          u_id,
-          email
-        });
-        newUser.save();
-        res.send("workout favorited")
+        console.log(req.body.u_id)
+        console.log(req.body.id)
+        console.log(req.body.name)
+        const {  u_id, id, name } = req.body;
+        const db = client.db("test");
+        const myquery = {u_id: `${req.body.u_id}`}
+        // const values = {id: `${req.body.id}`, name: `${req.body.name}`}
+        const newValues = {$push : {favoriteWorkouts:{id: `${req.body.id}`, name: `${req.body.name}`}}}
+        // newValues.$set.favoriteWorkouts.push(values)
+        db.collection("userprofiles").updateOne(myquery, newValues, (err,results) => {
+            if(err) console.error(err);
+            res.send(results)
+        })
       }
     );
   });
