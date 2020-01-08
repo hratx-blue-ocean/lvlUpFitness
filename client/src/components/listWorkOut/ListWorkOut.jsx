@@ -1,16 +1,23 @@
 import React, { Component, useState, useEffect } from "react";
 import Axios from "axios";
 import SubListWorkout from './SubListWorkout.jsx'
+import data from "./dummydata.js"
+import "./ListWorkOut.css"
 const ListWorkOut = () => {
-  const [workOuts, setWorkouts] = useState([]);
+
+  const [workOuts, setWorkouts] = useState([]
+);
   const [show, setShow] = useState(false);
 
-//   useEffect((param) => {
-//     getList(param);
-//   }, []);
+  useEffect((param) => {
+    getList(param);
+  }, []);
 
   const getList = (param) => {
-    Axios.get(`http://localhost:8000/api/${param}`)
+    const URL = "http://localhost:8000/api/"
+    const reqURL = URL+param;
+    console.log(reqURL)
+    Axios.get(reqURL)
       .then(({ data }) => {
         setWorkouts(data);
         setShow(true);
@@ -24,24 +31,31 @@ const ListWorkOut = () => {
 	return (
     <div className = 'list'>
       <div className = 'list-item' onClick = {()=>getList("cardio")}>
-        <h1>Cardio</h1>
+        Cardio
       </div>
       <div className = 'list-item' onClick = {()=>getList("BodyWeight")}>
-        <h1>BodyWeight</h1>
+        BodyWeight
       </div> 
       <div className = 'list-item' onClick = {()=>getList("flexibility")}>
-        <h1>Flex</h1>
+        Flex
       </div>
       <div className = 'list-item' onClick = {()=>getList("WeightLifting")}>
-        <h1>WeightLifting</h1>
+        WeightLifting
       </div>
     </div>
   );
   } else{
 	  return <SubListWorkout subList = {workOuts}/>
   }
+
+
+
+
+  
   
 };
+
+
 
 
 export default ListWorkOut;

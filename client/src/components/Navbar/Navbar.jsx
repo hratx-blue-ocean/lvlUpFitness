@@ -1,6 +1,6 @@
 import React, { Component, useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../AuthContext";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, NavLink } from "react-router-dom";
 import { DebugRouter } from "../../App.jsx";
 import { AuthContextProvider } from "../../AuthContext.js";
 import {
@@ -50,14 +50,14 @@ const Navbar = () => {
     return (
       <div className="header-bar">
         <div className="logo">
-          <Link to="/Navbar">
+          <NavLink to="/Navbar">
             <FontAwesomeIcon
               size="4x"
               icon={faHeart}
               fixedWidth={false}
               transform=" right 1 rotate-350"
             />
-          </Link>
+          </NavLink>
         </div>
         <SearchBar />
         <div className="message">
@@ -73,16 +73,16 @@ const Navbar = () => {
         </div>
 
         <div className="profile-icon">
-          <Link to="/Profile">
+          <NavLink to="/Profile">
             <FontAwesomeIcon icon={faHome} size="2x" />
             <p>Profile</p>
-          </Link>
+          </NavLink>
         </div>
         <div className="dumbell-icon">
-          <Link to="/Workout">
+          <NavLink to="/Workout">
             <FontAwesomeIcon icon={faDumbbell} size="2x" />
             <p>Workout</p>
-          </Link>
+          </NavLink>
         </div>
         <div className="meal-icon">
           <Link to="/">
