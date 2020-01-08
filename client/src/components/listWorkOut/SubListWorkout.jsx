@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+// import { AuthContext } from "../../AuthContext.js";
 
 const SubListWorkout = ({ subList }) => {
   const [show, setShow] = useState(false);
   const [sendExercise, setSendExercise] = useState("");
-
+  // const context = useContext(AuthContext);
+  // const { isAuth, loggedIn, uid } = context;
+  // console.log(uid);
+  
   const showExercise = param => {
     const holder = subList.filter((el, i) => {
       if (i === param) {
@@ -56,6 +60,8 @@ const Details = ({ name, intensity, duration, amount, description }) => {
       <div className={flip}>
           <div className="favorite" onClick={() => {
             console.log("I am working!");
+          
+            
           }}>
           
           
