@@ -54,11 +54,18 @@ const Details = ({ name, intensity, duration, amount, description }) => {
   if (isFlipped ===false) {
     return (
       <div className={flip}>
+          <div className="favorite" onClick={() => {
+            console.log("I am working!");
+          }}>
+          
+          
+          Favorite</div>
         <div className="name">Name: {name}</div>
         <div className="intensity">Intensity: {intensity}</div>
         <div className="duration">Duration: {duration}</div>
         <div className="amount">Amount: {amount}</div>
         <div className= "name" onClick={() => flipTile(!isFlipped)}>
+          
           Description:
         </div>
         <br />
