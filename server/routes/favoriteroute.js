@@ -16,7 +16,7 @@ router.post("/", (req, res) => {
           email
         });
         newUser.save();
-        res.send("Profile created")
+        res.send("workout favorited")
       }
     );
   });
