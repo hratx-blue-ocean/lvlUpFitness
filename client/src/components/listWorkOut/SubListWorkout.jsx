@@ -1,12 +1,12 @@
 import React, { useState, useContext } from "react";
-// import { AuthContext } from "../../AuthContext.js";
+import { AuthContext } from "../../AuthContext.js";
 
 const SubListWorkout = ({ subList }) => {
   const [show, setShow] = useState(false);
   const [sendExercise, setSendExercise] = useState("");
-  // const context = useContext(AuthContext);
-  // const { isAuth, loggedIn, uid } = context;
-  // console.log(uid);
+  const context = useContext(AuthContext);
+  const { isAuth, loggedIn, uid } = context;
+  console.log(uid);
   
   const showExercise = param => {
     const holder = subList.filter((el, i) => {
