@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 // import fetch from 'node-fetch';
 // import Axios from 'axios';
 import "./App.css";
@@ -8,10 +8,15 @@ import Home from "./components/loginScreen/Home.jsx";
 import SignUp from "./components/loginScreen/SignUp.jsx";
 import ForOfor from "./components/forOfor/forOfor.jsx";
 import Navbar from "./components/Navbar/Navbar.jsx";
-import Profile from "./components/profile/Profile.jsx"
-import CustomWorkout from "./components/Workouts/CustomWorkout.jsx"
-import ListWorkOut from './components/listWorkOut/ListWorkOut.jsx';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Profile from "./components/profile/Profile.jsx";
+import CustomWorkout from "./components/Workouts/CustomWorkout.jsx";
+import ListWorkOut from "./components/listWorkOut/ListWorkOut.jsx";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 
 class DebugRouter extends Router {
   constructor(props) {
@@ -53,41 +58,25 @@ export default class App extends Component {
   //   .then((data)=>{
   //     this.setState({test: data})
   //   })
-    
- // }
 
-
+  // }
 
   render() {
     return (
       <DebugRouter>
         <AuthContextProvider>
+          <Navbar />
+          
           <Switch>
-            <Route exact path="/"  >
-              <Home />
-            </Route>
-            <Route exact path="/SignUp">
-              <SignUp />
-            </Route>
-            <Route exact path="/Navbar">
-              <Navbar />
-            </Route>
-            <Route exact path="/Profile">
-              <Profile />
-            </Route>
-            <Route exact path="/Workout">
-              <CustomWorkout />
-            </Route>
-            <Route exact path="/ListWorkOut">
-              <ListWorkOut />
-            </Route>
-            <Route>
-              <ForOfor />
-            </Route>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/SignUp" component={SignUp} />
+            <Route exact path="/Navbar"></Route>
+            <Route exact path="/Profile" component={Profile} />
+            <Route exact path="/Workout" component={CustomWorkout} />
+            <Route exact path="/ListWorkOut" component={ListWorkOut} />
           </Switch>
         </AuthContextProvider>
       </DebugRouter>
     );
   }
 }
-

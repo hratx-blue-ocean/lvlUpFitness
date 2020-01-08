@@ -3,9 +3,7 @@ const mongoose = require('mongoose');
 
 const mealsSchema = new mongoose.Schema ({
     catergory: String,
-    recipes: [{ name: String, body: String, calories: Number }],
-    ingredients: [String],
-    favorite: Boolean
+    recipes: [{ name: String, body: String, calories: Number , ingredients: [String], favorite: Boolean}],
 });
 
 

@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useLayoutEffect,
+  useRef
+} from "react";
 import { AuthContext } from "../../AuthContext";
 import { useHistory } from "react-router-dom";
 import {
@@ -9,14 +15,16 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./loginScreen.css";
 import firebase from "../../firebase.js";
-import { setSessionCookie } from "../Cookies.js";
+import { setSessionCookie, getSessionCookie } from "../Cookies.js";
+import Axios from "axios";
 
 const SignUp = () => {
   let reRoute = useHistory();
 
   const context = useContext(AuthContext);
-  const { isAuth,phone, loggedIn } = context;
-  isAuth === true ? reRoute.push("/Navbar") : null;
+  const { isAuth, phone, loggedIn, uid } = context;
+
+  // isAuth === true? reRoute.push("/Navbar"):null
 
   const [userName, setUserName] = useState("");
   const [firstName, setFirst] = useState("");
@@ -37,7 +45,9 @@ const SignUp = () => {
   const [len, setLen] = useState("invalid");
   const [isSame, setSame] = useState("invalid");
   const [signUpComplete, setSignUpComplete] = useState(false);
-  const [user, setUser] = useState('')
+  const [user, setUser] = useState("");
+
+  
 
   /*useEffect to validate form complete requirement*/
   useEffect(() => {
@@ -46,6 +56,8 @@ const SignUp = () => {
     checkSame(password, rePassword);
     formComplete(validEmail, isStrong, isSame);
   }, [email, password, rePassword, isSame, isStrong]);
+
+  
 
   const checkEmail = email => {
     email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/g)
@@ -79,23 +91,35 @@ const SignUp = () => {
 
   const handleCreateUser = (userNameToSend, emailToSend, passswordToSend) => {
     const regStatus = new Promise((resolve, reject) => {
-      firebase.signOut();
       resolve(firebase.register(userNameToSend, emailToSend, passswordToSend));
     })
-    .then(() => {
-      setTimeout(() => {
-        setUser(firebase.auth.currentUser.uid);
-        loggedIn(user);
-      }, 2000);
-    })
-    .then(()=>{
-      setSessionCookie({isAuth: true, uid: user})
-      setSignUpComplete(true)
-    })
-  
+      .then(() => {
+        
+          let info = firebase.auth.currentUser.uid;
+          loggedIn(info);
+       
+        
+      })
+      .then(() => {
+        console.log("I am uid to post", uid)
+        console.log(getSessionCookie().uid)
+        Axios.post(`http://localhost:8000/api/profile`, {
+          username: userName,
+          u_id: getSessionCookie().uid,
+          email: email
+        }).then(response => {
+          console.log(response);
+        }).catch((error)=>{
+          console.error(error.message)
+        })
+      }).catch((error)=>{
+        console.error(error.message)
+      })
   };
 
-  console.log("I am user", user)
+
+  console.log(user);
+  isAuth ? reRoute.push("/Navbar") : null;
   return (
     <div className="signup-form">
       <div className="title">Create your Account</div>

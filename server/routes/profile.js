@@ -4,6 +4,8 @@ const path = require("path");
 const CONFIG = path.join(__dirname, "../../DB/config.js");
 const config = require(CONFIG);
 const Profile = require("../../DB/seeds/Userprofiles");
+const Profile = require("../../DB/seeds/Userprofiles.js");
+
 const mongoose = require("mongoose");
 //create profile from ui
 router.post("/", (req, res) => {
@@ -18,7 +20,10 @@ router.post("/", (req, res) => {
         email
       });
       newUser.save();
-      res.send("Profile created");
+
+
+      res.send("Profile created")
+
     }
   );
 });
@@ -58,9 +63,7 @@ router.get("/", (req, res) => {
     (err, client) => {
       if (err) console.error(err);
       const db = client.db("test");
-      db.collection("userprofiles")
-        .find()
-        .toArray((err, result) => {
+      db.collection("userprofiles").find().toArray((err, result) => {
           if (err) console.error(err);
           res.send(result);
         });
