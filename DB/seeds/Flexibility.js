@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const flexibilitySchema = new mongoose.Schema({
-    muscleGroup: String;
+    muscleGroup: String,
     type: [{
         name: String,
         amount: String,
