@@ -10,8 +10,9 @@ import ForOfor from "./components/forOfor/forOfor.jsx";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import Profile from "./components/profile/Profile.jsx";
 import CustomWorkout from "./components/Workouts/CustomWorkout.jsx";
+import CustomMeal from './components/Meals/CustomMeal.jsx'
 import ListWorkOut from "./components/listWorkOut/ListWorkOut.jsx";
-// import ListMealPlan from "./components/listMealPlan/ListMealPlan.jsx";
+import ListMealPlan from "./components/listMealPlan/ListMealPlan.jsx";
 import {
   BrowserRouter as Router,
   Switch,
@@ -69,12 +70,14 @@ export default class App extends Component {
           <Navbar />
           
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/SignUp" component={SignUp} />
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/SignUp" component={SignUp}/>
             <Route exact path="/Navbar"></Route>
-            <Route exact path="/Profile" component={Profile} />
-            <Route exact path="/Workout" component={CustomWorkout} />
-            <Route exact path="/ListWorkOut" component={ListWorkOut} />
+            <Route exact path="/Profile" component={Profile}/>
+            <Route exact path="/Workout" component={CustomWorkout}/>
+            <Route exact path="/Meals" component={CustomMeal}/>
+            <Route exact path="/ListWorkOut" component={ListWorkOut}/>
+            <Route exact path="/ListMealPlan" component={ListMealPlan} />
           </Switch>
         </AuthContextProvider>
       </DebugRouter>

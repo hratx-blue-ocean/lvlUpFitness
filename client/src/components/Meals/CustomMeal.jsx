@@ -21,7 +21,7 @@ const CustomMeal = () => {
 
 
 if (addMealClicked){
-    return <Redirect to ='/me'/>
+    return <Redirect to ='/ListMealPlan'/>
 }
 
  const newMeal = () => {
