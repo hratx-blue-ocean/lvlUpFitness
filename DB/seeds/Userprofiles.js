@@ -3,7 +3,7 @@ const config = require("../config");
 
 mongoose.connect(
   `mongodb+srv://shauncarr22:${config}@lvlupfitdb-lef31.mongodb.net/test?retryWrites=true&w=majority`,
-  { useNewUrlParser: true }
+  { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
 const profileSchema = new mongoose.Schema({

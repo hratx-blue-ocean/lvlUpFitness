@@ -11,58 +11,46 @@ import "./loginScreen.css";
 import { AuthContext } from "../../AuthContext.js";
 import { setSessionCookie, getSessionCookie } from "../Cookies.js";
 
-
 const Home = () => {
   let reRoute = useHistory();
   const context = useContext(AuthContext);
   const { isAuth, loggedIn } = context;
 
+  isAuth ? reRoute.push("/Navbar") : null;
 
-  isAuth === true ? reRoute.push("/Navbar") : null;
-
-  const [userInfo, setUserInfo] = useState("");
-  const [newUser, setNewUserStatus] = useState(false);
-  const [signIn, setSignIn] = useState(false);
-  const [email, setEmail] = useState("");
-  const [emailClass, setEmailClass] = useState("email");
+  const [email, setemail] = useState("");
+  const [emailClass, setemailClass] = useState("email");
   const [password, setPassword] = useState("");
   const [pwClass, setPWClass] = useState("password");
   const [reveal, setReveal] = useState(false);
+  /**************************************************** */
+  const [newUser, setNewUserStatus] = useState(false);
+  const [userInfo, setUserInfo] = useState("");
+  const [authStatus, setAuthStatus] = useState(false);
 
-  useEffect(() => {
-    authenticateUser(email, password);
-  }, [signIn]);
-
-  const authenticateUser =  (email, password) => {
+  const authenticateUser = (email, password) => {
     if (email.length > 0 && password.length > 0) {
       let a = new Promise((resolve, reject) => {
         resolve(firebase.login(email, password));
-      })
-      .then(()=>{
-          setUserInfo(firebase.auth.currentUser.uid);
-          setSessionCookie({isAuth: true, user: userInfo});
-          loggedIn(uid);
-     
-        })
-       
-        
-        .catch(error => {
+      }).then(() => {
+          let info = firebase.auth.currentUser.uid;
+          loggedIn(info);
+        }).catch(error => {
           // Handle Errors here.
           console.log([error.code, error.message]);
           error.code === "auth/user-not-found"
-            ? setEmailClass("email-error")
-            : setEmailClass("email");
+            ? setemailClass("email-error")
+            : setemailClass("email");
           error.code === "auth/wrong-password"
             ? setPWClass("password-error")
             : setPWClass("password");
         });
-        
-      setSignIn(false);
     }
   };
 
-
-  if (newUser === true) {
+  if (authStatus === true) {
+    return <Redirect to="/Navbar" />;
+  } else if (newUser === true) {
     return <Redirect push to="/SignUp" />;
   } else {
     return (
@@ -77,9 +65,9 @@ const Home = () => {
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             required
             value={email}
-            onChange={event => setEmail(event.target.value)}
+            onChange={event => setemail(event.target.value)}
           ></input>
-          <div className="email-clear" onClick={() => setEmail("")}>
+          <div className="email-clear" onClick={() => setemail("")}>
             <FontAwesomeIcon icon={faBackspace} size="2x" />
           </div>
         </div>
@@ -105,12 +93,12 @@ const Home = () => {
             )}
           </div>
         </div>
-        <div className="sign-in" disabled={signIn}>
+        <div className="sign-in">
           <div
             className="sign-in-text"
             type="readonly"
             onClick={() => {
-              setSignIn(true);
+              authenticateUser(email, password);
             }}
           >
             Sign In

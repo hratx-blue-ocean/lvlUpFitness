@@ -11,7 +11,7 @@ import Navbar from "./components/Navbar/Navbar.jsx";
 import Profile from "./components/profile/Profile.jsx"
 import CustomWorkout from "./components/Workouts/CustomWorkout.jsx"
 import ListWorkOut from './components/listWorkOut/ListWorkOut.jsx';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route , Redirect} from "react-router-dom";
 
 class DebugRouter extends Router {
   constructor(props) {
@@ -63,12 +63,14 @@ export default class App extends Component {
       <DebugRouter>
         <AuthContextProvider>
           <Switch>
-            <Route exact path="/"  >
+          <Route exact path="/"  >
               <Home />
             </Route>
+           
             <Route exact path="/SignUp">
               <SignUp />
             </Route>
+           
             <Route exact path="/Navbar">
               <Navbar />
             </Route>

@@ -1,5 +1,5 @@
 import React, {createContext, Component } from "react";
-import { getSessionCookie } from "./components/Cookies";
+import { getSessionCookie, setSessionCookie } from "./components/Cookies";
 
 export const AuthContext = createContext(getSessionCookie());
 
@@ -8,23 +8,24 @@ export default class AuthContextProvider extends Component {
     isAuth: false,
     uid:''
   };
+  
 
   componentDidMount(){
     this.setState(getSessionCookie())
-
   }
 
   loggedIn =(uid)=>{
-    this.setState({isAuth: false,
+    this.setState({isAuth: true,
       uid:uid});
+      setSessionCookie(this.state)
   }
 
   loggedOut =() =>{
-    this.setState({isAuth: false});
+    this.setState({isAuth: false,uid:''});
   }
 
   render() {
-    console.log("I am context from AuthContext", this.context)
+    console.log("I am context from AuthContext", this.state)
     
     return (
       <AuthContext.Provider 

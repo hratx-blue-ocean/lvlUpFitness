@@ -18,6 +18,7 @@ router.post("/", (req, res) => {
         email
       });
       newUser.save();
+      res.send("Profile created")
     }
   );
 });
