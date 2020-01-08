@@ -6,7 +6,9 @@ const SubListWorkout = ({ subList }) => {
   const [sendExercise, setSendExercise] = useState("");
   const context = useContext(AuthContext);
   const { isAuth, loggedIn, uid } = context;
-  console.log(uid);
+
+  // console.log(uid);
+
   
   const showExercise = param => {
     const holder = subList.filter((el, i) => {
@@ -17,6 +19,11 @@ const SubListWorkout = ({ subList }) => {
     setSendExercise(holder);
     setShow(true);
   };
+
+  const favorite = (uid) => {
+    console.log("something lol");
+    console.log(uid);
+  }
   if (!show) {
     return subList.map((exercises, i) => (
       <div
@@ -58,11 +65,7 @@ const Details = ({ name, intensity, duration, amount, description }) => {
   if (isFlipped ===false) {
     return (
       <div className={flip}>
-          <div className="favorite" onClick={() => {
-            console.log("I am working!");
-          
-            
-          }}>
+          <div className="favorite" onClick={}>
           
           
           Favorite</div>
