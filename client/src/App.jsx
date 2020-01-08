@@ -11,12 +11,14 @@ import Navbar from "./components/Navbar/Navbar.jsx";
 import Profile from "./components/profile/Profile.jsx";
 import CustomWorkout from "./components/Workouts/CustomWorkout.jsx";
 import ListWorkOut from "./components/listWorkOut/ListWorkOut.jsx";
+import ListMealPlan from "./components/listMealPlan/ListMealPlan.jsx";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect
 } from "react-router-dom";
+
 
 // class DebugRouter extends Router {
 //   constructor(props) {
@@ -86,6 +88,9 @@ export default class App extends Component {
           </Route>
           <Route exact path="/ListWorkOut">
             <ListWorkOut />
+          </Route>
+          <Route exact path="/ListMealPlan">
+            <ListMealPlan />
           </Route>
           <Route>
             <ForOfor />
