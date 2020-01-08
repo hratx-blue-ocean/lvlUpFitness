@@ -65,7 +65,9 @@ const Details = ({ name, intensity, duration, amount, description }) => {
   if (isFlipped ===false) {
     return (
       <div className={flip}>
-          <div className="favorite" onClick={}>
+          <div className="favorite" onClick={() => {
+            console.log("Yes");
+          }}>
           
           
           Favorite</div>
