@@ -1,10 +1,8 @@
-body{
-	background: #D8D8D8; 
-	font-family: NanumGothic;
-	margin: 0 !important;
-    padding: 0 !important;
-}
+/* .list,.user-workout-tile{
+	color:#332C62;
+	background: #D8D8D8;
 
+} */
 a {
 	color:black;
 	text-decoration: none;

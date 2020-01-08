@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+// import { AuthContext } from "../../AuthContext.js";
 
 const SubListWorkout = ({ subList }) => {
   const [show, setShow] = useState(false);
   const [sendExercise, setSendExercise] = useState("");
-
+  // const context = useContext(AuthContext);
+  // const { isAuth, loggedIn, uid } = context;
+  // console.log(uid);
+  
   const showExercise = param => {
     const holder = subList.filter((el, i) => {
       if (i === param) {
@@ -22,7 +26,7 @@ const SubListWorkout = ({ subList }) => {
           showExercise(i);
         }}
       >
-        {exercises.muscleGroup}
+        {exercises.muscleGroup || exercises.exercise}
       </div>
     ));
   } else {
@@ -54,11 +58,20 @@ const Details = ({ name, intensity, duration, amount, description }) => {
   if (isFlipped ===false) {
     return (
       <div className={flip}>
+          <div className="favorite" onClick={() => {
+            console.log("I am working!");
+          
+            
+          }}>
+          
+          
+          Favorite</div>
         <div className="name">Name: {name}</div>
         <div className="intensity">Intensity: {intensity}</div>
         <div className="duration">Duration: {duration}</div>
         <div className="amount">Amount: {amount}</div>
         <div className= "name" onClick={() => flipTile(!isFlipped)}>
+          
           Description:
         </div>
         <br />

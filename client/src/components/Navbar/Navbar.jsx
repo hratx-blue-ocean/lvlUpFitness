@@ -3,6 +3,7 @@ import { AuthContext } from "../../AuthContext";
 import { Link, useHistory, NavLink } from "react-router-dom";
 import { DebugRouter } from "../../App.jsx";
 import { AuthContextProvider } from "../../AuthContext.js";
+import CustomWorkout from "../Workouts/CustomWorkout.jsx"
 import {
   faHome,
   faDumbbell,
@@ -16,14 +17,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Navbar.css";
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState("");
-
-  // useEffect(() => {
-  //   callFn()
-  // }, [searchQuery])
-  // const callFn = (e)=>{
-  //   e.preventDefault();
-  //   setSearchQuery(e.target.value)
-  // }
+  const context = useContext(AuthContext);
+  const { isAuth, uid,loggedIn } = context;
+  
   return (
     <div className="search-bar">
       <input
@@ -48,6 +44,7 @@ const Navbar = () => {
   const { isAuth, uid } = context;
   if (isAuth === true) {
     return (
+      
       <div className="header-bar">
         <div className="logo">
           <NavLink to="/Navbar">
@@ -73,13 +70,13 @@ const Navbar = () => {
         </div>
 
         <div className="profile-icon">
-          <NavLink to="/Profile">
+          <Link to="/Profile">
             <FontAwesomeIcon icon={faHome} size="2x" />
             <p>Profile</p>
-          </NavLink>
+          </Link>
         </div>
         <div className="dumbell-icon">
-          <NavLink to="/Workout">
+          <NavLink to="/ListWorkOut">
             <FontAwesomeIcon icon={faDumbbell} size="2x" />
             <p>Workout</p>
           </NavLink>
@@ -98,8 +95,8 @@ const Navbar = () => {
         </div>
       </div>
     );
-  }else {
-    return <h1>Loading</h1>
+  }else{
+ return null
   }
 };
 
