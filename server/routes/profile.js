@@ -30,9 +30,7 @@ router.get("/", (req, res) => {
     (err, client) => {
       if (err) console.error(err);
       const db = client.db("test");
-      db.collection("userprofiles")
-        .find()
-        .toArray((err, result) => {
+      db.collection("userprofiles").find().toArray((err, result) => {
           if (err) console.error(err);
           res.send(result);
         });
