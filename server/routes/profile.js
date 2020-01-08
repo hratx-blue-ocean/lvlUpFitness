@@ -3,7 +3,7 @@ const MongoClient = require("mongodb").MongoClient;
 const path = require("path");
 const CONFIG = path.join(__dirname, "../../DB/config.js");
 const config = require(CONFIG);
-const Profile = require("../../db/seeds/Userprofiles");
+const Profile = require("../../DB/seeds/Userprofiles.js");
 const mongoose = require("mongoose");
 //create profile from ui
 router.post("/", (req, res) => {
@@ -18,6 +18,7 @@ router.post("/", (req, res) => {
         email
       });
       newUser.save();
+      res.send("Profile created")
     }
   );
 });
