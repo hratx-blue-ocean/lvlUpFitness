@@ -25,7 +25,6 @@ export default class AuthContextProvider extends Component {
   }
 
   render() {
-    console.log("I am context from AuthContext", this.state)
     
     return (
       <AuthContext.Provider 

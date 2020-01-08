@@ -1,5 +1,5 @@
 body{
-	background: #332C62;
+	background: #D8D8D8; 
 	font-family: NanumGothic;
 	margin: 0 !important;
     padding: 0 !important;
@@ -22,10 +22,11 @@ a:hover {
 	padding: 0;
 	border: 0;
 	font-size-adjust: 0.20;
-	height: 10%;
+	height: 25%;
 	grid-template-areas:"a b c d e f";
 	padding-top: 10px;
 	text-align: center;
+	border-bottom: 2px solid gray;
 }
 
 .header-bar p{
@@ -70,13 +71,22 @@ a:hover {
 }
 
 
+
 @media screen and (max-width: 375px){
 	body{
-		background: #332C62;
+		background: #D8D8D8; 
 		font-family: NanumGothic;
 		margin: 0 !important;
 		padding: 0 !important;
 		min-width: 374px;
+	}
+	a {
+		color:black;
+		text-decoration: none;
+	  }
+	a:hover {
+		color:#332C62;
+		text-decoration: none;
 	}
 	.header-bar {
 		background: #D8D8D8; 
@@ -91,6 +101,7 @@ a:hover {
 							"k k k l";
 		
 		text-align: center;
+		border-bottom: 2px solid gray;
 	
 	}
 	.header-bar div{

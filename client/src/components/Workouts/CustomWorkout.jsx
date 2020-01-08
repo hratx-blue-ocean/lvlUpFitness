@@ -8,15 +8,12 @@ import { Redirect } from "react-router-dom";
 import "./CustomWorkout.css";
 
 const CustomWorkout = () => {
-  
   const [addWorkoutClicked, setAddWorkout] = useState(false);
   const [workOutOfDay, setWorkOutOfDay] = useState("No Workout Plan:");
-  
+  const [workOutDescription, setWorkOutDescription] = useState(
+    "Add Your Workout:"
+  );
 
-
-  
-
-  
   if (addWorkoutClicked) {
     return <Redirect to="/ListWorkOut" />;
   }
@@ -24,17 +21,16 @@ const CustomWorkout = () => {
   const newWorkout = () => {};
   const addWorkout = () => {};
   return (
-    <div>
-      <form className="workout">
-        <h1>{workOutOfDay}</h1>
-        <div
-          onClick={() => {
-            setAddWorkout(true);
-          }}
-        >
-          Add Your Workout:
-        </div>
-      </form>
+    <div className="user-workout-tile">
+      <div className="workout-day">{workOutOfDay}</div>
+      <div
+        className="workout-description"
+        onClick={() => {
+          setAddWorkout(true);
+        }}
+      >
+        {workOutDescription}
+      </div>
     </div>
   );
 };

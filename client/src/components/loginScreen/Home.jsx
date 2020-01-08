@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./loginScreen.css";
 import { AuthContext } from "../../AuthContext.js";
-import { setSessionCookie, getSessionCookie } from "../Cookies.js";
+import Axios from "axios";
 
 const Home = () => {
   let reRoute = useHistory();
@@ -25,17 +25,32 @@ const Home = () => {
   const [reveal, setReveal] = useState(false);
   /**************************************************** */
   const [newUser, setNewUserStatus] = useState(false);
-  const [userInfo, setUserInfo] = useState("");
   const [authStatus, setAuthStatus] = useState(false);
+
+  // useEffect(() => {
+  //  fetchUser()
+  // }, [])
+
+  // const fetchUser = ()=>{
+  //   Axios.get(`http://localhost:8000/api/BodyWeight`)
+  //     .then(({ data }) => {
+  //       console.log(data)
+  //     })
+  //     .catch(() => {
+  //       console.error("Api call from cardiovascular failed");
+  //     });
+  // }
 
   const authenticateUser = (email, password) => {
     if (email.length > 0 && password.length > 0) {
       let a = new Promise((resolve, reject) => {
         resolve(firebase.login(email, password));
-      }).then(() => {
+      })
+        .then(() => {
           let info = firebase.auth.currentUser.uid;
           loggedIn(info);
-        }).catch(error => {
+        })
+        .catch(error => {
           // Handle Errors here.
           console.log([error.code, error.message]);
           error.code === "auth/user-not-found"
