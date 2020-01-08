@@ -22,7 +22,7 @@ const SubListWorkout = ({ subList }) => {
           showExercise(i);
         }}
       >
-        {exercises.muscleGroup}
+        {exercises.muscleGroup || exercises.exercise}
       </div>
     ));
   } else {

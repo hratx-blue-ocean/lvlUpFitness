@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useLayoutEffect,
+  useRef
+} from "react";
 import { AuthContext } from "../../AuthContext";
 import { useHistory } from "react-router-dom";
 import {
@@ -9,16 +15,16 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./loginScreen.css";
 import firebase from "../../firebase.js";
-import { setSessionCookie } from "../Cookies.js";
+import { setSessionCookie, getSessionCookie } from "../Cookies.js";
+import Axios from "axios";
 
 const SignUp = () => {
   let reRoute = useHistory();
 
   const context = useContext(AuthContext);
-  const { isAuth, phone, loggedIn } = context;
+  const { isAuth, phone, loggedIn, uid } = context;
 
   // isAuth === true? reRoute.push("/Navbar"):null
-  
 
   const [userName, setUserName] = useState("");
   const [firstName, setFirst] = useState("");
@@ -42,7 +48,6 @@ const SignUp = () => {
   const [user, setUser] = useState("");
 
   
-  isAuth? reRoute.push('/Navbar'):null
 
   /*useEffect to validate form complete requirement*/
   useEffect(() => {
@@ -51,6 +56,8 @@ const SignUp = () => {
     checkSame(password, rePassword);
     formComplete(validEmail, isStrong, isSame);
   }, [email, password, rePassword, isSame, isStrong]);
+
+  
 
   const checkEmail = email => {
     email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/g)
@@ -84,165 +91,172 @@ const SignUp = () => {
 
   const handleCreateUser = (userNameToSend, emailToSend, passswordToSend) => {
     const regStatus = new Promise((resolve, reject) => {
-      firebase.signOut();
       resolve(firebase.register(userNameToSend, emailToSend, passswordToSend));
     })
       .then(() => {
-        setTimeout(() => {
-          setUser(firebase.auth.currentUser.uid);
-          loggedIn(user);
-        }, 2000);
+        
+          let info = firebase.auth.currentUser.uid;
+          loggedIn(info);
+       
+        
       })
       .then(() => {
-        setSessionCookie({ isAuth: true, uid: user });
-        setSignUpComplete(true);
-      });
+        console.log("I am uid to post", uid)
+        console.log(getSessionCookie().uid)
+        Axios.post(`http://localhost:8000/api/profile`, {
+          username: userName,
+          u_id: getSessionCookie().uid,
+          email: email
+        }).then(response => {
+          console.log(response);
+        }).catch((error)=>{
+          console.error(error.message)
+        })
+      }).catch((error)=>{
+        console.error(error.message)
+      })
   };
 
-  
 
- 
-    return (
-      <div className="signup-form">
-        <div className="title">Create your Account</div>
-        <div className="input-label">Username: </div>
-        <div className="username-field">
-          <input
-            className="username"
-            type="text"
-            name="username"
-            placeholder="morning0wl"
-            value={userName}
-            onChange={event => setUserName(event.target.value)}
-          />
-          <div className="username-clear" onClick={() => setUserName("")}>
-            <FontAwesomeIcon icon={faBackspace} size="2x" />
-          </div>
+  console.log(user);
+  isAuth ? reRoute.push("/Navbar") : null;
+  return (
+    <div className="signup-form">
+      <div className="title">Create your Account</div>
+      <div className="input-label">Username: </div>
+      <div className="username-field">
+        <input
+          className="username"
+          type="text"
+          name="username"
+          placeholder="morning0wl"
+          value={userName}
+          onChange={event => setUserName(event.target.value)}
+        />
+        <div className="username-clear" onClick={() => setUserName("")}>
+          <FontAwesomeIcon icon={faBackspace} size="2x" />
         </div>
-
-        <div className="input-label">First Name: </div>
-        <div className="first-name-field">
-          <input
-            className="first-name"
-            type="text"
-            name="first-name"
-            placeholder="John"
-            value={firstName}
-            onChange={event => setFirst(event.target.value)}
-          />
-          <div className="first-name-clear" onClick={() => setFirst("")}>
-            <FontAwesomeIcon icon={faBackspace} size="2x" />
-          </div>
-        </div>
-
-        <div className="input-label">Last Name: </div>
-        <div className="last-name-field">
-          <input
-            className="last-name"
-            type="text"
-            name="last-name"
-            placeholder="Doe"
-            value={lastName}
-            onChange={event => setLast(event.target.value)}
-          />
-          <div className="last-name-clear" onClick={() => setLast("")}>
-            <FontAwesomeIcon icon={faBackspace} size="2x" />
-          </div>
-        </div>
-
-        <div className="input-label">Email Adress: </div>
-        <div className="email-field">
-          <input
-            className="email"
-            type="email"
-            name="email"
-            placeholder="email@domain.com"
-            value={email}
-            onChange={event => setEmail(event.target.value)}
-          />
-          <div className="email-clear" onClick={() => setEmail("")}>
-            <FontAwesomeIcon icon={faBackspace} size="2x" />
-          </div>
-        </div>
-
-        <div className="input-label">Password: </div>
-        <div className="password-field">
-          <input
-            className="password"
-            type={reveal ? "text" : "password"}
-            name="password"
-            placeholder="********"
-            value={password}
-            onFocus={() => setValidationClass("password-requirement-active")}
-            onChange={event => setPassword(event.target.value)}
-          />
-          <div
-            className="show-password"
-            onMouseDown={() => setReveal(!reveal)}
-            onMouseUp={() => setReveal(!reveal)}
-          >
-            {reveal ? (
-              <FontAwesomeIcon icon={faEye} size="2x" />
-            ) : (
-              <FontAwesomeIcon icon={faEyeSlash} size="2x" />
-            )}
-          </div>
-        </div>
-
-        <div className="input-label">Re Type Password: </div>
-        <div className="re-password-field">
-          <input
-            className="re-password"
-            type={reveal ? "text" : "password"}
-            name="repassword"
-            placeholder="********"
-            value={rePassword}
-            disabled={!isStrong}
-            onChange={event => setRePassword(event.target.value)}
-          />
-          <div
-            className="show-password-again"
-            onClick={() => setReveal(!reveal)}
-          >
-            {reveal ? (
-              <FontAwesomeIcon icon={faEye} size="2x" />
-            ) : (
-              <FontAwesomeIcon icon={faEyeSlash} size="2x" />
-            )}
-          </div>
-        </div>
-
-        <div className="create-account" disabled={!signUpComplete}>
-          <div
-            className="create-account-text"
-            type="readonly"
-            onClick={() => handleCreateUser(userName, email, password)}
-          >
-            Create Account
-          </div>
-        </div>
-
-        <ul className={validationClass}>
-          <h3>Password Requirement:</h3>
-          <li className={lower}>
-            A <b>lowercase</b> letter
-          </li>
-          <li className={upper}>
-            A <b>capital (uppercase)</b> letter
-          </li>
-          <li className={number}>
-            A <b>number</b>
-          </li>
-          <li className={len}>
-            Minimum <b>8 characters</b>
-          </li>
-          <li className={isSame}>
-            <b>Must </b> match
-          </li>
-        </ul>
       </div>
-    );
-  
+
+      <div className="input-label">First Name: </div>
+      <div className="first-name-field">
+        <input
+          className="first-name"
+          type="text"
+          name="first-name"
+          placeholder="John"
+          value={firstName}
+          onChange={event => setFirst(event.target.value)}
+        />
+        <div className="first-name-clear" onClick={() => setFirst("")}>
+          <FontAwesomeIcon icon={faBackspace} size="2x" />
+        </div>
+      </div>
+
+      <div className="input-label">Last Name: </div>
+      <div className="last-name-field">
+        <input
+          className="last-name"
+          type="text"
+          name="last-name"
+          placeholder="Doe"
+          value={lastName}
+          onChange={event => setLast(event.target.value)}
+        />
+        <div className="last-name-clear" onClick={() => setLast("")}>
+          <FontAwesomeIcon icon={faBackspace} size="2x" />
+        </div>
+      </div>
+
+      <div className="input-label">Email Adress: </div>
+      <div className="email-field">
+        <input
+          className="email"
+          type="email"
+          name="email"
+          placeholder="email@domain.com"
+          value={email}
+          onChange={event => setEmail(event.target.value)}
+        />
+        <div className="email-clear" onClick={() => setEmail("")}>
+          <FontAwesomeIcon icon={faBackspace} size="2x" />
+        </div>
+      </div>
+
+      <div className="input-label">Password: </div>
+      <div className="password-field">
+        <input
+          className="password"
+          type={reveal ? "text" : "password"}
+          name="password"
+          placeholder="********"
+          value={password}
+          onFocus={() => setValidationClass("password-requirement-active")}
+          onChange={event => setPassword(event.target.value)}
+        />
+        <div
+          className="show-password"
+          onMouseDown={() => setReveal(!reveal)}
+          onMouseUp={() => setReveal(!reveal)}
+        >
+          {reveal ? (
+            <FontAwesomeIcon icon={faEye} size="2x" />
+          ) : (
+            <FontAwesomeIcon icon={faEyeSlash} size="2x" />
+          )}
+        </div>
+      </div>
+
+      <div className="input-label">Re Type Password: </div>
+      <div className="re-password-field">
+        <input
+          className="re-password"
+          type={reveal ? "text" : "password"}
+          name="repassword"
+          placeholder="********"
+          value={rePassword}
+          disabled={!isStrong}
+          onChange={event => setRePassword(event.target.value)}
+        />
+        <div className="show-password-again" onClick={() => setReveal(!reveal)}>
+          {reveal ? (
+            <FontAwesomeIcon icon={faEye} size="2x" />
+          ) : (
+            <FontAwesomeIcon icon={faEyeSlash} size="2x" />
+          )}
+        </div>
+      </div>
+
+      <div className="create-account" disabled={!signUpComplete}>
+        <div
+          className="create-account-text"
+          type="readonly"
+          onClick={() => handleCreateUser(userName, email, password)}
+        >
+          Create Account
+        </div>
+      </div>
+
+      <ul className={validationClass}>
+        <h3>Password Requirement:</h3>
+        <li className={lower}>
+          A <b>lowercase</b> letter
+        </li>
+        <li className={upper}>
+          A <b>capital (uppercase)</b> letter
+        </li>
+        <li className={number}>
+          A <b>number</b>
+        </li>
+        <li className={len}>
+          Minimum <b>8 characters</b>
+        </li>
+        <li className={isSame}>
+          <b>Must </b> match
+        </li>
+      </ul>
+    </div>
+  );
 };
 
 export default SignUp;

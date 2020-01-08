@@ -1,9 +1,3 @@
-body{
-    align-content: center;
-    margin: 0 !important;
-    padding: 0 !important;
-    
-}
 .list{
 	display: flex;
 	flex-direction: column;
@@ -12,7 +6,7 @@ body{
 }
 
 .list-item,.details{
-	background: #332C62;
+	background: #0F4C81;;
     border-radius: 24px;
     width: 92%;
     min-height: 200px;
@@ -31,7 +25,7 @@ body{
 	display: flex;
 	flex-direction: column;
 	position: center;
-	background: #332C62;
+	background: #0F4C81;
 	color: #FFFFFF;
 	border-radius: 24px;
     width: 92%;
@@ -50,7 +44,7 @@ body{
 	transform: rotateY(360deg);
 	transition: transform 1.2s;
 	background: #FFFFFF ;
-	color: #332C62;
+	color: #0F4C81;;
     border-radius: 24px;
     width: 92%;
     min-height: 200px;
