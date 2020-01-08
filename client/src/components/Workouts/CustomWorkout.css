@@ -1,6 +1,9 @@
 
+body{
+    background: #FFFFFF;
+}
 .user-workout-tile {
-    background: #0F4C81;;
+    background: #0F4C81;
     border-radius: 24px;
     width: 92%;
     min-height: 200px;
