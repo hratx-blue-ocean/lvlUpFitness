@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../../AuthContext.js";
+import Axios from "axios";
 
 const SubListWorkout = ({ subList }) => {
   const [show, setShow] = useState(false);
@@ -20,10 +21,7 @@ const SubListWorkout = ({ subList }) => {
     setShow(true);
   };
 
-  const favorite = (uid) => {
-    console.log("something lol");
-    console.log(uid);
-  }
+ 
   if (!show) {
     return subList.map((exercises, i) => (
       <div
@@ -42,10 +40,14 @@ const SubListWorkout = ({ subList }) => {
 };
 
 const Exercise = ({ exercise }) => {
+  const context = useContext(AuthContext);
+  const { isAuth, loggedIn, uid } = context;
   let details = exercise[0].type;
+  console.log(exercise[0].type)
   return details.map((el, i) => (
     <Details
       key={el._id}
+      exerciseId={el._id}
       name={el.name}
       intensity={el.intensity}
       duration={el.duration}
@@ -55,18 +57,33 @@ const Exercise = ({ exercise }) => {
   ));
 };
 
-const Details = ({ name, intensity, duration, amount, description }) => {
+const Details = ({ name, intensity, duration, amount, description, exerciseId }) => {
   const [isFlipped, setFlipped] = useState(false);
+  const context = useContext(AuthContext);
+  const { isAuth, loggedIn, uid } = context;
   const flipTile = () => {
     setFlipped(!isFlipped);
+  };
+  
+  const favorite = () => {
+    console.log(uid);
+    //console.log(exerciseId);
+    Axios.post(`http://localhost:8000/api/postfav`, {
+      u_id: uid,
+      id: exerciseId,
+      name: name
+    }).then((response) => {
+      console.log(response);
+    });
   };
   let flip = ''
   isFlipped? flip = "details-flipped": flip = "details-not-flipped"
   if (isFlipped ===false) {
     return (
       <div className={flip}>
-          <div className="favorite" onClick={() => {
+          <div className="favorite" onClick={(uid) => {
             console.log("Yes");
+            favorite(uid);
           }}>
           
           
