@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
-// import { AuthContext } from "../../AuthContext.js";
+import { AuthContext } from "../../AuthContext.js";
 
 const SubListWorkout = ({ subList }) => {
   const [show, setShow] = useState(false);
   const [sendExercise, setSendExercise] = useState("");
-  // const context = useContext(AuthContext);
-  // const { isAuth, loggedIn, uid } = context;
+  const context = useContext(AuthContext);
+  const { isAuth, loggedIn, uid } = context;
   // console.log(uid);
   
   const showExercise = param => {
@@ -17,6 +17,11 @@ const SubListWorkout = ({ subList }) => {
     setSendExercise(holder);
     setShow(true);
   };
+
+  const favorite = (uid) => {
+    console.log("something lol");
+    console.log(uid);
+  }
   if (!show) {
     return subList.map((exercises, i) => (
       <div
@@ -58,11 +63,7 @@ const Details = ({ name, intensity, duration, amount, description }) => {
   if (isFlipped ===false) {
     return (
       <div className={flip}>
-          <div className="favorite" onClick={() => {
-            console.log("I am working!");
-          
-            
-          }}>
+          <div className="favorite" onClick={}>
           
           
           Favorite</div>
