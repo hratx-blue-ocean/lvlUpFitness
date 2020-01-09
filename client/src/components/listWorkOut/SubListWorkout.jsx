@@ -100,9 +100,9 @@ const Details = ({
         <div className="intensity">Intensity: {intensity}</div>
         <div className="duration">Duration: {duration}</div>
         <div className="amount">Amount: {amount}</div>
-        <div className="name" onClick={() => flipTile(!isFlipped)}>
-          Description:
-        </div>
+        <button className="description" onClick={() => flipTile(!isFlipped)}>
+          Show description
+        </button>
         <br />
       </div>
     );
