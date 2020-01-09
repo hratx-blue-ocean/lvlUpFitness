@@ -43,7 +43,7 @@ const Exercise = ({ exercise }) => {
   const context = useContext(AuthContext);
   const { isAuth, loggedIn, uid } = context;
   let details = exercise[0].type;
-  console.log(exercise[0].type);
+  //console.log(exercise[0].type);
   return details.map((el, i) => (
     <Details
       key={el._id}
@@ -72,7 +72,7 @@ const Details = ({
     setFlipped(!isFlipped);
   };
 
-  const favorite = () => {
+  const savedWrkOut = () => {
     console.log(uid);
     //console.log(exerciseId);
     Axios.post(`http://localhost:8000/api/postfav`, {
@@ -91,7 +91,7 @@ const Details = ({
         <div
           className="favorite"
           onClick={uid => {
-            favorite(uid);
+            savedWrkOut(uid);
           }}
         >
           <FontAwesomeIcon size="1x" icon={faHeart} style={{ '--fa-primary-color': "#F96F6D" }}/>
