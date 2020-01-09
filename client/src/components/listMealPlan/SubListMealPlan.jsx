@@ -56,9 +56,9 @@ const Details = ({ name, body, calories, ingredients}) => {
         <div className="name">Name: {name}</div>
         <div className="calories">Calories: {calories}</div>
         <div className="body">Body: {body}</div>
-        <div className= "name" onClick={() => flipTile(!isFlipped)}>
-          Ingredients:
-        </div>
+        <button className="description" onClick={() => flipTile(!isFlipped)}>
+          Show Ingredients
+        </button>
         <br />
       </div>
     );
