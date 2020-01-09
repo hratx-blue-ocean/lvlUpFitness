@@ -13,3 +13,4 @@ export const getSessionCookie = () => {
     return JSON.parse(sessionCookie);
   }
 };
+
