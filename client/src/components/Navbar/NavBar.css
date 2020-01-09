@@ -21,7 +21,7 @@ a:hover {
 	border: 0;
 	font-size-adjust: 0.20;
 	height: 25%;
-	grid-template-areas:"a b c d e f";
+	grid-template-areas:"a k b c d e f";
 	padding-top: 10px;
 	text-align: center;
 	border-bottom: 2px solid gray;
@@ -35,9 +35,9 @@ a:hover {
     padding:0;
     margin:0;
 }
-.message{
+/* .message{
 	display: none;
-}
+} */
 .search-icon{
 	display: none;
 }
@@ -45,9 +45,10 @@ a:hover {
 .logo{
 	grid-area: a;
 }
-.search-bar{
-	grid-area: b;
+.message{
+	grid-area: g;
 }
+
 
 .profile-icon{
 	grid-area: c;

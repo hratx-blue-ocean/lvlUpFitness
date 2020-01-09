@@ -7,12 +7,30 @@ import Axios from "axios";
 import { Redirect } from "react-router-dom";
 import "./CustomWorkout.css";
 
-const CustomWorkout = () => {
+const CustomWorkout = ({savedWorkouts}) => {
+  
   const [addWorkoutClicked, setAddWorkout] = useState(false);
   const [workOutOfDay, setWorkOutOfDay] = useState("No Workout Plan:");
   const [workOutDescription, setWorkOutDescription] = useState(
     "Add Your Workout:"
   );
+
+  useEffect(() => {
+    getData();
+  }, [])
+
+  const getData = ()=>{
+    let todayWorkout = ''
+    console.log(savedWorkouts.length);
+    
+    let num = Math.floor(Math.random()*savedWorkouts.length)
+      console.log(num);
+      
+      setWorkOutDescription(savedWorkouts[num].name)
+      setWorkOutOfDay("Today's Workout:")
+      
+    
+  }
 
   if (addWorkoutClicked) {
     return <Redirect to="/ListWorkOut" />;
