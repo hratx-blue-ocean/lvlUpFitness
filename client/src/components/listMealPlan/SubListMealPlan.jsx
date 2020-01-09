@@ -47,7 +47,7 @@ const Meal = ({ meal }) => {
       body={el.body}
       calories={el.calories}
       ingredients={el.ingredients}
-      mealId={el._id}
+      favorite={el.favorite}
     />
   ));
 };
@@ -84,9 +84,12 @@ const Details = ({ name, body, calories, ingredients, mealId }) => {
         <div className="name">Name: {name}</div>
         <div className="calories">Calories: {calories}</div>
         <div className="body">Body: {body}</div>
-        <div className= "name" onClick={() => flipTile(!isFlipped)}>
-          Ingredients:
-        </div>
+        <button className="description" onClick={() => flipTile(!isFlipped)}>
+          Show Ingredients
+        </button>
+        <button className="favorite" onClick={() => flipTile(!isFlipped)}>
+          Add to favorites 
+        </button>
         <br />
       </div>
     );
