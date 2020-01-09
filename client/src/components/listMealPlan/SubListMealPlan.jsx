@@ -68,9 +68,9 @@ const Details = ({ name, body, calories, ingredients, mealId }) => {
       u_id: uid,
       id: mealId,
       name: name
-    }).then(response => {
-      console.log(response);
-    });  
+    }) .catch((error)=>{
+      console.log(error.message);
+    });
   };
 
   let flip = ''
@@ -78,16 +78,16 @@ const Details = ({ name, body, calories, ingredients, mealId }) => {
   if (isFlipped ===false) {
     return (
       <div className={flip}>
-        <div className="savedMeal" onClick={ (uid) => {
-          savedMeal(uid);
-        }}>Save your Meal!</div>
+        
         <div className="name">Name: {name}</div>
         <div className="calories">Calories: {calories}</div>
         <div className="body">Body: {body}</div>
         <button className="description" onClick={() => flipTile(!isFlipped)}>
           Show Ingredients
         </button>
-        <button className="favorite" onClick={() => flipTile(!isFlipped)}>
+        <button className="favorite" onClick={uid => {
+          savedMeal(uid);
+          }}>
           Add to favorites 
         </button>
         <br />

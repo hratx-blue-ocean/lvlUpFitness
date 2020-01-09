@@ -50,9 +50,6 @@ export default function Profile() {
 	  localStorage.setItem('username', JSON.stringify(username))
 	  localStorage.setItem('savedWorkouts', JSON.stringify(savedWorkouts))
 	  localStorage.setItem('savedMeals', JSON.stringify(savedMeals))
-
-	  
-	  
   }
 
  
@@ -61,7 +58,7 @@ export default function Profile() {
   return (
     <React.Fragment>
       <CustomWorkout savedWorkouts = {JSON.parse(localStorage.getItem('savedWorkouts'))}/>
-      <CustomMeal />
+      <CustomMeal savedMeals = {JSON.parse(localStorage.getItem('savedMeals'))}/>
     </React.Fragment>
   );
 }
