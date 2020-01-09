@@ -33,13 +33,7 @@ const ListMeal = () => {
       <div className = 'list-item' onClick = {()=>getList("mealPlans")}>
         Meal Plans
       </div>
-      {/* <div className = 'list-item' onClick = {()=>getList("Carbs")}>
-        Carbs 
-      </div>  */}
-      {/* <div className = 'list-item' onClick = {()=>getList("Diet")}>
-         Diet
-      </div>
-       */}
+      
     </div>
   );
   } else{

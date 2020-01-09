@@ -1,17 +1,15 @@
 import React, { useState, useContext } from "react";
+import {useHistory} from 'react-router-dom'
 import { AuthContext } from "../../AuthContext.js";
 import Axios from "axios";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const SubListWorkout = ({ subList }) => {
+  const reRoute = useHistory()
   const [show, setShow] = useState(false);
   const [sendExercise, setSendExercise] = useState("");
   const context = useContext(AuthContext);
   const { isAuth, loggedIn, uid } = context;
-
-  // console.log(uid);
-
+  isAuth === false? reRoute.push('/'): null;
   const showExercise = param => {
     const holder = subList.filter((el, i) => {
       if (i === param) {
@@ -79,8 +77,8 @@ const Details = ({
       u_id: uid,
       id: exerciseId,
       name: name
-    }).then(response => {
-      console.log(response);
+    }).catch((error)=>{
+      console.error(error.message);
     });
   };
   let flip = "";
@@ -94,7 +92,7 @@ const Details = ({
             savedWrkOut(uid);
           }}
         >
-          <FontAwesomeIcon size="1x" icon={faHeart} style={{ '--fa-primary-color': "#F96F6D" }}/>
+          
         </div>
         <div className="name">Name: {name}</div>
         <div className="intensity">Intensity: {intensity}</div>
