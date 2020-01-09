@@ -1,51 +1,56 @@
 import React, { useContext, useEffect, useState } from "react";
 import CustomWorkout from "../Workouts/CustomWorkout.jsx";
+import { useHistory } from "react-router-dom";
 import CustomMeal from "../Meals/CustomMeal.jsx";
 import { AuthContext } from "../../AuthContext.js";
 import Axios from "axios";
+import { setSessionCookie, getSessionCookie } from "../Cookies.js";
 
 export default function Profile() {
+	
+  let reRoute = useHistory();
   const context = useContext(AuthContext);
-  const { isAuth, uid, loggedIn, loggedOut } = context;
+  const { isAuth, uid, loggedOut, username, storeDataInContext } = context;
 
-  const [axiosData, setAxiosData] = useState({});
-
+//   if(isAuth === false) {
+// 	console.log("I am bas");
+// 	reRoute.push("/")
+//   }  
+  const [axiosData, setAxiosData] = useState({
+    username: "",
+    savedWorkouts: "",
+    savedMeals: ""
+  });
+  const [item, setItem] = useState(false);
   useEffect(() => {
     getOneUser();
   }, []);
 
   useEffect(() => {
-    storeData();
-  }, []);
+    storeData(axiosData);
+  }, [item]);
 
   const getOneUser = () => {
-    let userPref;
     let user = uid;
     let URL = "http://localhost:8000/api/profile/";
     const reqURL = URL + user;
 
     Axios.get(reqURL).then(({ data }) => {
-      setAxiosData(data);
-      storeData(data);
+      setAxiosData({
+        username: data.username,
+        savedWorkouts: data.savedWorkouts,
+        savedMeals: data.savedMeals
+      });
+      setItem(true);
     });
-    //       .then(() => {
-
-    //       });
   };
 
-  const storeData = data => {
-    console.log(data);
-    if (data) {
-      sessionStorage.setItem("username", JSON.stringify(data.username));
-      sessionStorage.setItem("savedWorkout", data.savedWorkouts);
-      sessionStorage.setItem("username", data.savedMeals);
-      sessionStorage.setItem("username", data.favoriteWorkouts);
-      sessionStorage.setItem("username", data.favoriteMeals);
-      sessionStorage.setItem("username", data.createdWorkouts);
-    }
-
-    console.log(sessionStorage.getItem("username"));
-  };
+  const storeData = (axiosData)=>{
+	  const {username, savedWorkouts, savedMeals} = axiosData
+	  localStorage.setItem('username', JSON.stringify(username))
+	  localStorage.setItem('savedWorkouts', JSON.stringify(savedWorkouts))
+	  localStorage.setItem('savedMeals', JSON.stringify(savedMeals))
+  }
 
   return (
     <React.Fragment>
