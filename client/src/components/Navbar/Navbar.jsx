@@ -82,7 +82,7 @@ const Navbar = () => {
           </NavLink>
         </div>
         <div className="meal-icon">
-          <Link to="/">
+          <Link to="/ListMealPlan">
             <FontAwesomeIcon icon={faUtensils} size="2x" />
             <p>Meals</p>
           </Link>

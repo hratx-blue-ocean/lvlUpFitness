@@ -1,3 +1,5 @@
+
+
 import React,{useContext, useEffect} from "react";
 import CustomWorkout from "../Workouts/CustomWorkout.jsx";
 import { AuthContext } from "../../AuthContext.js";
@@ -30,4 +32,5 @@ export default function Profile() {
       <CustomWorkout />
     </div>
   );
+
 }
