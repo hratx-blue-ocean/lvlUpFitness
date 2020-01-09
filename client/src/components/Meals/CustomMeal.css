@@ -1,25 +1,26 @@
-.meal {
-    background: white;
+
+body{
+    background: #FFFFFF;
+}
+.user-meal-tile {
+    background: #0F4C81;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
     border-radius: 24px;
-    width: 35%;
-    height: 30%;
-    padding: 12px 20px;
+    width: 92%;
+    min-height: 200px;
+    padding: 12px 10px;
+    position: center;
+    text-align: center;
+    margin: 10px;
 }
-
-.custom {
-    height: 30%;
-    font-family: NanumGothic;
-    font-size: 36px;
-    color: #FFFFFF;
+.meal-day{ 
+    font-size: 24px;
+    color: hsla(0, 0%, 100%, 0.86);
     text-align: left;
-    border-radius: 10px;
+}
+.meal-description{
+    font-size: 36px;
+    color: hsla(0, 0%, 100%, 0.86);
+    text-align: left;
 }
 
-.select {
-    width: 75%;
-    padding: 16px 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #f1f1f1;
-
-}

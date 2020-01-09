@@ -17,12 +17,11 @@ const ListWorkOut = () => {
       const reqURL = URL + param;
       Axios.get(reqURL)
         .then(({ data }) => {
-
           setWorkouts(data);
           setShow(true);
         })
-        .catch(() => {
-          console.error("Api call from cardiovascular failed");
+        .catch((error) => {
+          console.error(error.message);
         });
     }
   };

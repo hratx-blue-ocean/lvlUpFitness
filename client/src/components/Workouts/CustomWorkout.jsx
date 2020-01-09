@@ -18,8 +18,6 @@ const CustomWorkout = () => {
     return <Redirect to="/ListWorkOut" />;
   }
 
-  const newWorkout = () => {};
-  const addWorkout = () => {};
   return (
     <div className="user-workout-tile">
       <div className="workout-day">{workOutOfDay}</div>

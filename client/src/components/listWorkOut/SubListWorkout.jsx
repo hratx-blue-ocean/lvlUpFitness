@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../../AuthContext.js";
 import Axios from "axios";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const SubListWorkout = ({ subList }) => {
   const [show, setShow] = useState(false);
@@ -10,7 +12,6 @@ const SubListWorkout = ({ subList }) => {
 
   // console.log(uid);
 
-  
   const showExercise = param => {
     const holder = subList.filter((el, i) => {
       if (i === param) {
@@ -21,7 +22,6 @@ const SubListWorkout = ({ subList }) => {
     setShow(true);
   };
 
- 
   if (!show) {
     return subList.map((exercises, i) => (
       <div
@@ -43,7 +43,7 @@ const Exercise = ({ exercise }) => {
   const context = useContext(AuthContext);
   const { isAuth, loggedIn, uid } = context;
   let details = exercise[0].type;
-  console.log(exercise[0].type)
+  console.log(exercise[0].type);
   return details.map((el, i) => (
     <Details
       key={el._id}
@@ -57,14 +57,21 @@ const Exercise = ({ exercise }) => {
   ));
 };
 
-const Details = ({ name, intensity, duration, amount, description, exerciseId }) => {
+const Details = ({
+  name,
+  intensity,
+  duration,
+  amount,
+  description,
+  exerciseId
+}) => {
   const [isFlipped, setFlipped] = useState(false);
   const context = useContext(AuthContext);
   const { isAuth, loggedIn, uid } = context;
   const flipTile = () => {
     setFlipped(!isFlipped);
   };
-  
+
   const favorite = () => {
     console.log(uid);
     //console.log(exerciseId);
@@ -72,28 +79,28 @@ const Details = ({ name, intensity, duration, amount, description, exerciseId })
       u_id: uid,
       id: exerciseId,
       name: name
-    }).then((response) => {
+    }).then(response => {
       console.log(response);
     });
   };
-  let flip = ''
-  isFlipped? flip = "details-flipped": flip = "details-not-flipped"
-  if (isFlipped ===false) {
+  let flip = "";
+  isFlipped ? (flip = "details-flipped") : (flip = "details-not-flipped");
+  if (isFlipped === false) {
     return (
       <div className={flip}>
-          <div className="favorite" onClick={(uid) => {
-            console.log("Yes");
+        <div
+          className="favorite"
+          onClick={uid => {
             favorite(uid);
-          }}>
-          
-          
-          Favorite</div>
+          }}
+        >
+          <FontAwesomeIcon size="1x" icon={faHeart} style={{ '--fa-primary-color': "#F96F6D" }}/>
+        </div>
         <div className="name">Name: {name}</div>
         <div className="intensity">Intensity: {intensity}</div>
         <div className="duration">Duration: {duration}</div>
         <div className="amount">Amount: {amount}</div>
-        <div className= "name" onClick={() => flipTile(!isFlipped)}>
-          
+        <div className="name" onClick={() => flipTile(!isFlipped)}>
           Description:
         </div>
         <br />
@@ -101,23 +108,17 @@ const Details = ({ name, intensity, duration, amount, description, exerciseId })
     );
   } else {
     return (
-      
-        <div  className = {flip} onClick={() => flipTile(!isFlipped)}>
-          {description.map((el, i) => (
-            <Description key={i} desc={el} />
-          ))}
-        </div>
-        
+      <div className={flip} onClick={() => flipTile(!isFlipped)}>
+        {description.map((el, i) => (
+          <Description key={i} desc={el} />
+        ))}
+      </div>
     );
   }
 };
 
-const Description = ({  key, desc }) => {
-  return (
-    <div key={key}  >
-      {desc}
-    </div>
-  );
+const Description = ({ key, desc }) => {
+  return <div key={key}>{desc}</div>;
 };
 
 export default SubListWorkout;

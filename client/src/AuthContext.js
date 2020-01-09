@@ -6,7 +6,7 @@ export const AuthContext = createContext(getSessionCookie());
 export default class AuthContextProvider extends Component {
   state = {
     isAuth: false,
-    uid:''
+    uid:'',
   };
   
 
@@ -24,6 +24,9 @@ export default class AuthContextProvider extends Component {
     this.setState({isAuth: false,uid:''});
   }
 
+  storeData =() =>{
+    this.setState({})
+  }
   render() {
     
     return (
