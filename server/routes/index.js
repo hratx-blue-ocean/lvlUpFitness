@@ -14,5 +14,7 @@ const mealPlans = require('./MealPlans')
 
 const favoriteroute = require('./favoriteroute')
 
+const favoritemeal = require('./favoritemeal')
 
-module.exports = { example, profile, bodyweight, cardio, flexibility, weightLifting, mealPlans, favoriteroute }
+
+module.exports = { example, profile, bodyweight, cardio, flexibility, weightLifting, mealPlans, favoriteroute, favoritemeal }
