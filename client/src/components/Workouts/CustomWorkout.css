@@ -4,6 +4,7 @@ body{
 }
 .user-workout-tile {
     background: #0F4C81;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
     border-radius: 24px;
     width: 92%;
     min-height: 200px;
@@ -14,12 +15,12 @@ body{
 }
 .workout-day{ 
     font-size: 24px;
-    color: #FFFFFF;
+    color: hsla(0, 0%, 100%, 0.86);
     text-align: left;
 }
 .workout-description{
     font-size: 36px;
-    color: #FFFFFF;
+    color: hsla(0, 0%, 100%, 0.86);
     text-align: left;
 }
 
