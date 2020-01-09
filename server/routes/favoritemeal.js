@@ -16,7 +16,7 @@ router.post("/", (req, res) => {
         const db = client.db("test");
         const myquery = {u_id: `${req.body.u_id}`}
         // const values = {id: `${req.body.id}`, name: `${req.body.name}`}
-        const newValues = {$push : {favoriteMeals:{id: `${req.body.id}`, name: `${req.body.name}`}}}
+        const newValues = {$push : {savedMeals:{id: `${req.body.id}`, name: `${req.body.name}`}}}
         // newValues.$set.favoriteWorkouts.push(values)
         db.collection("userprofiles").updateOne(myquery, newValues, (err,results) => {
             if(err) console.error(err);
