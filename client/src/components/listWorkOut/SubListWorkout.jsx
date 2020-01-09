@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../AuthContext.js";
 import Axios from "axios";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
@@ -21,7 +21,6 @@ const SubListWorkout = ({ subList }) => {
     setSendExercise(holder);
     setShow(true);
   };
-
   if (!show) {
     return subList.map((exercises, i) => (
       <div
@@ -73,16 +72,18 @@ const Details = ({
   };
 
   const savedWrkOut = () => {
-    console.log(uid);
-    //console.log(exerciseId);
+   
     Axios.post(`http://localhost:8000/api/postfav`, {
       u_id: uid,
       id: exerciseId,
       name: name
-    }).then(response => {
-      console.log(response);
+    }).then(({data}) => {
+      console.log("bauyksdgfykausbbsdk",data);
     });
   };
+
+ 
+
   let flip = "";
   isFlipped ? (flip = "details-flipped") : (flip = "details-not-flipped");
   if (isFlipped === false) {
@@ -90,7 +91,7 @@ const Details = ({
       <div className={flip}>
         <div
           className="favorite"
-          onClick={uid => {
+          onClick={(uid) => {
             savedWrkOut(uid);
           }}
         >
