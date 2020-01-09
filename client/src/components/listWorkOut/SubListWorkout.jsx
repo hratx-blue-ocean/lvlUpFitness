@@ -78,7 +78,7 @@ const Details = ({
       id: exerciseId,
       name: name
     }).catch((error)=>{
-      console.log(error.message);
+      console.error(error.message);
     });
   };
   let flip = "";

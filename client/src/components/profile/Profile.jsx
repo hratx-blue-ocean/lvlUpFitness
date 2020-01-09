@@ -4,61 +4,56 @@ import { useHistory } from "react-router-dom";
 import CustomMeal from "../Meals/CustomMeal.jsx";
 import { AuthContext } from "../../AuthContext.js";
 import Axios from "axios";
-import { setSessionCookie, getSessionCookie } from "../Cookies.js";
 
 export default function Profile() {
-	
   let reRoute = useHistory();
   const context = useContext(AuthContext);
-  const { isAuth, uid, loggedOut, username, storeDataInContext } = context;
+  const { isAuth, uid, loggedOut, storeDataInContext } = context;
+  const [cacheuserName, setcacheUserName] = useState();
+  const [cachesavedWorkouts, setcacheSavedWorkOuts] = useState();
+  const [cachesavedMeals, setcacheSavedMeals] = useState();
 
-//   if(isAuth === false) {
-// 	console.log("I am bas");
-// 	reRoute.push("/")
-//   }  
-  const [axiosData, setAxiosData] = useState({
-    username: "",
-    savedWorkouts: "",
-    savedMeals: ""
-  });
   const [item, setItem] = useState(false);
   useEffect(() => {
-    getOneUser();
+    getOneUser(uid);
   }, []);
 
-  useEffect(() => {
-    storeData(axiosData);
-  }, [item]);
+  //   useEffect(() => {
+  //     storeData((cacheuserName, cachesavedWorkouts, cachesavedMeals));
+  //   }, [item]);
 
-  const getOneUser = () => {
-    let user = uid;
+  const getOneUser = uid => {
     let URL = "http://localhost:8000/api/profile/";
-    const reqURL = URL + user;
+    const reqURL = URL + uid;
 
     Axios.get(reqURL).then(({ data }) => {
-      setAxiosData({
-        username: data.username,
-        savedWorkouts: data.savedWorkouts,
-        savedMeals: data.savedMeals
-      });
-      setItem(true);
+      let c = data.username;
+      setcacheUserName(c);
+
+      let d = data.savedWorkouts;
+      setcacheSavedWorkOuts(d);
+      let e = data.savedMeals;
+      setcacheSavedMeals(e);
     });
   };
 
-  const storeData = (axiosData)=>{
-	  const {username, savedWorkouts, savedMeals} = axiosData
-	  localStorage.setItem('username', JSON.stringify(username))
-	  localStorage.setItem('savedWorkouts', JSON.stringify(savedWorkouts))
-	  localStorage.setItem('savedMeals', JSON.stringify(savedMeals))
-  }
+  //   const storeData = (a, b, c) => {
+  // 	console.log("phonasdfasdf",a);
+  // 	console.log("waterasdfasdf",b);
+  // 	console.log("dongleasdfasdf",c);
 
- 
+  //     localStorage.setItem("savedMeals", JSON.stringify(a));
+  //     localStorage.setItem("savedWorkouts", JSON.stringify(b));
+  //     localStorage.setItem("savedMeals", JSON.stringify(c));
+  //   };
 
-  
   return (
     <React.Fragment>
-      <CustomWorkout savedWorkouts = {JSON.parse(localStorage.getItem('savedWorkouts'))}/>
-      <CustomMeal savedMeals = {JSON.parse(localStorage.getItem('savedMeals'))}/>
+      <CustomWorkout savedWorkouts={cachesavedWorkouts} />
+      <CustomMeal savedMeals={cachesavedMeals}/>
     </React.Fragment>
   );
 }
+
+// savedWorkouts={JSON.parse(localStorage.getItem("savedWorkouts"))}
+// savedMeals={JSON.parse(localStorage.getItem("savedMeals"))}

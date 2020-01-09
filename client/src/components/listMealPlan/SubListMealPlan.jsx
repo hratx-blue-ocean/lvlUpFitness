@@ -3,6 +3,7 @@ import { AuthContext } from "../../AuthContext.js";
 import Axios from "axios";
 
 const SubListMealPlan = ({ subList }) => {
+  
   const [show, setShow] = useState(false);
   const [sendMeal, setSendMeal] = useState("");
   const context = useContext(AuthContext);
@@ -10,7 +11,7 @@ const SubListMealPlan = ({ subList }) => {
 
   const showMeal = param => {
     const holder = subList.filter((el, i) => {
-      if (i === param) {
+      if (i === param) { 
         return el;
       }
     });
@@ -22,6 +23,7 @@ const SubListMealPlan = ({ subList }) => {
       <div
         className="list-item"
         key={meals._id}
+        mealId = {meals._id}
         onClick={() => {
           showMeal(i);
         }}
@@ -39,7 +41,6 @@ const Meal = ({ meal }) => {
   const { isAuth, loggedIn, uid } = context;
 
   let details = meal[0].recipes;
-  // console.log(meal[0].recipes[0]._id);
   return details.map((el, i) => (
     <Details
       key={el._id}
@@ -48,6 +49,7 @@ const Meal = ({ meal }) => {
       calories={el.calories}
       ingredients={el.ingredients}
       favorite={el.favorite}
+      mealId = {el._id}
     />
   ));
 };
@@ -62,14 +64,12 @@ const Details = ({ name, body, calories, ingredients, mealId }) => {
   };
 
   const savedMeal = () => {
-    // console.log(uid);
-    // console.log(mealId);
     Axios.post(`http://localhost:8000/api/favmeal`, {
       u_id: uid,
       id: mealId,
       name: name
     }) .catch((error)=>{
-      console.log(error.message);
+      console.error(error.message);
     });
   };
 
