@@ -25,7 +25,7 @@ app.use(cors());
 app.use(logger("dev"));
 
 // You can place your routes here, feel free to refactor:
-const { example, profile, bodyweight, cardio, flexibility, weightLifting, mealPlans, favoriteroute, favoritemeal } = require("./routes/");
+const { example, profile, bodyweight, cardio, flexibility, weightLifting, mealPlans, favoriteroute, favoritemeal, singleworkout } = require("./routes/");
 app.use("/api/example", example);
 app.use('/api/profile', profile);
 app.use('/api/bodyweight', bodyweight);
@@ -35,6 +35,7 @@ app.use('/api/weightLifting', weightLifting);
 app.use('/api/mealPlans', mealPlans);
 app.use('/api/postfav', favoriteroute);
 app.use('/api/favmeal', favoritemeal);
+app.use('/api/singleworkout', singleworkout);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
