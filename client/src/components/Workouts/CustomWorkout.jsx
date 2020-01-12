@@ -8,6 +8,7 @@ import { Redirect } from "react-router-dom";
 import "./CustomWorkout.css";
 
 const CustomWorkout = ({ savedWorkouts }) => {
+  
   let workOutData = savedWorkouts;
 
   const [addWorkoutClicked, setAddWorkout] = useState(false);
@@ -17,11 +18,10 @@ const CustomWorkout = ({ savedWorkouts }) => {
   );
 
   const getData = arg => {
-    if (arg) {
+    if (arg !== undefined  ) {
       let num = Math.floor(Math.random() * arg.length);
-
-      let todayWorkout = arg[num].name || "front end messed up";
-
+      console.log("I am here",arg[num])
+      let todayWorkout = arg[num].name||"front end messed up";
       setWorkOutDescription(todayWorkout);
       setWorkOutOfDay("Today's Workout:");
     }

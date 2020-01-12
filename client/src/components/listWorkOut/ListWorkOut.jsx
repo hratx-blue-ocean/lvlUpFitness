@@ -12,6 +12,7 @@ const ListWorkOut = () => {
   }, []);
 
   const getList = param => {
+    console.log(param)
     if (param) {
       const URL = "http://localhost:8000/api/";
       const reqURL = URL + param;

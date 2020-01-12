@@ -8,7 +8,7 @@ const CustomMeal = ({ savedMeals }) => {
   const [mealOfDay, setMealOfDay] = useState("No Meal Plan:");
   const [mealDescription, setMealDescription] = useState("Add Meal Plan:");
   const getData = arg => {
-    if (arg) {
+    if (arg!==undefined) {
       let num = Math.floor(Math.random() * arg.length);
 
       let todayMeal = arg[num].name || "front end messed up";
