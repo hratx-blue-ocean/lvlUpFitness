@@ -1,1 +1,1 @@
-web: node server/server.js
+web: node /Users/laskey/Documents/Blue_Ocean/lvlUpFitness/server/server.js
