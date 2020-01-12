@@ -7,7 +7,14 @@
 const app = require('../server');
 const debug = require('debug')('BlueOcean:server');
 const http = require('http');
+const io = require('socket.io')(server);
 
+
+io.on('connection', (socket) => {
+  socket.on('message', (msg) => {
+    io.emit('message',msg)
+  });
+});
 
 /**
  * Normalize a port into a number, string, or false.
@@ -70,7 +77,7 @@ const onListening = () => {
  * Get port from environment and store in Express.
  */
 
-const port = process.env.PORT;
+const port = normalizePort(process.env.PORT)
 app.set('port', port);
 
 /**

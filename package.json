@@ -37,6 +37,7 @@
     "mongoose": "^5.8.7",
     "morgan": "^1.9.1",
     "nyc": "^15.0.0",
+    "socket.io": "^2.3.0",
     "typescript-eslint": "0.0.1-alpha.0"
   },
   "devDependencies": {
