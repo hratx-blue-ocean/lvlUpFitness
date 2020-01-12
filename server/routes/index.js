@@ -4,7 +4,7 @@ const profile = require('./profile')
 
 const bodyweight = require('./BodyWeight')
 
-const cardio  = require('./cardio')
+const cardio = require('./cardio')
 
 const flexibility = require('./flexibility')
 
