@@ -24,6 +24,7 @@
   "dependencies": {
     "@react-firebase/auth": "^0.2.10",
     "axios": "^0.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "http-errors": "^1.7.3",
     "lodash.merge": "^4.6.2",
