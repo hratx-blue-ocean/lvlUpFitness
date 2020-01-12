@@ -94,7 +94,7 @@ const server = http.createServer(app);
    port = 8000;
  };
 
-server.listen(port, (err) => {console.log(`port: ${port}`)} );
+server.listen(process.env.PORT || 5000, (err) => {console.log(`port: ${port}`)} );
 server.on('error', onError);
 server.on('listening', onListening);
 
