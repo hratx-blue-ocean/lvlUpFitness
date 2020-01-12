@@ -15,30 +15,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Navbar.css";
-// const SearchBar = () => {
-//   console.log(localStorage.getItem('username'));
-  
-//   const [searchQuery, setSearchQuery] = useState("");
-//   const context = useContext(AuthContext);
-//   const { isAuth, uid,loggedIn } = context;
-  
-//   return (
-//     <div className="search-bar">
-//       <input
-//         type="text"
-//         name="name"
-//         value={searchQuery}
-//         placeholder="Search this bro"
-//         onChange={e => {
-//           setSearchQuery(e.target.value);
-//         }}
-//       />
-//       <div className="search-button" onClick={() => setSearchQuery("")}>
-//         <FontAwesomeIcon icon={faSearch} size="2x" />
-//       </div>
-//     </div>
-//   );
-// };
 
 const Navbar = () => {
   let reRoute = useHistory();
