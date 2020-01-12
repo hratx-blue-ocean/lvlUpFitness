@@ -2,6 +2,9 @@
   "name": "lvlUpFitness",
   "version": "1.0.0",
   "description": "A fitness tracker app with Meal planning",
+  "engines": {
+    "node": "12.13.0"
+  },
   "main": "index.js",
   "scripts": {
     "setup": "npm install && cd ./client && npm install ; cd ./server && npm install",
