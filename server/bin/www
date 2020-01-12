@@ -70,7 +70,7 @@ const onListening = () => {
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '8000');
+const port = process.env.PORT;
 app.set('port', port);
 
 /**
@@ -82,6 +82,10 @@ const server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
+
+ if(port === null || port === ""){
+   port = 8000;
+ };
 
 server.listen(port, (err) => {console.log(`port: ${port}`)} );
 server.on('error', onError);
