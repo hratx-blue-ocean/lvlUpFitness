@@ -6,7 +6,7 @@ const bodyweight = require('./BodyWeight')
 
 const cardio = require('./Cardio')
 
-const flexibility = require('./flexibility')
+const flexibility = require('./Flexibility')
 
 const weightLifting = require('./WeightLifting')
 
