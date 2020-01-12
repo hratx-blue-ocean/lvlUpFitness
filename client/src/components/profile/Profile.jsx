@@ -31,11 +31,13 @@ export default function Profile() {
       setcacheUserName(c);
 
       let d = data.savedWorkouts;
+      
       setcacheSavedWorkOuts(d);
       let e = data.savedMeals;
       setcacheSavedMeals(e);
     });
   };
+
 
   //   const storeData = (a, b, c) => {
   // 	console.log("phonasdfasdf",a);

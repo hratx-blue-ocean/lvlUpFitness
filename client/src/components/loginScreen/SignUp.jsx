@@ -22,7 +22,7 @@ const SignUp = () => {
   let reRoute = useHistory();
 
   const context = useContext(AuthContext);
-  const { isAuth, phone, loggedIn, uid } = context;
+  const { isAuth, phone, loggedIn, uid, loggedOut } = context;
 
   // isAuth === true? reRoute.push("/Navbar"):null
 
@@ -47,8 +47,6 @@ const SignUp = () => {
   const [signUpComplete, setSignUpComplete] = useState(false);
   const [user, setUser] = useState("");
 
-  
-
   /*useEffect to validate form complete requirement*/
   useEffect(() => {
     checkEmail(email);
@@ -56,8 +54,6 @@ const SignUp = () => {
     checkSame(password, rePassword);
     formComplete(validEmail, isStrong, isSame);
   }, [email, password, rePassword, isSame, isStrong]);
-
-  
 
   const checkEmail = email => {
     email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/g)
@@ -91,35 +87,27 @@ const SignUp = () => {
 
   const handleCreateUser = (userNameToSend, emailToSend, passswordToSend) => {
     const regStatus = new Promise((resolve, reject) => {
+      firebase.signOut();
+      loggedOut();
       resolve(firebase.register(userNameToSend, emailToSend, passswordToSend));
     })
       .then(() => {
-        
-          let info = firebase.auth.currentUser.uid;
-          loggedIn(info);
-       
-        
+        setTimeout(() => {
+          let user = firebase.auth.currentUser.uid;
+          let dbData = Axios.post(`http://localhost:8000/api/profile`, {
+            username: userName,
+            u_id: user,
+            email: email
+          });
+          loggedIn(user)
+        }, 2000);
       })
-      .then(() => {
-        console.log("I am uid to post", uid)
-        console.log(getSessionCookie().uid)
-        Axios.post(`http://localhost:8000/api/profile`, {
-          username: userName,
-          u_id: getSessionCookie().uid,
-          email: email
-        }).then(response => {
-          console.log(response);
-        }).catch((error)=>{
-          console.error(error.message)
-        })
-      }).catch((error)=>{
-        console.error(error.message)
-      })
+      .catch(error => {
+        console.error(error.message);
+      });
   };
 
-
-  console.log(user);
-  isAuth ? reRoute.push("/Navbar") : null;
+  isAuth ? reRoute.push("/Profile") : null;
   return (
     <div className="signup-form">
       <div className="title">Create your Account</div>
