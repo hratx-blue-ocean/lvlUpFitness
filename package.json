@@ -32,6 +32,7 @@
     "http-errors": "^1.7.3",
     "lodash.merge": "^4.6.2",
     "material-ui-react": "0.0.1",
+    "mongo-seeding": "^3.4.0-alpha.1",
     "mongodb": "^3.4.1",
     "mongoose": "^5.8.7",
     "morgan": "^1.9.1",
