@@ -48,7 +48,7 @@ app.use((err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
   // render the error page
-  res.status(err.status || process.env.PORT);
+  res.status(err.status || 500);
   /*  this does not work with expres anymore apparantly --sujan
   res.render("error");
   */
