@@ -10,8 +10,8 @@ export default function Profile() {
   const context = useContext(AuthContext);
   const { isAuth, uid, loggedOut, storeDataInContext } = context;
   const [cacheuserName, setcacheUserName] = useState();
-  const [cachesavedWorkouts, setcacheSavedWorkOuts] = useState();
-  const [cachesavedMeals, setcacheSavedMeals] = useState();
+  const [cachesavedWorkouts, setcacheSavedWorkOuts] = useState('');
+  const [cachesavedMeals, setcacheSavedMeals] = useState('');
 
   const [item, setItem] = useState(false);
   useEffect(() => {
@@ -27,15 +27,22 @@ export default function Profile() {
     const reqURL = URL + uid;
 
     Axios.get(reqURL).then(({ data }) => {
+      console.log(data)
       let c = data.username;
       setcacheUserName(c);
 
       let d = data.savedWorkouts;
+      
       setcacheSavedWorkOuts(d);
       let e = data.savedMeals;
       setcacheSavedMeals(e);
     });
   };
+  if(!cachesavedWorkouts){
+    console.log("waddup i am new")
+  }
+  
+
 
   //   const storeData = (a, b, c) => {
   // 	console.log("phonasdfasdf",a);
@@ -49,8 +56,8 @@ export default function Profile() {
 
   return (
     <React.Fragment>
-      <CustomWorkout savedWorkouts={cachesavedWorkouts} />
-      <CustomMeal savedMeals={cachesavedMeals}/>
+      <CustomWorkout savedWorkouts={cachesavedWorkouts||null} />
+      <CustomMeal savedMeals={cachesavedMeals||null}/>
     </React.Fragment>
   );
 }

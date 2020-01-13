@@ -17,6 +17,11 @@ export default class AuthContextProvider extends Component {
     this.setState({ isAuth: false, uid: "" });
     setSessionCookie(this.state);
   };
+
+  register =()=>{
+    this.setState({ isAuth: true, uid: uid });
+    setSessionCookie(this.state);
+  }
   render() {
     return (
       <AuthContext.Provider

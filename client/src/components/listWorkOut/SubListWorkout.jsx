@@ -77,7 +77,11 @@ const Details = ({
       u_id: uid,
       id: exerciseId,
       name: name
-    }).catch((error)=>{
+    }).then((response)=>{
+      console.log(response)
+    })
+    .catch((error)=>{
+      
       console.error(error.message);
     });
   };
@@ -101,6 +105,9 @@ const Details = ({
         <button className="description" onClick={() => flipTile(!isFlipped)}>
           Show description
         </button>
+        <button className="description" onClick={() => savedWrkOut()}>
+        Add To Profile
+      </button>
         <br />
       </div>
     );
