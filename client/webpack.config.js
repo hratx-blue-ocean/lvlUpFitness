@@ -20,9 +20,19 @@ module.exports = {
         loader : 'babel-loader'
       },
       {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
+      },
+      {
         test: /\.css$/,
-        include: SRC_DIR,
-        loader:  ['style-loader', 'css-loader'],
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
       },
       {
         test: /npm\.js$/,

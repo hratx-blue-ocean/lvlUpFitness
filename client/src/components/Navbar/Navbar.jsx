@@ -65,7 +65,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="calender-icon">
-          <Link to="/">
+          <Link to="/Calender">
             <FontAwesomeIcon icon={faCalendarAlt} size="2x" />
             <p>Schedule</p>
           </Link>

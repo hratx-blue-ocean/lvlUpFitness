@@ -13,6 +13,7 @@ import CustomWorkout from "./components/Workouts/CustomWorkout.jsx";
 import CustomMeal from './components/Meals/CustomMeal.jsx'
 import ListWorkOut from "./components/listWorkOut/ListWorkOut.jsx";
 import ListMealPlan from "./components/listMealPlan/ListMealPlan.jsx";
+import Calender from "./components/calender/Calender.jsx";
 import {
   BrowserRouter as Router,
   Switch,
@@ -78,6 +79,7 @@ export default class App extends Component {
             <Route exact path="/Meals" component={CustomMeal}/>
             <Route exact path="/ListWorkOut" component={ListWorkOut}/>
             <Route exact path="/ListMealPlan" component={ListMealPlan} />
+            <Route exact path="/Calender" component={Calender} />
           </Switch>
         </AuthContextProvider>
       </DebugRouter>
