@@ -70,7 +70,7 @@ const Details = ({
   const flipTile = () => {
     setFlipped(!isFlipped);
   };
-  const newDate = new Date();
+  const newDate = new Date("Sun Jan 12 2020 20:28:36")
 
   const savedWrkOut = () => {
     console.log(uid);

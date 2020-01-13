@@ -12,7 +12,7 @@ router.post("/", (req, res) => {
         console.log("A---------",req.body.u_id)
         console.log("B---------",req.body.id)
         console.log("C---------",req.body.name)
-        console.log("D---------",req,body.dateAdded)
+        console.log("D---------",req.body.dateAdded)
         const {  u_id, id, name , dateAdded} = req.body;
         const db = client.db("test");
         const myquery = {u_id: `${req.body.u_id}`}

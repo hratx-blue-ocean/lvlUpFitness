@@ -3,42 +3,9 @@ import { AuthContext } from "../../AuthContext.js";
 import Axios from "axios";
 
 const SubListMealPlan = ({ subList }) => {
-  console.log("sublist", subList);
-
   return(
     <Meal meals = {subList.recipes}/>
   )
-
-  // const [show, setShow] = useState(false);
-  // const [sendMeal, setSendMeal] = useState("");
-  // const context = useContext(AuthContext);
-  // const { isAuth, loggedIn, uid } = context;
-
-  // const showMeal = param => {
-  //   const holder = subList.filter((el, i) => {
-  //     if (i === param) {
-  //       return el;
-  //     }
-  //   });
-  //   setSendMeal(holder);
-  //   setShow(true);
-  // };
-  // if (!show) {
-  //   return subList.map((meals, i) => (
-  //     <div
-  //       className="list-item"
-  //       key={meals._id}
-  //       mealId={meals._id}
-  //       onClick={() => {
-  //         showMeal(i);
-  //       }}
-  //     >
-  //       {meals.catergory}
-  //     </div>
-  //   ));
-  // } else {
-  //   return <Meal meal={sendMeal} />;
-  // }
 };
 
 const Meal = ({meals}) => {
@@ -68,14 +35,14 @@ const Details = ({ name, body, calories, ingredients, mealId }) => {
   const flipTile = () => {
     setFlipped(!isFlipped);
   };
+  const newDate = new Date("Sun Jan 12 2020 20:28:36")
 
   const savedMeal = () => {
     Axios.post(`http://localhost:8000/api/favmeal`, {
       u_id: uid,
       id: mealId,
-      name: name
-    }).then((response)=>{
-      console.log("I am response", response)
+      name: name,
+      dateAdded: newDate
     })
     .catch(error => {
       console.error(error.message);
@@ -90,9 +57,7 @@ const Details = ({ name, body, calories, ingredients, mealId }) => {
         <div className="name">Name: {name}</div>
         <div className="calories">Calories: {calories}</div>
         <div className="body">Body: {body}</div>
-        <button className="description" onClick={() => flipTile(!isFlipped)}>
-          Show Ingredients
-        </button>
+        
         <button
           className="favorite"
           onClick={uid => {
