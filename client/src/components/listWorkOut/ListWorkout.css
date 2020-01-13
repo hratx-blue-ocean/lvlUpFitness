@@ -68,6 +68,12 @@
 .favorite {
 	text-align: right;
 }
+.datepick-false{
+	display: none;
+}
+.datepick-true{
+	display: inherit;
+}
 
 
   
