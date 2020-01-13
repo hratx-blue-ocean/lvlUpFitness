@@ -76,7 +76,7 @@ const Details = ({
   const newDate = new Date("Sun Jan 12 2020 20:28:36");
 
   const savedWrkOut = () => {
-    let URL = window.location.href;
+    let URL = "https://levelupfitness.herokuapp.com";
     const reqURL = `${URL}/api/${param}`;
     Axios.post(reqURL, {
       u_id: uid,

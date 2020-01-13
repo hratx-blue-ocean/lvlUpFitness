@@ -13,7 +13,7 @@ const ListWorkOut = () => {
 
   const getList = param => {
     if (param) {
-      let URL = window.location.href;
+      let URL = "https://levelupfitness.herokuapp.com";
       const reqURL = `${URL}/api/${param}`;
 
       Axios.get(reqURL)

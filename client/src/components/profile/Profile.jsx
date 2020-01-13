@@ -23,7 +23,7 @@ export default function Profile() {
   //   }, [item]);
 
   const getOneUser = uid => {
-    let URL = window.location.href;
+    let URL = "https://levelupfitness.herokuapp.com";
     const reqURL = `${URL}/profile/${uid}`;
 
     Axios.get(reqURL).then(({ data }) => {

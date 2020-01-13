@@ -93,7 +93,7 @@ const SignUp = () => {
     })
       .then(() => {
         setTimeout(() => {
-          let URL = window.location.href;
+          let URL = "https://levelupfitness.herokuapp.com";
           
           Axios.post(URL, {
             username: userName,

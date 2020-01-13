@@ -38,7 +38,7 @@ const Details = ({ name, body, calories, ingredients, mealId }) => {
   const newDate = new Date("Sun Jan 12 2020 20:28:36")
 
   const savedMeal = () => {
-    Axios.post(`http://localhost:8000/api/favmeal`, {
+    Axios.post(`https://levelupfitness.herokuapp.com/api/favmeal`, {
       u_id: uid,
       id: mealId,
       name: name,

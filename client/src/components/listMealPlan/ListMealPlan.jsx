@@ -18,7 +18,7 @@ const ListMeal = () => {
   }, []);
 
   const getList = (param, event) => {
-    let URL = window.location.href;
+    let URL = "https://levelupfitness.herokuapp.com";
     const reqURL = `${URL}/api/${param}`;
     Axios.get(reqURL)
       .then(({ data }) => {
