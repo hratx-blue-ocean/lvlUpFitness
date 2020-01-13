@@ -11,13 +11,10 @@ const profileSchema = new mongoose.Schema({
   username: String,
   u_id: String,
   email: String,
-  savedWorkouts: [{ id: String, Name: String }],
-  savedMeals: [{ id: String, Name: String }],
-  favoriteWorkouts: [{ id: String, Name: String }],
-  favoriteMeals: [{ id: String, Name: String }],
-  createdWorkouts: [{ Name: String, Info: String }]
+  savedWorkouts: [{ id: String, Name: String, dateAdded: {type: Date} }],
+  savedMeals: [{ id: String, Name: String, dateAdded: {type: Date} }],
+  dateAdded : {type: Date}
 });
-
 module.exports = mongoose.model("userProfile", profileSchema);
 
 // const profiles = new userProfile({
@@ -25,16 +22,13 @@ module.exports = mongoose.model("userProfile", profileSchema);
 //   username: "Black Nasa",
 //   emai: "blacknasa@nasa.org",
 //   password: "password",
-//   savedWorkouts: [{}],
+//   savedWorkouts: [{
+//     id: "fuck u",
+//     Name: "Eat Shit",
+//     dateAdded: new Date
+//   }],
 //   savedMeals: [{}],
-//   favoriteWorkouts: [{}],
-//   favoriteMeals: [{}],
-//   createdWorkouts: [
-//     {
-//       Name: "Moon Jump",
-//       Info: "Jump around on the moon and call the empire trash"
-//     }
-//   ]
+//   dateAdded: new Date
 // });
 
-//module.exports = Profile = mongoose.model("userProfile", profileSchema);
+// module.exports = profiles
