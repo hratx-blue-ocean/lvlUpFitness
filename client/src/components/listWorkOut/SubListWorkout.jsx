@@ -76,9 +76,9 @@ const Details = ({
   const newDate = new Date("Sun Jan 12 2020 20:28:36");
 
   const savedWrkOut = () => {
-    console.log(uid);
-    //console.log(exerciseId);
-    Axios.post(`http://localhost:8000/api/postfav`, {
+    let URL = window.location.href;
+    const reqURL = `${URL}/${param}`;
+    Axios.post(reqURL, {
       u_id: uid,
       id: exerciseId,
       name: name,
