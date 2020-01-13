@@ -67,7 +67,7 @@ const Details = ({
   exerciseId
 }) => {
   const [isFlipped, setFlipped] = useState(false);
-  
+
   const context = useContext(AuthContext);
   const { isAuth, loggedIn, uid } = context;
   const flipTile = () => {
@@ -95,17 +95,7 @@ const Details = ({
   //   savedWrkOut(uid);
   // }}
   const [startDate, setStartDate] = useState(new Date());
-  const [showCal, setShowCal] = useState(false)
-  const showPicker = () => {
-    return (
-      <DatePicker
-        selected={startDate}
-        onChange={() => {
-          console.log("clack");
-        }}
-      />
-    );
-  };
+  const [showCal, setShowCal] = useState(false);
 
   let flip = "";
   isFlipped ? (flip = "details-flipped") : (flip = "details-not-flipped");
@@ -125,34 +115,33 @@ const Details = ({
         <button className="description" onClick={() => flipTile(!isFlipped)}>
           Show description
         </button>
-        <button className="description" onClick={() => showPicker()}>
+        <button className="description" onClick={() => setShowCal(true)}>
           Add To Profile
         </button>
-        <DatePicker
-          peekNextMonth={true}
-          showMonthDropdown={true}
-          showYearDropdown={true}
-          dropdownMode="select"
-          placeholderText="mm/dd/yyyy"
-          dateFormat="mm/dd/yyyy"
-          shouldCloseOnSelect={true}
-          defaultValue={null}
-          selected={startDate}
-          onChange={() => {
-            console.log("clack");
-          }}
-          style = {{backgroundColor : "red"}}
-        />
+        <div className={`datepick-${showCal}`}>
+          <DatePicker
+            disabled={showCal}
+            autoFocus={true}
+            peekNextMonth={true}
+            showMonthDropdown={true}
+            showYearDropdown={true}
+            dropdownMode="select"
+            placeholderText="mm/dd/yyyy"
+            dateFormat="mm/dd/yyyy"
+            shouldCloseOnSelect={true}
+            defaultValue={new Date()}
+            selected={startDate}
+            onChange={() => {
+              console.log("clack");
+            }}
+            style={{ backgroundColor: "red" }}
+          />
+        </div>
+
         <br />
       </div>
     );
-  } else if (showCal === true){
-    return(
-      <h1>Yo Yo </h1>
-    )
-  } 
-  
-  else {
+  } else {
     return (
       <div className={flip} onClick={() => flipTile(!isFlipped)}>
         {description.map((el, i) => (
