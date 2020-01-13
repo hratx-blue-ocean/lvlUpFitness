@@ -27,7 +27,6 @@ export default function Profile() {
     const reqURL = URL + uid;
 
     Axios.get(reqURL).then(({ data }) => {
-      console.log(data)
       let c = data.username;
       setcacheUserName(c);
 
@@ -38,9 +37,7 @@ export default function Profile() {
       setcacheSavedMeals(e);
     });
   };
-  if(!cachesavedWorkouts){
-    console.log("waddup i am new")
-  }
+  
   
 
 
@@ -57,7 +54,7 @@ export default function Profile() {
   return (
     <React.Fragment>
       <CustomWorkout savedWorkouts={cachesavedWorkouts||null} />
-      <CustomMeal savedMeals={cachesavedMeals||null}/>
+      <CustomMeal savedMeals={cachesavedMeals}/>
     </React.Fragment>
   );
 }

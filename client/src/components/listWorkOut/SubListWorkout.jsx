@@ -1,16 +1,18 @@
 import React, { useState, useContext } from "react";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../AuthContext.js";
 import Axios from "axios";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 
 const SubListWorkout = ({ subList }) => {
-  const reRoute = useHistory()
+  const reRoute = useHistory();
   const [show, setShow] = useState(false);
   const [sendExercise, setSendExercise] = useState("");
   const context = useContext(AuthContext);
   const { isAuth, loggedIn, uid } = context;
-  isAuth === false? reRoute.push('/'): null;
+  isAuth === false ? reRoute.push("/") : null;
   const showExercise = param => {
     const holder = subList.filter((el, i) => {
       if (i === param) {
@@ -65,12 +67,13 @@ const Details = ({
   exerciseId
 }) => {
   const [isFlipped, setFlipped] = useState(false);
+  
   const context = useContext(AuthContext);
   const { isAuth, loggedIn, uid } = context;
   const flipTile = () => {
     setFlipped(!isFlipped);
   };
-  const newDate = new Date();
+  const newDate = new Date("Sun Jan 12 2020 20:28:36");
 
   const savedWrkOut = () => {
     console.log(uid);
@@ -80,27 +83,41 @@ const Details = ({
       id: exerciseId,
       name: name,
       dateAdded: newDate
-    }).then((response)=>{
-      console.log(response)
     })
-    .catch((error)=>{
-      
-      console.error(error.message);
-    });
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.error(error.message);
+      });
   };
+  // onClick={uid => {
+  //   savedWrkOut(uid);
+  // }}
+  const [startDate, setStartDate] = useState(new Date());
+  const [showCal, setShowCal] = useState(false)
+  const showPicker = () => {
+    return (
+      <DatePicker
+        selected={startDate}
+        onChange={() => {
+          console.log("clack");
+        }}
+      />
+    );
+  };
+
   let flip = "";
   isFlipped ? (flip = "details-flipped") : (flip = "details-not-flipped");
-  if (isFlipped === false) {
+  if (isFlipped === false && showCal === false) {
     return (
       <div className={flip}>
         <div
           className="favorite"
           onClick={uid => {
-            savedWrkOut(uid);
+            showPicker();
           }}
-        >
-          
-        </div>
+        ></div>
         <div className="name">Name: {name}</div>
         <div className="intensity">Intensity: {intensity}</div>
         <div className="duration">Duration: {duration}</div>
@@ -108,13 +125,34 @@ const Details = ({
         <button className="description" onClick={() => flipTile(!isFlipped)}>
           Show description
         </button>
-        <button className="description" onClick={() => savedWrkOut()}>
-        Add To Profile
-      </button>
+        <button className="description" onClick={() => showPicker()}>
+          Add To Profile
+        </button>
+        <DatePicker
+          peekNextMonth={true}
+          showMonthDropdown={true}
+          showYearDropdown={true}
+          dropdownMode="select"
+          placeholderText="mm/dd/yyyy"
+          dateFormat="mm/dd/yyyy"
+          shouldCloseOnSelect={true}
+          defaultValue={null}
+          selected={startDate}
+          onChange={() => {
+            console.log("clack");
+          }}
+          style = {{backgroundColor : "red"}}
+        />
         <br />
       </div>
     );
-  } else {
+  } else if (showCal === true){
+    return(
+      <h1>Yo Yo </h1>
+    )
+  } 
+  
+  else {
     return (
       <div className={flip} onClick={() => flipTile(!isFlipped)}>
         {description.map((el, i) => (

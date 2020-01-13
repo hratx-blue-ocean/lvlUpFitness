@@ -10,9 +10,8 @@ const CustomMeal = ({ savedMeals }) => {
   const [propsExist, setPropsExist] = useState(false);
   const getData = arg => {
     if (arg) {
-      if (arg.length > 1) {
+      if (arg.length > 0) {
         let num = Math.floor(Math.random() * arg.length);
-
         let todayMeal = arg[num].name || "front end messed up";
 
         setMealDescription(todayMeal);
@@ -33,13 +32,16 @@ const CustomMeal = ({ savedMeals }) => {
     return (
       <div className="user-meal-tile">
         <div className="meal-day">{mealOfDay}</div>
-        <div
-          className="meal-description"
-          onClick={() => {
-            setAddMeal(true);
-          }}
-        >
+        <div className="meal-description">
           {mealDescription}
+          <button
+            className="description"
+            onClick={() => {
+              setAddMeal(true);
+            }}
+          >
+            Browse Meals
+          </button>
         </div>
       </div>
     );

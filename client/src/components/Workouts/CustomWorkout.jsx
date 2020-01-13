@@ -1,9 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { faRoute } from '@fortawesome/free-solid-svg-icons';
-// import TextField from '@material-ui/core/TextField';
-// import Typography from '@material-ui/core/Typography';
-// import App from '../../App';
-import Axios from "axios";
 import { Redirect } from "react-router-dom";
 import "./CustomWorkout.css";
 
@@ -19,8 +14,7 @@ const CustomWorkout = ({ savedWorkouts }) => {
 
   const getData = arg => {
     if (arg) {
-      if (arg.length > 1) {
-        console.log("i am arg", arg);
+      if (arg.length > 0) {
         let num = Math.floor(Math.random() * arg.length);
         let todayWorkout = arg[num].name || "front end messed up";
         setWorkOutDescription(todayWorkout);
