@@ -24,7 +24,7 @@ export default function Profile() {
 
   const getOneUser = uid => {
     let URL = window.location.href;
-    const reqURL = `${URL}/${uid}`;
+    const reqURL = `${URL}/profile/${uid}`;
 
     Axios.get(reqURL).then(({ data }) => {
       let c = data.username;

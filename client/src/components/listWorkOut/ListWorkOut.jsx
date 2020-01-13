@@ -14,7 +14,7 @@ const ListWorkOut = () => {
   const getList = param => {
     if (param) {
       let URL = window.location.href;
-      const reqURL = `${URL}/${param}`;
+      const reqURL = `${URL}/api/${param}`;
 
       Axios.get(reqURL)
         .then(({ data }) => {

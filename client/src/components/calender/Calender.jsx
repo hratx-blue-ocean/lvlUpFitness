@@ -36,7 +36,7 @@ const Calender = () => {
   }, [wos, mls]);
   const getUserData = uid => {
     let URL = window.location.href;
-    const reqURL = `${URL}/${uid}`;
+    const reqURL = `${URL}/profile/${uid}`;
   
     Axios.get(reqURL).then(({ data }) => {
       let d = data.savedWorkouts;
