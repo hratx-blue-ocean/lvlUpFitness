@@ -43,10 +43,10 @@ db.once("open", () => {
   console.log("were connected");
 });
 
-// profiles.save((err, profiles) => {
-//   if (err) console.log(err);
-//   console.log("profiles saved");
-// });
+profiles.save((err, profiles) => {
+  if (err) console.log(err);
+  console.log("profiles saved");
+});
 
 // bwFullBody.save((err, bwFullBody) => {
 //   if (err) console.log(err);
@@ -83,20 +83,20 @@ db.once("open", () => {
 //   console.log("bwCore saved");
 // });
 
-carbMeals.save((err, carbMeals) => {
-  if (err) console.error(err);
-  console.log("carbMeals saved");
-});
+// carbMeals.save((err, carbMeals) => {
+//   if (err) console.error(err);
+//   console.log("carbMeals saved");
+// });
 
-proteinPlans.save((err, proteinPlans) => {
-  if (err) console.error(err);
-  console.log("proteinPlans saved");
-});
+// proteinPlans.save((err, proteinPlans) => {
+//   if (err) console.error(err);
+//   console.log("proteinPlans saved");
+// });
 
-dietPlans.save((err, dietPlans) => {
-  if (err) console.error(err);
-  console.log("dietPlans saved");
-});
+// dietPlans.save((err, dietPlans) => {
+//   if (err) console.error(err);
+//   console.log("dietPlans saved");
+// });
 
 // cardioJumpRope.save((err, cardioJumpRope) => {
 //   if (err) console.error(err);
