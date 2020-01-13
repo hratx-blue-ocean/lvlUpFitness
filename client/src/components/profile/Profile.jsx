@@ -23,8 +23,8 @@ export default function Profile() {
   //   }, [item]);
 
   const getOneUser = uid => {
-    let URL = "http://localhost:8000/api/profile/";
-    const reqURL = URL + uid;
+    let URL = window.location.href;
+    const reqURL = `${URL}/${uid}`;
 
     Axios.get(reqURL).then(({ data }) => {
       let c = data.username;

@@ -65,6 +65,7 @@ export default class App extends Component {
   // }
 
   render() {
+    console.log(window.location.href)
     return (
       <DebugRouter>
         <AuthContextProvider>

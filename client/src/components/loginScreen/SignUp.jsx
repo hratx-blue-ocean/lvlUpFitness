@@ -93,13 +93,14 @@ const SignUp = () => {
     })
       .then(() => {
         setTimeout(() => {
-          let user = firebase.auth.currentUser.uid;
-          let dbData = Axios.post(`http://localhost:8000/api/profile`, {
+          let URL = window.location.href;
+          
+          Axios.post(URL, {
             username: userName,
             u_id: user,
             email: email
           });
-          loggedIn(user)
+          loggedIn(user);
         }, 2000);
       })
       .catch(error => {

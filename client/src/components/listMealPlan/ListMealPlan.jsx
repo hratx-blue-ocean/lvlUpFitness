@@ -18,13 +18,10 @@ const ListMeal = () => {
   }, []);
 
   const getList = (param, event) => {
-    
-    // console.log("I am showId",showId)
-    const URL = "http://localhost:8000/api/";
-    const reqURL = URL + param;
+    let URL = window.location.href;
+    const reqURL = `${URL}/${param}`;
     Axios.get(reqURL)
       .then(({ data }) => {
-       
         setMeals(data[event]);
         setShowId(event);
         setShow(true);
@@ -60,7 +57,7 @@ const ListMeal = () => {
         </div>
       </div>
     );
-  } else  {
+  } else {
     return <SubListMealPlan subList={meals} />;
   }
 };

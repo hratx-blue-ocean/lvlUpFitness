@@ -13,14 +13,15 @@ const ListWorkOut = () => {
 
   const getList = param => {
     if (param) {
-      const URL = "http://localhost:8000/api/";
-      const reqURL = URL + param;
+      let URL = window.location.href;
+      const reqURL = `${URL}/${param}`;
+
       Axios.get(reqURL)
         .then(({ data }) => {
           setWorkouts(data);
           setShow(true);
         })
-        .catch((error) => {
+        .catch(error => {
           console.error(error.message);
         });
     }

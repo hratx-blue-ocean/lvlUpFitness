@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./loginScreen.css";
 import { AuthContext } from "../../AuthContext.js";
-import Axios from "axios";
+
 
 const Home = () => {
   let reRoute = useHistory();
