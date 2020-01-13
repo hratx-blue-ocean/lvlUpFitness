@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import {useHistory} from 'react-router-dom'
 import { AuthContext } from "../../AuthContext.js";
 import Axios from "axios";
+import moment from "moment";
 
 const SubListWorkout = ({ subList }) => {
   const reRoute = useHistory()
@@ -69,6 +70,7 @@ const Details = ({
   const flipTile = () => {
     setFlipped(!isFlipped);
   };
+  const newDate = new Date();
 
   const savedWrkOut = () => {
     console.log(uid);
@@ -76,7 +78,8 @@ const Details = ({
     Axios.post(`http://localhost:8000/api/postfav`, {
       u_id: uid,
       id: exerciseId,
-      name: name
+      name: name,
+      dateAdded: newDate
     }).then((response)=>{
       console.log(response)
     })
