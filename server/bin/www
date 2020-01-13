@@ -70,7 +70,7 @@ const onListening = () => {
  * Get port from environment and store in Express.
  */
 
-const port = process.env.PORT;
+const port = 8000;
 app.set('port', port);
 
 /**
@@ -83,7 +83,7 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
- if(port === null || port === ""){
+ if(port === null || port === "" || port === undefined){
    port = 8000;
  };
 
