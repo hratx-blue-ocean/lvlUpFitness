@@ -7,11 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "preinstall": "npm install && cd ./client && npm install ; cd ./server && npm install",
-    "test": "cd ./client && npm test",
-    "launch": "cd ./server/bin && node www && cd ../../client && npm run-script apple ",
-    "lint:client": "cd ./client && ./node_modules/.bin/eslint \"src/**/*.{js,jsx}\" && echo 'Your code has passed the linting guidelines' || echo 'Please fix the errors listed above'",
-    "lint:server": "cd ./server && ../node_modules/.bin/eslint \"routes/**/*.js\" 2>/dev/null && echo 'Your code has passed the linting guidelines' || echo 'Please fix the errors listed above'",
+    "build": "cd ./client &&  npm run build",
     "start": "node server.js"
   },
   "repository": {
