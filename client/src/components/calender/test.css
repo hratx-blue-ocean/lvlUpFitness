@@ -39,7 +39,7 @@ button.rbc-input::-moz-focus-inner {
 
 .rbc-ellipsis, .rbc-event-label, .rbc-row-segment .rbc-event-content, .rbc-show-more {
   display: block;
-  width: 100px;
+  width: 100%;
   font: 14px;
   background-color: rgb(12,188,171) !important;
   overflow-wrap: break-word;

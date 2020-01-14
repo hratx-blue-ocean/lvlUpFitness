@@ -7,8 +7,6 @@ class Firebase {
   constructor() {
     app.initializeApp(config.default);
     this.auth = app.auth();
-    this.someId = "";
-    // this.db = app.firestore();
   }
 
   login(email, password) {
@@ -30,6 +28,9 @@ class Firebase {
   statusChange() {
     this.auth.onAuthStateChanged(function(user) {
       if (user) {
+        debugger;
+        console.log(user);
+        
         return user
       } else {
         console.log("register error");

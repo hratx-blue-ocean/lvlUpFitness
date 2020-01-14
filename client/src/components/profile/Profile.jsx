@@ -10,8 +10,8 @@ export default function Profile() {
   const context = useContext(AuthContext);
   const { isAuth, uid, loggedOut, storeDataInContext } = context;
   const [cacheuserName, setcacheUserName] = useState();
-  const [cachesavedWorkouts, setcacheSavedWorkOuts] = useState('');
-  const [cachesavedMeals, setcacheSavedMeals] = useState('');
+  const [cachesavedWorkouts, setcacheSavedWorkOuts] = useState("");
+  const [cachesavedMeals, setcacheSavedMeals] = useState("");
 
   const [item, setItem] = useState(false);
   useEffect(() => {
@@ -23,23 +23,56 @@ export default function Profile() {
   //   }, [item]);
 
   const getOneUser = uid => {
-    let URL = "https://levelupfitness.herokuapp.com";
-    const reqURL = `${URL}/profile/${uid}`;
+    // console.log("jkfahklajds", uid)
+    if (uid) {
+      let URL = "https://levelupfitness.herokuapp.com/api/profile/";
+      if (uid) {
+        const reqURL = `${URL}${uid}`;
+        Axios.get(reqURL)
+          .then(({ data }) => {
+            let c = data.username;
+            localStorage.setItem("username", c);
+            setcacheUserName(c);
+            let d = data.savedWorkouts;
+            let f = d.filter((el, i) => {
+              let dbDate = new Date(el.dateAdded).toUTCString();
+              dbDate = dbDate.split(" ");
+              let today = new Date().toUTCString();
+              today = today.split(" ");
+              if (
+                today[0] === dbDate[0] &&
+                today[1] === dbDate[1] &&
+                today[2] === dbDate[2]
+              ) {
+                return el;
+              }
+            });
 
-    Axios.get(reqURL).then(({ data }) => {
-      let c = data.username;
-      setcacheUserName(c);
-
-      let d = data.savedWorkouts;
-      
-      setcacheSavedWorkOuts(d);
-      let e = data.savedMeals;
-      setcacheSavedMeals(e);
-    });
+            localStorage.setItem("savedWorkouts", JSON.stringify(f));
+            setcacheSavedWorkOuts(f);
+            let e = data.savedMeals;
+            let g = e.filter((el, i) => {
+              let dbDate = new Date(el.dateAdded).toUTCString();
+              dbDate = dbDate.split(" ");
+              let today = new Date().toUTCString();
+              today = today.split(" ");
+              if (
+                today[0] === dbDate[0] &&
+                today[1] === dbDate[1] &&
+                today[2] === dbDate[2]
+              ) {
+                return el;
+              }
+            });
+            // console.log(a, g)
+            setcacheSavedMeals(g);
+          })
+          .catch(error => {
+            console.error(error.message);
+          });
+      }
+    }
   };
-  
-  
-
 
   //   const storeData = (a, b, c) => {
   // 	console.log("phonasdfasdf",a);
@@ -53,8 +86,8 @@ export default function Profile() {
 
   return (
     <React.Fragment>
-      <CustomWorkout savedWorkouts={cachesavedWorkouts||null} />
-      <CustomMeal savedMeals={cachesavedMeals}/>
+      <CustomWorkout savedWorkouts={cachesavedWorkouts} />
+      <CustomMeal savedMeals={cachesavedMeals} />
     </React.Fragment>
   );
 }
