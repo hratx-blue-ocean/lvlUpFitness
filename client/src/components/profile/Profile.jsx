@@ -23,6 +23,7 @@ export default function Profile() {
   //   }, [item]);
 
   const getOneUser = uid => {
+    // console.log("jkfahklajds", uid)
     if (uid) {
       let URL = "https://levelupfitness.herokuapp.com/api/profile/";
       if (uid) {
@@ -30,10 +31,8 @@ export default function Profile() {
         Axios.get(reqURL)
           .then(({ data }) => {
             let c = data.username;
-            console.log(data)
             localStorage.setItem("username", c);
             setcacheUserName(c);
-
             let d = data.savedWorkouts;
             let f = d.filter((el, i) => {
               let dbDate = new Date(el.dateAdded).toUTCString();
@@ -49,6 +48,7 @@ export default function Profile() {
               }
             });
 
+            localStorage.setItem("savedWorkouts", JSON.stringify(f));
             setcacheSavedWorkOuts(f);
             let e = data.savedMeals;
             let g = e.filter((el, i) => {
@@ -64,8 +64,9 @@ export default function Profile() {
                 return el;
               }
             });
+            // console.log(a, g)
             setcacheSavedMeals(g);
-          }).then(()=>{console.log("who am i, I am ",cacheuserName)})
+          })
           .catch(error => {
             console.error(error.message);
           });

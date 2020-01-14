@@ -3,65 +3,58 @@ import { Redirect } from "react-router-dom";
 import "./CustomMeal.css";
 
 const CustomMeal = ({ savedMeals }) => {
-  let mealData = savedMeals;
-  const [addMealClicked, setAddMeal] = useState(false);
-  const [mealOfDay, setMealOfDay] = useState("No Meal Plan:");
-  const [mealDescription, setMealDescription] = useState("Add Meal Plan:");
-  const [propsExist, setPropsExist] = useState(false);
-  const getData = arg => {
-    if (arg) {
-      if (arg.length > 0) {
-        let num = Math.floor(Math.random() * arg.length);
-        let todayMeal = arg[num].name || "front end messed up";
-
-        setMealDescription(todayMeal);
-        setMealOfDay("Today's Meal:");
-        setPropsExist(true);
-      }
-    }
-  };
-  useEffect(() => {
-    getData(mealData);
-  }, [mealData]);
-
-  if (addMealClicked) {
-    return <Redirect to="/ListMealPlan" />;
+  const [addMeal, setAddMeal] = useState(false);
+  if (addMeal) {
+    return <Redirect to="/ListWorkOut" />;
   }
-  if (!propsExist) {
-    return (
-      <div className="user-meal-tile">
-        <div className="meal-day">{mealOfDay}</div>
-        <div className="meal-description">
-          {mealDescription}
-          <button
-            className="description"
-            onClick={() => {
-              setAddMeal(true);
-            }}
-          >
-            Browse Meals
-          </button>
-        </div>
-      </div>
-    );
+  if (savedMeals && savedMeals.length > 0) {
+    return savedMeals.map((el, i) => {
+      <SingleMeal key={i} singleMeal={el} />;
+    });
   } else {
     return (
       <div className="user-meal-tile">
-        <div className="meal-day">{mealOfDay}</div>
-        <div
-          className="meal-description"
+        <div className="meal-day">No Meals Planned</div>
+
+        <button
+          className="description"
           onClick={() => {
             setAddMeal(true);
           }}
         >
-          {mealDescription}
-        </div>
-        <button className="description" onClick={() => console.log("click")}>
-          Show Ingredients
+          Add More
         </button>
       </div>
     );
   }
+};
+const SingleMeal = ({ singleMeal }) => {
+  console.log(singleMeal);
+  const [addMoreClicked, setAddMoreMeals] = useStae(false);
+
+  if (addMoreClicked) {
+    return <Redirect to="/ListMealPlan" />;
+  }
+
+  return (
+    <div className="user-meal-tile">
+      <div className="meal-day">Today's Workout: </div>
+      <div className="meal-description">
+        {singleMeal.name}
+        <button className="description" onClick={() => alert("Don't do that")}>
+          Show Details
+        </button>
+        <button
+          className="description"
+          onClick={() => {
+            setAddMoreMeals(true);
+          }}
+        >
+          Add More
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default CustomMeal;
