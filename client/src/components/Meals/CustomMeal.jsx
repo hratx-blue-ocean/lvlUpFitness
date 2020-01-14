@@ -27,7 +27,6 @@ const CustomMeal = ({ savedMeals }) => {
   if (addMealClicked) {
     return <Redirect to="/ListMealPlan" />;
   }
-
   if (!propsExist) {
     return (
       <div className="user-meal-tile">

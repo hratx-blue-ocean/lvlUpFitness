@@ -2,8 +2,6 @@ import React, {
   useState,
   useEffect,
   useContext,
-  useLayoutEffect,
-  useRef
 } from "react";
 import { AuthContext } from "../../AuthContext";
 import { useHistory } from "react-router-dom";
@@ -86,6 +84,7 @@ const SignUp = () => {
   };
 
   const handleCreateUser = (userNameToSend, emailToSend, passswordToSend) => {
+    localStorage.setItem("username", userNameToSend);
     const regStatus = new Promise((resolve, reject) => {
       firebase.signOut();
       loggedOut();
@@ -93,14 +92,15 @@ const SignUp = () => {
     })
       .then(() => {
         setTimeout(() => {
-          let URL = "https://levelupfitness.herokuapp.com";
-          
+          let user = firebase.auth.currentUser.uid;
+          let URL = "https://levelupfitness.herokuapp.com/api/profile/";
           Axios.post(URL, {
             username: userName,
             u_id: user,
             email: email
           });
-          loggedIn(user);
+          loggedIn(user)
+          
         }, 2000);
       })
       .catch(error => {

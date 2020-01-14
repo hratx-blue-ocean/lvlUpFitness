@@ -44,10 +44,9 @@ const Exercise = ({ exercise }) => {
   const context = useContext(AuthContext);
   const { isAuth, loggedIn, uid } = context;
   let details = exercise[0].type;
-  //console.log(exercise[0].type);
   return details.map((el, i) => (
     <Details
-      key={el._id}
+      key={i}
       exerciseId={el._id}
       name={el.name}
       intensity={el.intensity}
@@ -73,33 +72,31 @@ const Details = ({
   const flipTile = () => {
     setFlipped(!isFlipped);
   };
-  const newDate = new Date("Sun Jan 12 2020 20:28:36");
 
-  const savedWrkOut = () => {
-    let URL = "https://levelupfitness.herokuapp.com";
-    const reqURL = `${URL}/api/${param}`;
-    Axios.post(reqURL, {
-      u_id: uid,
-      id: exerciseId,
-      name: name,
-      dateAdded: newDate
-    })
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.error(error.message);
-      });
-  };
-  // onClick={uid => {
-  //   savedWrkOut(uid);
-  // }}
   const [startDate, setStartDate] = useState(new Date());
   const [showCal, setShowCal] = useState(false);
+  const [schedule, setSchedule] = useState(true);
+
+  const savedWrkOut = () => {
+    if (!schedule) {
+      let URL = "https://levelupfitness.herokuapp.com";
+      const reqURL = `${URL}/api/postfav`;
+      Axios.post(reqURL, {
+        u_id: uid,
+        id: exerciseId,
+        name: name,
+        dateAdded: startDate
+      }).catch(error => {
+        console.error(error.message);
+      });
+    }
+  };
 
   let flip = "";
   isFlipped ? (flip = "details-flipped") : (flip = "details-not-flipped");
-  if (isFlipped === false && showCal === false) {
+  let sched = "";
+  schedule ? (sched = "Schedule") : (sched = "Add To Profile");
+  if (isFlipped === false) {
     return (
       <div className={flip}>
         <div
@@ -112,48 +109,56 @@ const Details = ({
         <div className="intensity">Intensity: {intensity}</div>
         <div className="duration">Duration: {duration}</div>
         <div className="amount">Amount: {amount}</div>
-        <button className="description" onClick={() => flipTile(!isFlipped)}>
+        <button
+          className="description"
+          onClick={event => {
+            event.preventDefault();
+            flipTile(!isFlipped);
+          }}
+        >
           Show description
         </button>
-        <button className="description" onClick={() => setShowCal(true)}>
-          Add To Profile
+        <button
+          className={`schedule-${schedule}`}
+          onClick={() => {
+            setSchedule(!schedule);
+            setShowCal(!showCal);
+            savedWrkOut(startDate);
+          }}
+        >
+          {sched}
         </button>
         <div className={`datepick-${showCal}`}>
-          <DatePicker
-            disabled={showCal}
-            autoFocus={true}
-            peekNextMonth={true}
-            showMonthDropdown={true}
-            showYearDropdown={true}
-            dropdownMode="select"
-            placeholderText="mm/dd/yyyy"
-            dateFormat="mm/dd/yyyy"
-            shouldCloseOnSelect={true}
-            defaultValue={new Date()}
-            selected={startDate}
-            onChange={() => {
-              console.log("clack");
-            }}
-            style={{ backgroundColor: "red" }}
+          <input
+            className="date-select"
+            type="date"
+            value={startDate}
+            onChange={event => setStartDate(event.target.value)}
+            required
           />
         </div>
-
         <br />
       </div>
     );
   } else {
     return (
-      <div className={flip} onClick={() => flipTile(!isFlipped)}>
+      <div
+        className={flip}
+        onClick={event => {
+          event.preventDefault();
+          flipTile(!isFlipped);
+        }}
+      >
         {description.map((el, i) => (
-          <Description key={i} desc={el} />
+          <Description key={i} test={i} desc={el} />
         ))}
       </div>
     );
   }
 };
 
-const Description = ({ key, desc }) => {
-  return <div key={key}>{desc}</div>;
+const Description = ({ test, desc }) => {
+  return <div key={test}>{desc}</div>;
 };
 
 export default SubListWorkout;

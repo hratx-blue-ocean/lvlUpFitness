@@ -6,6 +6,7 @@ const config = require(CONFIG);
 
 
 router.post("/", (req, res) => {
+  console.log(req.body)
     MongoClient.connect(
       `mongodb+srv://shauncarr22:${config}@lvlupfitdb-lef31.mongodb.net/test?retryWrites=true&w=majority`,(err, client) => {
         if (err) console.error(err);

@@ -38,7 +38,7 @@ const Navbar = () => {
         <div className="message">
           <div>Welcome</div>
           <div>
-            <strong>ahsdf</strong>
+            <strong>{localStorage.getItem("username")}</strong>
           </div>
         </div>
 

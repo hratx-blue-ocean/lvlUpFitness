@@ -36,7 +36,7 @@ const Calender = () => {
   }, [wos, mls]);
   const getUserData = uid => {
     let URL = "https://levelupfitness.herokuapp.com";
-    const reqURL = `${URL}/profile/${uid}`;
+    const reqURL = `${URL}/api/profile/${uid}`;
   
     Axios.get(reqURL).then(({ data }) => {
       let d = data.savedWorkouts;
@@ -83,7 +83,7 @@ const Calender = () => {
       <div className="workouts">
         <Calendar
           localizer={localizer}
-          defaultDate={new Date("Sun Jan 12 2020 20:28:36")}
+          defaultDate={new Date()}
           defaultView="month"
           events={totalEvent}
           style={{ height: "100vh" }}
