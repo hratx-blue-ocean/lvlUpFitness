@@ -28,7 +28,6 @@ const ListMeal = () => {
         console.error("Api call from meals failed");
       });
   };
-  // console.log("showId", showId, "meals", meals);
   if (!show && !showId) {
     return (
       <div className="list">

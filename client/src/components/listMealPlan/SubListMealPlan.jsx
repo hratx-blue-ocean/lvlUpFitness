@@ -40,13 +40,14 @@ const Details = ({ name, body, calories, ingredients, mealId }) => {
     setFlipped(!isFlipped);
   };
 
-  const savedMeal = () => {
+  const savedMeal = (arg) => {
+    let parsedDate = Date.parse(arg)
     let URL = "https://levelupfitness.herokuapp.com/api/favmeal";
     Axios.post(`${URL}`, {
       u_id: uid,
       id: mealId,
       name: name,
-      dateAdded: startDate
+      dateAdded: parsedDate
     }).catch(error => {
       console.error(error.message);
     });

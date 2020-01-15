@@ -16,7 +16,13 @@ const CustomMeal = ({ savedMeals }) => {
       return <Redirect to="/ListMealPlan" />;
     }
     if (savedMeals && savedMeals.length > 0) {
-      return savedMeals.map((el, i) => <SingleMeal key={i} singleMeal={el} />);
+      let temp3 = [];
+      let temp1 = savedMeals.map(el => JSON.stringify(el));
+      let temp2 = _.uniq(temp1);
+      for (let item of temp2) {
+        temp3.push(JSON.parse(item));
+      }
+      return temp3.map((el, i) => <SingleMeal key={i} singleMeal={el} />);
     } else {
       return (
         <div className="user-meal-tile">

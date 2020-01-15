@@ -37,7 +37,7 @@ const Home = () => {
         loggedIn(info);
       }).catch(error => {
         // Handle Errors here.
-        console.log([error.code, error.message]);
+        console.error([error.code, error.message]);
         error.code === "auth/user-not-found"
           ? setemailClass("email-error")
           : setemailClass("email");
@@ -53,7 +53,7 @@ const Home = () => {
   } else {
     return (
       <div className="login-form">
-        <div className="title">Log In</div>
+        <div className="title">Level Up Fitness</div>
         <div className="email-field">
           <input
             className={emailClass}
@@ -102,10 +102,11 @@ const Home = () => {
             Sign In
           </div>
         </div>
-
-        <div className="forgot-password">Forgot-Password</div>
-        <div className="sign-up" onClick={() => setNewUserStatus(true)}>
-          Sign-Up
+        <div className="new-link">
+          <div className="forgot-password">Forgot-Password</div>
+          <div className="sign-up" onClick={() => setNewUserStatus(true)}>
+            Sign-Up
+          </div>
         </div>
       </div>
     );

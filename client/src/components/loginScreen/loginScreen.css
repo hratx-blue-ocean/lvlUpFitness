@@ -1,20 +1,22 @@
 
-.App{
-	background: #0F4C81;
+#root{
+	margin:none;
+}
+.login-form,.signup-form{
+	background-color: transparent;
 	box-sizing: border-box;
 	font-family: NanumGothic;
-	padding: 1px;
-}
-.login-form{
+	content: center;
+	padding: 10px;
 	max-width: 1170px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.title{
-	font-size: 48px;
-	color: #FFFDFD;
-	text-align: left;
+	min-width: 375px;
+	max-height: 813px;
+	margin: auto;
+	margin-top: 4%;
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-bottom: 10%
+	
 }
 .username-field,
 .email-field, 
@@ -22,8 +24,15 @@
 .re-password-field,
 .first-name-field,
 .last-name-field,
-.create-account{
+.create-account,.sign-in{
 	display: flex;
+}
+
+.title{
+	font-size: 48px;
+	color: #0F4C81;
+	text-align: left;
+	overflow-wrap: visible;
 }
 
 .create-account[disabled]
@@ -34,8 +43,10 @@
 
 .label{
 	font-size: 24px;
-	color: #FFFFFF;
+	color: #0F4C81;
 	text-align: left;
+	padding: none;
+	margin: none
 }
 
 .email-field-error, .password-field-error, select, textarea{
@@ -45,9 +56,13 @@
 }
 
 .input-label{
+	display: block; /* add this */
+    /* padding-top: 5px; */
 	font-size: 24px;
-	color: #FFFFFF;
+	color: #0F4C81;
 	text-align: left;
+	padding: 0px;
+	margin: 0px
 }
 
 .username,
@@ -56,16 +71,42 @@
 .re-password,
 .first-name,
 .last-name{
-	background-color: #D8D8D8;
-	border: 1px solid #979797;
-	font-size: 36px;
-	border-radius: 10px;
+	border-top-style: none;
+	border-right-style: hidden;
+	border-left-style: hidden;
+	border-bottom-style: solid;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 18px;
+	background-color: transparent;
+  -webkit-text-fill-color: grey;
+  -webkit-box-shadow: 0 0 0px 1000px transparant inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+	background-color: transparent;
+  border-top: none;
+  border-bottom-style: solid;
+  -webkit-text-fill-color: grey;
+  -webkit-box-shadow: 0 0 0px 1000px transparant inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .email-error, .password-error{
 	background-color: #D8D8D8;
 	border: 1px solid #979797;
-	font-size: 36px;
+	font-size: 18px;
 	border-radius: 10px;
 	color: red
 }
@@ -75,7 +116,9 @@
 .last-name-clear,
 .show-password,
 .show-password-again{
-	margin-left: -45px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: none;
 }
 .password-requirement-inactive{
 	display: none;
@@ -85,7 +128,7 @@
 .password-requirement-active{
 	color:white;
 	position: relative;
-	right: -50px;	
+	right:50px;	
 }
 .invalid{
 	color: red;
@@ -96,26 +139,32 @@
 	
 }
 
-.sign-in-text, .create-account-text{
-	width: 398px;
-	background-color: #88C4F8;
-	border: 1px solid #979797;
-	color: #FFFFFF;
-	border-radius: 10px;
-	font-size: 36px;
-	text-align: center;
-	cursor: pointer;
-}
-/* .sign-in-text::placeholder, .create-account-text::placeholder{
-	color: white;
-} */
 .forgot-password{
+	flex-direction: row;
 	font-size: 12px;
 	color: rgb(144, 144, 233);
 	text-align: left;
 }
 .sign-up{	
-font-size: 24px;
-color: #ADACAE;
-text-align: left;
+	flex-direction: row;
+	font-size: 24px;
+	color: #ADACAE;
+	text-align: left;
 }
+
+.sign-in-text, .create-account-text {
+	width: 150px ;
+	background-color: #0F4C81;;
+	font-size: 19px;
+	color: white;
+	text-align: center;
+	border-radius: 12px;
+	cursor: pointer;
+}
+.sign-in-text:hover,.schedule:hover,.schedule:hover {
+	background-color:red; /* Green */
+	color: white;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	cursor: pointer;
+  }

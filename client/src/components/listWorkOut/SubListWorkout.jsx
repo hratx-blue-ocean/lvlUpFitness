@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../AuthContext.js";
 import Axios from "axios";
-import "react-datepicker/dist/react-datepicker.css";
 
 const SubListWorkout = ({ subList }) => {
   const reRoute = useHistory();
@@ -71,21 +70,21 @@ const Details = ({
   const [showCal, setShowCal] = useState(false);
   const [schedule, setSchedule] = useState(true);
 
-  const savedWrkOut = () => {
+  const savedWrkOut = (arg) => {
     if (!schedule) {
+      let parsedDate = Date.parse(arg)
       let URL = "https://levelupfitness.herokuapp.com";
       const reqURL = `${URL}/api/postfav`;
       Axios.post(reqURL, {
         u_id: uid,
         id: exerciseId,
         name: name,
-        dateAdded: startDate
+        dateAdded: parsedDate
       }).catch(error => {
         console.error(error.message);
       });
     }
   };
-
   let flip = "";
   isFlipped ? (flip = "details-flipped") : (flip = "details-not-flipped");
   let sched = "";
