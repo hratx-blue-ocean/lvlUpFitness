@@ -5,25 +5,25 @@ import CustomMeal from "../Meals/CustomMeal.jsx";
 import { AuthContext } from "../../AuthContext.js";
 import Axios from "axios";
 
+import { momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+const localizer = momentLocalizer(moment);
 export default function Profile() {
   let reRoute = useHistory();
   const context = useContext(AuthContext);
-  const { isAuth, uid, loggedOut, storeDataInContext } = context;
-  const [cacheuserName, setcacheUserName] = useState();
+  const { isAuth, uid } = context;
   const [cachesavedWorkouts, setcacheSavedWorkOuts] = useState("");
   const [cachesavedMeals, setcacheSavedMeals] = useState("");
+  if (!isAuth) {
+    reRoute.push("/");
+  }
 
-  const [item, setItem] = useState(false);
   useEffect(() => {
     getOneUser(uid);
-  }, []);
-
-  //   useEffect(() => {
-  //     storeData((cacheuserName, cachesavedWorkouts, cachesavedMeals));
-  //   }, [item]);
-
+  }, [uid]);
+  let currentDay = new Date();
+  currentDay = currentDay.toLocaleString().split(/[/,]/);
   const getOneUser = uid => {
-    // console.log("jkfahklajds", uid)
     if (uid) {
       let URL = "https://levelupfitness.herokuapp.com/api/profile/";
       if (uid) {
@@ -32,40 +32,45 @@ export default function Profile() {
           .then(({ data }) => {
             let c = data.username;
             localStorage.setItem("username", c);
-            setcacheUserName(c);
+            //////////////////////////////////////////////////////////////////////////
             let d = data.savedWorkouts;
             let f = d.filter((el, i) => {
-              let dbDate = new Date(el.dateAdded).toUTCString();
-              dbDate = dbDate.split(" ");
-              let today = new Date().toUTCString();
-              today = today.split(" ");
+              let formatDate = el.dateAdded.toLocaleString().split(/[-T]/);
               if (
-                today[0] === dbDate[0] &&
-                today[1] === dbDate[1] &&
-                today[2] === dbDate[2]
+                formatDate[0] === currentDay[2] &&
+                formatDate[1] === `0${currentDay[0]}` &&
+                formatDate[2] === currentDay[1] && formatDate[3]==="00:00:00.000Z"
               ) {
                 return el;
               }
             });
+            let temp3 = [];
+            let temp1 = f.map(el => JSON.stringify(el));
+            let temp2 = new Set(temp1);
+            for (let item of temp2) {
+              temp3.push(JSON.parse(item));
+            }
+            setcacheSavedWorkOuts(temp3);
 
-            localStorage.setItem("savedWorkouts", JSON.stringify(f));
-            setcacheSavedWorkOuts(f);
+            //////////////////////////////////////////////////////////////////////////
             let e = data.savedMeals;
             let g = e.filter((el, i) => {
-              let dbDate = new Date(el.dateAdded).toUTCString();
-              dbDate = dbDate.split(" ");
-              let today = new Date().toUTCString();
-              today = today.split(" ");
+              let formatDate = el.dateAdded.toLocaleString().split(/[-T]/);
               if (
-                today[0] === dbDate[0] &&
-                today[1] === dbDate[1] &&
-                today[2] === dbDate[2]
+                formatDate[0] === currentDay[2] &&
+                formatDate[1] === `0${currentDay[0]}` &&
+                formatDate[2] === currentDay[1] && formatDate[3]==="00:00:00.000Z"
               ) {
                 return el;
               }
             });
-            // console.log(a, g)
-            setcacheSavedMeals(g);
+            let temp6 = [];
+            let temp4 = g.map(el => JSON.stringify(el));
+            let temp5 = new Set(temp4);
+            for (let item of temp5) {
+              temp6.push(JSON.parse(item));
+            }
+            setcacheSavedMeals(temp6);
           })
           .catch(error => {
             console.error(error.message);
@@ -74,16 +79,6 @@ export default function Profile() {
     }
   };
 
-  //   const storeData = (a, b, c) => {
-  // 	console.log("phonasdfasdf",a);
-  // 	console.log("waterasdfasdf",b);
-  // 	console.log("dongleasdfasdf",c);
-
-  //     localStorage.setItem("savedMeals", JSON.stringify(a));
-  //     localStorage.setItem("savedWorkouts", JSON.stringify(b));
-  //     localStorage.setItem("savedMeals", JSON.stringify(c));
-  //   };
-
   return (
     <React.Fragment>
       <CustomWorkout savedWorkouts={cachesavedWorkouts} />
@@ -91,6 +86,3 @@ export default function Profile() {
     </React.Fragment>
   );
 }
-
-// savedWorkouts={JSON.parse(localStorage.getItem("savedWorkouts"))}
-// savedMeals={JSON.parse(localStorage.getItem("savedMeals"))}

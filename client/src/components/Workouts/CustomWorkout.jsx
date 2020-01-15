@@ -8,7 +8,15 @@ const CustomWorkout = ({ savedWorkouts }) => {
     return <Redirect to="/ListWorkOut" />;
   }
   if (savedWorkouts && savedWorkouts.length > 0) {
-    return savedWorkouts.map((el, i) => (
+    let temp3 = []
+    let temp1 = savedWorkouts.map(el => JSON.stringify(el));
+    let temp2 = _.uniq(temp1);
+    for (let item of temp2){
+      temp3.push(JSON.parse(item))
+    }
+  
+ 
+    return temp3.map((el, i) => (
       <SingleTile key={i} singleWorkouts={el} />
     ));
   } else

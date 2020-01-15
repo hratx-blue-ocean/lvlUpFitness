@@ -20,8 +20,9 @@ class Firebase {
       resolve(this.auth.createUserWithEmailAndPassword(email, password));
     });
     reg.catch(error => {
-      console.log("Code: ", error.code, "/n", "Message", error.message);
+      console.error(error.message);
     });
+   
   }
   statusChange() {
     this.auth.onAuthStateChanged(function(user) {

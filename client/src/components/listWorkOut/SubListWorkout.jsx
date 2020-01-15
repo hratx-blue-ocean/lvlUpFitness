@@ -2,23 +2,18 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../AuthContext.js";
 import Axios from "axios";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import moment from "moment";
 
 const SubListWorkout = ({ subList }) => {
   const reRoute = useHistory();
   const [show, setShow] = useState(false);
   const [sendExercise, setSendExercise] = useState("");
   const context = useContext(AuthContext);
-  const { isAuth, loggedIn, uid } = context;
-  isAuth === false ? reRoute.push("/") : null;
+  const { isAuth } = context;
+  if (isAuth === false) {
+    reRoute.push("/");
+  }
   const showExercise = param => {
-    const holder = subList.filter((el, i) => {
-      if (i === param) {
-        return el;
-      }
-    });
+    const holder = subList.filter((el, i) => ((i === param) ?  el :null));
     setSendExercise(holder);
     setShow(true);
   };
@@ -41,8 +36,6 @@ const SubListWorkout = ({ subList }) => {
 };
 
 const Exercise = ({ exercise }) => {
-  const context = useContext(AuthContext);
-  const { isAuth, loggedIn, uid } = context;
   let details = exercise[0].type;
   return details.map((el, i) => (
     <Details
@@ -68,7 +61,7 @@ const Details = ({
   const [isFlipped, setFlipped] = useState(false);
 
   const context = useContext(AuthContext);
-  const { isAuth, loggedIn, uid } = context;
+  const { uid } = context;
   const flipTile = () => {
     setFlipped(!isFlipped);
   };
@@ -77,21 +70,21 @@ const Details = ({
   const [showCal, setShowCal] = useState(false);
   const [schedule, setSchedule] = useState(true);
 
-  const savedWrkOut = () => {
+  const savedWrkOut = (arg) => {
     if (!schedule) {
+      let parsedDate = Date.parse(arg)
       let URL = "https://levelupfitness.herokuapp.com";
       const reqURL = `${URL}/api/postfav`;
       Axios.post(reqURL, {
         u_id: uid,
         id: exerciseId,
         name: name,
-        dateAdded: startDate
+        dateAdded: parsedDate
       }).catch(error => {
         console.error(error.message);
       });
     }
   };
-
   let flip = "";
   isFlipped ? (flip = "details-flipped") : (flip = "details-not-flipped");
   let sched = "";
@@ -99,12 +92,6 @@ const Details = ({
   if (isFlipped === false) {
     return (
       <div className={flip}>
-        <div
-          className="favorite"
-          onClick={uid => {
-            showPicker();
-          }}
-        ></div>
         <div className="name">Name: {name}</div>
         <div className="intensity">Intensity: {intensity}</div>
         <div className="duration">Duration: {duration}</div>

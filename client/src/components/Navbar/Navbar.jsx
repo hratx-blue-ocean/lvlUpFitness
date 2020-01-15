@@ -1,31 +1,31 @@
 import React, { Component, useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../AuthContext";
-import { Link, useHistory, NavLink } from "react-router-dom";
-import { DebugRouter } from "../../App.jsx";
-import { AuthContextProvider } from "../../AuthContext.js";
-import CustomWorkout from "../Workouts/CustomWorkout.jsx"
+import { Link, useHistory, NavLink, Redirect } from "react-router-dom";
 import {
   faHome,
   faDumbbell,
   faUtensils,
   faCalendarAlt,
   faHeart,
-  faBackspace,
-  faSearch
+  faSearch,
+  faSignOutAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Navbar.css";
+import firebase from "../../firebase.js"
 
 const Navbar = () => {
   let reRoute = useHistory();
   const context = useContext(AuthContext);
-  const { isAuth, uid } = context;
+  const { isAuth, uid, loggedOut } = context;
+  useEffect(() => {
+    
+  }, [isAuth])
   if (isAuth === true) {
     return (
-      
       <div className="header-bar">
         <div className="logo">
-          <NavLink to="/Navbar">
+          <NavLink to="/Profile">
             <FontAwesomeIcon
               size="4x"
               icon={faHeart}
@@ -34,7 +34,7 @@ const Navbar = () => {
             />
           </NavLink>
         </div>
-        
+
         <div className="message">
           <div>Welcome</div>
           <div>
@@ -70,10 +70,15 @@ const Navbar = () => {
             <p>Schedule</p>
           </Link>
         </div>
+        <div className="signOut-icon" onClick={() => {firebase.signOut();loggedOut()}}>
+          <FontAwesomeIcon icon={faSignOutAlt} size="2x" />
+          <p>SignOut</p>
+        </div>
       </div>
     );
-  }else{
- return null
+    
+  } else {
+    return <Redirect to ="/"/>
   }
 };
 

@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../../AuthContext.js";
+import { useHistory } from "react-router-dom";
 import Axios from "axios";
 
 const SubListMealPlan = ({ subList }) => {
@@ -7,9 +8,12 @@ const SubListMealPlan = ({ subList }) => {
 };
 
 const Meal = ({ meals }) => {
+  let reRoute = useHistory();
   const context = useContext(AuthContext);
-  const { isAuth, loggedIn, uid } = context;
-
+  const { isAuth} = context;
+  if (!isAuth){
+    reRoute.push("/")
+  }
   return meals.map((el, i) => (
     <Details
       key={el._id}
@@ -36,13 +40,14 @@ const Details = ({ name, body, calories, ingredients, mealId }) => {
     setFlipped(!isFlipped);
   };
 
-  const savedMeal = () => {
+  const savedMeal = (arg) => {
+    let parsedDate = Date.parse(arg)
     let URL = "https://levelupfitness.herokuapp.com/api/favmeal";
     Axios.post(`${URL}`, {
       u_id: uid,
       id: mealId,
       name: name,
-      dateAdded: startDate
+      dateAdded: parsedDate
     }).catch(error => {
       console.error(error.message);
     });

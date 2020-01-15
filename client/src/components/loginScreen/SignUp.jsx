@@ -1,8 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useContext,
-} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../AuthContext";
 import { useHistory } from "react-router-dom";
 import {
@@ -13,15 +9,17 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./loginScreen.css";
 import firebase from "../../firebase.js";
-import { setSessionCookie, getSessionCookie } from "../Cookies.js";
+
 import Axios from "axios";
 
 const SignUp = () => {
   let reRoute = useHistory();
 
   const context = useContext(AuthContext);
-  const { isAuth, phone, loggedIn, uid, loggedOut } = context;
-
+  const { isAuth, loggedIn, loggedOut } = context;
+  if (isAuth) {
+    reRoute.push("/Profile");
+  }
   // isAuth === true? reRoute.push("/Navbar"):null
 
   const [userName, setUserName] = useState("");
@@ -43,7 +41,6 @@ const SignUp = () => {
   const [len, setLen] = useState("invalid");
   const [isSame, setSame] = useState("invalid");
   const [signUpComplete, setSignUpComplete] = useState(false);
-  const [user, setUser] = useState("");
 
   /*useEffect to validate form complete requirement*/
   useEffect(() => {
@@ -51,7 +48,7 @@ const SignUp = () => {
     validatePassword(password, lower, upper, number, len);
     checkSame(password, rePassword);
     formComplete(validEmail, isStrong, isSame);
-  }, [email, password, rePassword, isSame, isStrong]);
+  }, [email, password, rePassword, isSame, isStrong,lower, upper, number, len, validEmail]);
 
   const checkEmail = email => {
     email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/g)
@@ -89,7 +86,8 @@ const SignUp = () => {
       firebase.signOut();
       loggedOut();
       resolve(firebase.register(userNameToSend, emailToSend, passswordToSend));
-    })
+    });
+    regStatus
       .then(() => {
         setTimeout(() => {
           let user = firebase.auth.currentUser.uid;
@@ -99,8 +97,7 @@ const SignUp = () => {
             u_id: user,
             email: email
           });
-          loggedIn(user)
-          
+          loggedIn(user);
         }, 2000);
       })
       .catch(error => {
@@ -108,7 +105,7 @@ const SignUp = () => {
       });
   };
 
-  isAuth ? reRoute.push("/Profile") : null;
+  
   return (
     <div className="signup-form">
       <div className="title">Create your Account</div>
