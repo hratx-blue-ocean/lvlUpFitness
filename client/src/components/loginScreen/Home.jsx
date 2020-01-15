@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import firebase from "../../firebase.js";
 import {
@@ -10,13 +10,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./loginScreen.css";
 import { AuthContext } from "../../AuthContext.js";
 
-
 const Home = () => {
   let reRoute = useHistory();
   const context = useContext(AuthContext);
   const { isAuth, loggedIn } = context;
 
-  isAuth ? reRoute.push("/Profile") : null;
+  if (isAuth) {
+    reRoute.push("/Profile");
+  }
 
   const [email, setemail] = useState("");
   const [emailClass, setemailClass] = useState("email");
@@ -25,34 +26,29 @@ const Home = () => {
   const [reveal, setReveal] = useState(false);
   /**************************************************** */
   const [newUser, setNewUserStatus] = useState(false);
-  const [authStatus, setAuthStatus] = useState(false);
-
 
   const authenticateUser = (email, password) => {
     if (email.length > 0 && password.length > 0) {
       let a = new Promise((resolve, reject) => {
         resolve(firebase.login(email, password));
-      })
-        .then(() => {
-          let info = firebase.auth.currentUser.uid;
-          loggedIn(info);
-        })
-        .catch(error => {
-          // Handle Errors here.
-          console.log([error.code, error.message]);
-          error.code === "auth/user-not-found"
-            ? setemailClass("email-error")
-            : setemailClass("email");
-          error.code === "auth/wrong-password"
-            ? setPWClass("password-error")
-            : setPWClass("password");
-        });
+      });
+      a.then(() => {
+        let info = firebase.auth.currentUser.uid;
+        loggedIn(info);
+      }).catch(error => {
+        // Handle Errors here.
+        console.log([error.code, error.message]);
+        error.code === "auth/user-not-found"
+          ? setemailClass("email-error")
+          : setemailClass("email");
+        error.code === "auth/wrong-password"
+          ? setPWClass("password-error")
+          : setPWClass("password");
+      });
     }
   };
 
-  if (authStatus === true) {
-    return <Redirect to="/Navbar" />;
-  } else if (newUser === true) {
+  if (newUser === true) {
     return <Redirect push to="/SignUp" />;
   } else {
     return (

@@ -56,7 +56,7 @@ const Calender = () => {
     if (mls && mls.length > 0) {
       // console.log(mls)
       let holderOne = [...meals];
-      let ok = removeDuplicates(mls);
+      
       // console.log(ok);
       mls.map((el, i) => {
         let test = el.dateAdded;

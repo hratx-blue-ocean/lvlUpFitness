@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../../AuthContext.js";
+import { useHistory } from "react-router-dom";
 import Axios from "axios";
 
 const SubListMealPlan = ({ subList }) => {
@@ -7,9 +8,12 @@ const SubListMealPlan = ({ subList }) => {
 };
 
 const Meal = ({ meals }) => {
+  let reRoute = useHistory();
   const context = useContext(AuthContext);
-  const { isAuth, loggedIn, uid } = context;
-
+  const { isAuth} = context;
+  if (!isAuth){
+    reRoute.push("/")
+  }
   return meals.map((el, i) => (
     <Details
       key={el._id}
