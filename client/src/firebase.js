@@ -1,5 +1,3 @@
-import { getSessionCookie,setSessionCookie } from "./components/Cookies.js";
-
 const app = require("firebase");
 const config = require("../src/components/loginScreen/config.js");
 
@@ -20,20 +18,17 @@ class Firebase {
   register(name, email, password) {
     const reg = new Promise((resolve, reject) => {
       resolve(this.auth.createUserWithEmailAndPassword(email, password));
-    })
-    .catch(error => {
+    });
+    reg.catch(error => {
       console.log("Code: ", error.code, "/n", "Message", error.message);
     });
   }
   statusChange() {
     this.auth.onAuthStateChanged(function(user) {
       if (user) {
-        debugger;
-        console.log(user);
-        
-        return user
+        return user;
       } else {
-        console.log("register error");
+        console.error("register error");
       }
     });
   }

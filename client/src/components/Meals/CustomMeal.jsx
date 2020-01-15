@@ -5,12 +5,13 @@ import "./CustomMeal.css";
 const CustomMeal = ({ savedMeals }) => {
   const [addMeal, setAddMeal] = useState(false);
   if (addMeal) {
-    return <Redirect to="/ListWorkOut" />;
+    return <Redirect to="/ListMealPlan" />;
   }
   if (savedMeals && savedMeals.length > 0) {
-    return savedMeals.map((el, i) => {
-      <SingleMeal key={i} singleMeal={el} />;
-    });
+    return savedMeals.map((el, i) => (
+      
+      <SingleMeal key={i} singleMeal={el} />
+    ));
   } else {
     return (
       <div className="user-meal-tile">
@@ -29,16 +30,15 @@ const CustomMeal = ({ savedMeals }) => {
   }
 };
 const SingleMeal = ({ singleMeal }) => {
-  console.log(singleMeal);
-  const [addMoreClicked, setAddMoreMeals] = useStae(false);
+  const [addMoreMealsClicked, setAddMoreMeals] = useState(false);
 
-  if (addMoreClicked) {
+  if (addMoreMealsClicked) {
     return <Redirect to="/ListMealPlan" />;
   }
 
   return (
     <div className="user-meal-tile">
-      <div className="meal-day">Today's Workout: </div>
+      <div className="meal-day">Today's Meal </div>
       <div className="meal-description">
         {singleMeal.name}
         <button className="description" onClick={() => alert("Don't do that")}>

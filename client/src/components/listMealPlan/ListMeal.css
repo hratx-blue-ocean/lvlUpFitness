@@ -2,21 +2,22 @@
 	display: flex;
 	flex-direction: column;
 	position: center;
-	
 }
 
 .list-item,.details{
 	background: #0F4C81;
     border-radius: 24px;
-    width: 92%;
+	width: 60%;
+	top: 69%;
     min-height: 200px;
     padding: 12px 10px;
     position: center;
     text-align: center;
-	margin: 10px;
 	font-size: 48px;
 	color: #FFFFFF;
 	text-align: left;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 .details-not-flipped{
@@ -27,7 +28,7 @@
 	position: center;
 	background: #0F4C81;
 	color: #FFFFFF;
-	border-radius: 24px;
+	border-radius: 24px 24px 0px 0px;
     width: 92%;
     min-height: 200px;
     position: center;
@@ -44,7 +45,8 @@
 	transform: rotateY(360deg);
 	transition: transform 1.2s;
 	background: #FFFFFF ;
-	color: #0F4C81;;
+	color: #0F4C81;
+	border: solid red;
     border-radius: 24px;
     width: 92%;
     min-height: 200px;
@@ -53,13 +55,13 @@
     margin: 1px;
 	
 }
-.description {
+.description, .schedule-false,.schedule-true {
 	width: 150px ;
 	font-size: 19px;
 	color: black;
 	border-radius: 12px;
 }
-.description:hover {
+.description:hover,.schedule:hover,.schedule:hover {
 	background-color: #3AA1F2; /* Green */
 	color: white;
 	-webkit-transition-duration: 0.4s; /* Safari */
@@ -67,23 +69,15 @@
   }
 .favorite {
 	text-align: right;
+}
+.datepick-false{
+	display: none;
+}
+.datepick-true{
+	display: inherit;
 }
 
-.favorite {
-	width: 150px ;
-	font-size: 19px;
-	color: black;
-	border-radius: 12px;
-}
-.favorite:hover {
-	background-color: #3AA1F2; /* Green */
-	color: white;
-	-webkit-transition-duration: 0.4s; /* Safari */
-	transition-duration: 0.4s;
-  }
-.favorite {
-	text-align: right;
-}
+
   
 
 

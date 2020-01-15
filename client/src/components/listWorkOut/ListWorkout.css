@@ -2,21 +2,23 @@
 	display: flex;
 	flex-direction: column;
 	position: center;
-	
 }
 
 .list-item,.details{
 	background: #0F4C81;
     border-radius: 24px;
-    width: 92%;
+	width: 60%;
+	top: 69%;
     min-height: 200px;
     padding: 12px 10px;
     position: center;
     text-align: center;
-	margin: 10px;
 	font-size: 48px;
 	color: #FFFFFF;
 	text-align: left;
+	margin: auto;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 .details-not-flipped{
@@ -27,13 +29,15 @@
 	position: center;
 	background: #0F4C81;
 	color: #FFFFFF;
-	border-radius: 24px 24px 0px 0px;
-    width: 92%;
+	border-radius: 24px;
+    width: 60%;
     min-height: 200px;
     position: center;
-    text-align: left;
-    margin: 1px;
-
+	text-align: left;
+	padding: 10px;
+	margin: auto;
+	margin-top: 15px;
+	margin-bottom: 15px
 }
 .description, .intensity, .duration, .description-wrapper, .amount{
 	padding: 5px;
@@ -44,17 +48,20 @@
 	transform: rotateY(360deg);
 	transition: transform 1.2s;
 	background: #FFFFFF ;
-	color: #0F4C81;;
+	color: #0F4C81;
+	border: 2px solid #0F4C81;
     border-radius: 24px;
-    width: 92%;
+    width: 60%;
     min-height: 200px;
-    padding: 5px;
+    padding: 2%;
     text-align: left;
-    margin: 1px;
+    margin: auto;
+	margin-top: 15px;
+	margin-bottom: 15px
 	
 }
 .description, .schedule-false,.schedule-true {
-	width: 150px ;
+	width: auto ;
 	font-size: 19px;
 	color: black;
 	border-radius: 12px;
@@ -74,6 +81,7 @@
 .datepick-true{
 	display: inherit;
 }
+
 
 
   

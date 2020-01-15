@@ -18,56 +18,21 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
 } from "react-router-dom";
 
-class DebugRouter extends Router {
-  constructor(props) {
-    super(props);
-    console.log("initial history is: ", JSON.stringify(this.history, null, 2));
-    this.history.listen((location, action) => {
-      console.log(
-        `The current URL is ${location.pathname}${location.search}${location.hash}`
-      );
-      console.log(
-        `The last navigation action was ${action}`,
-        JSON.stringify(this.history, null, 2)
-      );
-    });
-  }
-}
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.api = "http://localhost:8000/api/example";
-  }
+// export default class App extends Component {
+ 
+    
 
-  static contextType = AuthContext;
-  //componentDidMount() {
-  // this.fetchData();
-  //SUjan commented this to test the initial setup
-  // fetch(this.api)
-  //   .then(res => res.json())
-  //   .then(seaCreatures => {
-  //     this.setState({ seaCreatures: seaCreatures.data });
-  //   });
-  //}
+//   static contextType = AuthContext;
 
-  // fetchData(){
-  //   // console.log('nfakhjsdfbalksdfhahsdbfiauysdgh')
-  //   Axios.get(`http://localhost:8000/api/example`)
-  //   .then((data)=>{
-  //     this.setState({test: data})
-  //   })
-
-  // }
-
-  render() {
-    console.log(window.location.href)
+//   render() {
+  const App = ()=>{
+  
+  
     return (
-      <DebugRouter>
+      
         <AuthContextProvider>
           <Navbar />
           
@@ -83,7 +48,9 @@ export default class App extends Component {
             <Route exact path="/Calender" component={Calender} />
           </Switch>
         </AuthContextProvider>
-      </DebugRouter>
+   
     );
   }
-}
+// }
+
+export default App

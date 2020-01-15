@@ -2,7 +2,7 @@ import React, { Component, useState, useEffect } from "react";
 import Axios from "axios";
 import SubListMealPlan from "./SubListMealPlan.jsx";
 // import data from "./dummydata.js"
-import "./ListMeal.css";
+// import "./ListMeal.css";
 const ListMeal = () => {
   const [meals, setMeals] = useState([]);
   const [show, setShow] = useState(false);

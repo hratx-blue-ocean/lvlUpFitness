@@ -3,12 +3,10 @@ import { AuthContext } from "../../AuthContext.js";
 import Axios from "axios";
 
 const SubListMealPlan = ({ subList }) => {
-  return(
-    <Meal meals = {subList.recipes}/>
-  )
+  return <Meal meals={subList.recipes} />;
 };
 
-const Meal = ({meals}) => {
+const Meal = ({ meals }) => {
   const context = useContext(AuthContext);
   const { isAuth, loggedIn, uid } = context;
 
@@ -45,13 +43,10 @@ const Details = ({ name, body, calories, ingredients, mealId }) => {
       id: mealId,
       name: name,
       dateAdded: startDate
-    })
-    .catch(error => {
+    }).catch(error => {
       console.error(error.message);
     });
   };
-
-  
 
   let flip = "";
   isFlipped ? (flip = "details-flipped") : (flip = "details-not-flipped");
@@ -63,35 +58,37 @@ const Details = ({ name, body, calories, ingredients, mealId }) => {
         <div className="name">Name: {name}</div>
         <div className="calories">Calories: {calories}</div>
         <div className="body">Body: {body}</div>
-        <button
-          className="description"
-          onClick={event => {
-            event.preventDefault();
-            flipTile(!isFlipped);
-          }}
-        >
-          Show description
-        </button>
-        <button
-          className={`schedule-${schedule}`}
-          onClick={() => {
-            setSchedule(!schedule);
-            setShowCal(!showCal);
-            savedMeal(startDate);
-          }}
-        >
-          {sched}
-        </button>
-        <div className={`datepick-${showCal}`}>
-          <input
-            className="date-select"
-            type="date"
-            value={startDate}
-            onChange={event => setStartDate(event.target.value)}
-            required
-          />
-        </div>
         <br />
+        <div className="selectors">
+          <button
+            className="description"
+            onClick={event => {
+              event.preventDefault();
+              flipTile(!isFlipped);
+            }}
+          >
+            Show description
+          </button>
+          <button
+            className={`schedule-${schedule}`}
+            onClick={() => {
+              setSchedule(!schedule);
+              setShowCal(!showCal);
+              savedMeal(startDate);
+            }}
+          >
+            {sched}
+          </button>
+          <div className={`datepick-${showCal}`}>
+            <input
+              className="date-select"
+              type="date"
+              value={startDate}
+              onChange={event => setStartDate(event.target.value)}
+              required
+            />
+          </div>
+        </div>
       </div>
     );
   } else {

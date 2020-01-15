@@ -6,12 +6,14 @@ body{
     background: #0F4C81;
     box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
     border-radius: 24px;
-    width: 92%;
+    width: 60%;
     min-height: 200px;
     padding: 12px 10px;
     position: center;
     text-align: center;
-    margin: 10px;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px
 }
 .workout-day{ 
     font-size: 24px;

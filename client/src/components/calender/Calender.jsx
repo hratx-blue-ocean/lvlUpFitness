@@ -28,18 +28,18 @@ const Calender = () => {
 
     Axios.get(reqURL).then(({ data }) => {
       let d = data.savedWorkouts;
-      let e = data.savedMeals;
       setWos(d);
+      let e = data.savedMeals;
       setMls(e);
     });
   };
+
   const updateWos = () => {
     if (wos && wos.length > 0) {
       let holder = [...workouts];
+
       wos.map((el, i) => {
-        let test = el.dateAdded;
-        test = Date.parse(test);
-        test += 21600000;
+        let test = Date.parse(el.dateAdded);
         holder.push({
           start: test,
           end: test,
@@ -47,27 +47,30 @@ const Calender = () => {
           allDay: true
         });
       });
+
       setWorkOuts(holder);
     }
   };
+
   const updateMls = mls => {
-    if (mls) {
-      if (mls.length > 0) {
-        mls.map((el, i) => {
-          let test = el.dateAdded;
-          test = Date.parse(test);
-          test += 21600000;
-          const { dateAdded, name } = el;
-          let holderOne = [...meals];
-          holderOne.push({
-            start: test,
-            end: test,
-            title: name,
-            allDay: true
-          });
-          setMeals(holderOne);
+    if (mls && mls.length > 0) {
+      // console.log(mls)
+      let holderOne = [...meals];
+      let ok = removeDuplicates(mls);
+      // console.log(ok);
+      mls.map((el, i) => {
+        let test = el.dateAdded;
+        test = Date.parse(test);
+        const { dateAdded, name } = el;
+
+        holderOne.push({
+          start: test,
+          end: test,
+          title: name,
+          allDay: true
         });
-      }
+      });
+      setMeals(holderOne);
     }
   };
 
@@ -78,6 +81,7 @@ const Calender = () => {
       <div className="workouts">
         <Calendar
           localizer={localizer}
+          popup
           defaultView="month"
           events={totalEvent}
           style={{ height: "100vh" }}
