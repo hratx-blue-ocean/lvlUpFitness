@@ -20,7 +20,8 @@
   "plugins": ["react", "jsx-a11y"],
   "rules": {
     "semi": ["error", "always"],
-    "quotes": ["error", "double"],
-    "no-console": "on"
+    "quotes": ["error", "double"]
+    
+    // "no-console": "no"
   }
 }
