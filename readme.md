@@ -1,4 +1,4 @@
-# LvL Up Fitness
+# LvL Up Fitness 
 
 
 ## Table of Contents
@@ -34,7 +34,11 @@ Lvl Up Fitness is a mobile-first designed web application. Lvl Up Fitness allows
 |               | Node.js       | Mocha             |
 
 ## Set-up and requirements:
-MongoDB (Win or Mac)
+- MongoDB (Win or Mac)
+- `npm install`
+
+## Deployment
+Deployed on Heroku. (https://levelupfitness.herokuapp.com/)
 
 # Contributors
 * [Shaun Carr](https://github.com/shauncarr22)
