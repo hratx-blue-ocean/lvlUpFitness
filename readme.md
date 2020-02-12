@@ -28,17 +28,12 @@ Lvl Up Fitness is a user based application for planning tracking and setting a w
 
 
 ## Technologies
-  | Front-End  | |  Back-End      |
+| Front-End  | Back-End |
 | ------------- | ------------- |
-|   React          | Mongo Db | 
-|   GrommetUi   |   Express         |
-|    React Router |  Node.js  |
-|  |              |   Mongoose          |
-
- | Back-End  | |
-| ------------- | ------------- |
-|   Momgo Db          | Mongoose  | 
-|   Express           |   Node.js           |
+| React         | Mongo Db      |
+| GrommetUi     | Express       |
+| React Router  | Node.js       |
+|               | Mongoose      |
 
 ### Additional Technologies
 * Mongo Atlas
