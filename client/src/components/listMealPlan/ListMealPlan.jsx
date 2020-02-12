@@ -43,7 +43,7 @@ const ListMeal = () => {
           id="1"
           onClick={() => getList("mealPlans", categoryId.protien)}
         >
-          Protien
+          Protein
         </div>
         <div
           className="list-item"

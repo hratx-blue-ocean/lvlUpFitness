@@ -32,7 +32,6 @@ Lvl Up Fitness is a mobile-first designed web application. Lvl Up Fitness allows
 | React         | Mongo Db      | Heroku            |
 | React Router  | Express       | Travs CI          |
 |               | Node.js       | Mocha             |
-|               | Mongoose      | Mongo Atlas       |
 
 ## Set-up and requirements:
 MongoDB (Win or Mac)
