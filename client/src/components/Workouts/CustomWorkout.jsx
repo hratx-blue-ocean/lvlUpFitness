@@ -23,7 +23,7 @@ const CustomWorkout = ({ savedWorkouts }) => {
     return (
       <div>
         <div className="user-workout-tile">
-          <div className="workout-day">"No Workout Planed"</div>
+          <div className="workout-day">"No Workout Planned"</div>
 
           <button
             className="description"
