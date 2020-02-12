@@ -30,8 +30,8 @@ Lvl Up Fitness is a user based application for planning tracking and setting a w
 ## Technologies
   | Front-End  | Back-end |
 | ------------- | ------------- |
-|               | Content Cell  |
-| Content Cell  | Content Cell  |
+|   React          | React Router  |
+| GrommetUi  |  
 
  React
 * React Router
