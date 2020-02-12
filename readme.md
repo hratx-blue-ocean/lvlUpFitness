@@ -1,8 +1,8 @@
-# LvL Up Fitness 
+# Level Up Fitness 
 
 
 ## Table of Contents
-- [Lvl Up Fitness](#lvl-up-fitness)
+- [Level Up Fitness](#level-up-fitness)
   - [Table of Contents](#table-of-contents)
   - [Contributors](#contributors)
   - [About](#about)
@@ -10,7 +10,7 @@
   
 
 # About 
-Lvl Up Fitness is a mobile-first designed web application. Lvl Up Fitness allows a user to set, plan and track workouts and meals. Users can schedule their exercise regimen and diet plan from an extensive database. We enable users to view their scheduled workouts and meals from an incorporated calendar viewable in day, week, and month formats. 
+Level Up Fitness is a mobile-first designed web application. Lvl Up Fitness allows a user to set, plan and track workouts and meals. Users can schedule their exercise regimen and diet plan from an extensive database. We enable users to view their scheduled workouts and meals from an incorporated calendar viewable in day, week, and month formats. 
 
 # User Stories
 - As a user I should be able to login using my email and password
