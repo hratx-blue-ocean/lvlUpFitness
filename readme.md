@@ -1,5 +1,5 @@
 # Level Up Fitness 
-![lvlupfitness.gif](demo/demo.gif)
+
 
 
 ## Table of Contents
