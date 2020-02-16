@@ -1,5 +1,5 @@
 # Level Up Fitness 
-
+![](UI%20Pictures/lvlupfitness.gif)
 
 
 ## Table of Contents
